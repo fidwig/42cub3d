@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 01:20:21 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/13 01:38:43 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@ void	init_cub(t_cub *cub)
 
 int	update(t_cub *cub)
 {
+	// clear_image(cub->image, BLACK);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->image.img, 0, 0);
 	return (0);
 }
 
 void	init_hooks(t_cub *cub)
 {
+	// mlx_hook(cub->win, );
+	// mlx_hook(cub->win, );
 	mlx_loop_hook(cub->mlx, update, cub);
 }
 
@@ -38,6 +41,8 @@ int	main(int argc, char **argv)
 
 	(void) argc;
 	(void) argv;
+	if (argc < 2)
+		return (usage_error(), 1);
 	cub = (t_cub){0};
 	init_cub(&cub);
 	init_hooks(&cub);
