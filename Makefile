@@ -5,30 +5,45 @@ MLXDIR		:= mlx
 LIBFTDIR	:= libft
 MLX			:= $(MLXDIR)/libmlx.a
 LIBFT		:= $(LIBFTDIR)/libft.a
-OBJDIR		:= .obj/
-SRCS		:= main.c raycasting.c graphics.c
-OBJS		:= $(SRC:.c=.o)
-SRC			:= $(addprefix $(SRCDIR)/, $(SRC))
-OBJ			:= $(addprefix $(OBJDIR)/, $(OBJ))
+OBJDIR		:= .obj
+SRCS		:= main.c raycasting.c graphics.c parsing.c
+OBJS		:= $(SRCS:%.c=%.o)
+SRCS		:= $(addprefix $(SRCDIR)/, $(SRCS))
+OBJS		:= $(addprefix $(OBJDIR)/, $(OBJS))
 DEPS		:= $(OBJS:.c=.o)
 
 RM		:= rm -rf
 CC		:= cc
-CFLAGS	:= -Wall -Werror -Wextra -I$(INCDIR) -I$(MLX) -g3
+CFLAGS	:= -Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -g3
+LFLAGS	:= -L/usr/lib -lXext -lX11 -lm -lz
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
+$(LIBFT): $(LIBFTDIR)
+	@make -sC $(LIBFTDIR)
+
+$(MLX): $(MLXDIR)
+	@make -C $(MLXDIR)
+
+$(NAME): $(LIBFT) $(MLX) $(OBJDIR) $(OBJS)
+	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	$(CPPC) $(CPPFLAGS) -o $@ -c $^
+	$(CC) $(CFLAGS) -MMD -o $@ -c $^
 
-# include $(DEPS)
+# -include: $(DEPS)
+
 clean:
 	@$(RM) $(OBJS) $(DEPS) $(OBJDIR)
-	@make -C $(LIBFTDIR) fclean
-	@make -C $(MLXDIR) fclean
+	@make clean -C $(LIBFTDIR)
+	@make clean -C $(MLXDIR)
 
 fclean: clean
-	rm -rf
+	@$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean flcean re
