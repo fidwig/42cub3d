@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:45:24 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 23:10:41 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/14 18:05:05 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ unsigned long	get_now(int unit)
 
 int	init_info(t_info *info)
 {
+	*info = (t_info){0};
 	info->start_time = get_now(MSEC);
+	info->last_frame = info->start_time;
 	return (0);
 }
 

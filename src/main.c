@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 23:13:43 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/14 18:07:48 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	init_cub(t_cub *cub)
 	cub->image.addr = mlx_get_data_addr(cub->image.img,
 			&cub->image.bitdepth, &cub->image.linelen, &cub->image.endian);
 	cub->win = mlx_new_window(cub->mlx, S_WIDTH, S_HEIGHT, "cub3d");
-
 	cub->player.spd = 10;
 	cub->player.pos = (t_dvec3){200, 0, 200};
 	init_info(&cub->info);
