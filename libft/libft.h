@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:22:56 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/18 09:11:25 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:15:28 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "garbage_collector.h"
 
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
@@ -38,12 +39,19 @@ int				ft_memcmp(const void *s1, const void *s2, size_t n);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 int				ft_atoi(const char *nptr);
 void			*ft_calloc(size_t nmemb, size_t size); //
+void			*ft_calloc2(size_t nmemb, size_t size);
 char			*ft_strdup(const char *s);
+char			*ft_strdup2(const char *s);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
+char			*ft_substr2(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin2(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
+char			*ft_strtrim2(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
-char			*ft_itoa(int n); //
+char			**ft_split2(char const *s, char c);
+char			*ft_itoa(int n);
+char			*ft_itoa2(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 void			ft_putchar_fd(char c, int fd);
@@ -55,7 +63,10 @@ void			ft_putnbr_fd(int n, int fd);
 char			**ft_splitf(char const *s, int (*f)(int));
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strdup_free(const char *s, int free_s);
+char			*ft_strdup_free2(const char *s, int free_s);
 char			*ft_strjoin_free(char const *s1, char const *s2, int free1,
+					int free2);
+char			*ft_strjoin_free2(char const *s1, char const *s2, int free1,
 					int free2);
 char			*ft_strndup(const char *s, size_t len);
 int				ft_dprintf(int fd, const char *format, ...);
@@ -78,18 +89,24 @@ typedef struct s_list
 }	t_list;
 
 t_list			*ft_lstnew(void *content);
+t_list			*ft_lstnew2(void *content);
 void			*ft_lstadd_front(t_list **lst, t_list *new);
 int				ft_lstsize(t_list *lst);
 t_list			*ft_lstlast(t_list *lst);
 void			*ft_lstadd_back(t_list **lst, t_list *new);
 void			ft_lstdelone(t_list *lst, void (*del)(void*));
+void			ft_lstdelone2(t_list *lst, void (*del)(void*));
 void			ft_lstclear(t_list **lst, void (*del)(void *));
+void			ft_lstclear2(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
+					void (*del)(void *));
+t_list			*ft_lstmap2(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 
 // late additions
 void			ft_lstremove(t_list **lst, t_list *link, void (*del)(void *));
+void			ft_lstremove2(t_list **lst, t_list *link, void (*del)(void *));
 void			ft_lstunlink(t_list **lst, t_list *link);
 
 #endif
