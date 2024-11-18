@@ -11,7 +11,7 @@ SRCS		:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
 OBJS		:=	$(SRCS:%.c=%.o)
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))
 OBJS		:=	$(addprefix $(OBJDIR)/, $(OBJS))
-DEPS		:=	$(OBJS:.c=.o)
+DEPS		:=	$(OBJS:.o=.d)
 
 RM		:=	rm -rf
 CC		:=	cc
@@ -29,13 +29,13 @@ $(LIBFT): $(LIBFTDIR)
 $(MLX): $(MLXDIR)
 	@make -sC $(MLXDIR)
 
-$(NAME): $(LIBFT) $(MLX) $(OBJDIR) $(OBJS)
+$(NAME): $(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
 	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -MMD -o $@ -c $^
 
-# -include: $(DEPS)
+-include: $(DEPS)
 
 clean:
 	@$(RM) $(OBJS) $(DEPS) $(OBJDIR)
