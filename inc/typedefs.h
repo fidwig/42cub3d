@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 22:53:28 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/18 15:33:46 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define LARR 256
 # define RARR 257
+# include <stdbool.h>
 
 typedef unsigned int	t_uicol;
 

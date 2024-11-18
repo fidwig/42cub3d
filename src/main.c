@@ -6,19 +6,44 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/14 18:07:48 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/18 15:19:03 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "mlx.h"
+
+void	free_mlx_display(void *cub)
+{
+	mlx_destroy_display(((t_cub *)cub)->mlx);
+}
+
+void	free_mlx_image(void *cub)
+{
+	mlx_destroy_image(((t_cub *)cub)->mlx, ((t_cub *)cub)->image.img);
+}
+
+void	free_mlx_win(void *cub)
+{
+	mlx_destroy_window(((t_cub *)cub)->mlx, ((t_cub *)cub)->win);
+}
 
 void	init_cub(t_cub *cub)
 {
 	cub->mlx = mlx_init();
+	if (!cub->mlx)
+		return (clean_exit(1, cub));
+	trash_add(cub->mlx, &free_mlx_display);
 	cub->image.img = mlx_new_image(cub->mlx, S_WIDTH, S_HEIGHT);
+	if (!cub->image.img)
+		return (clean_exit(1, cub));
+	trash_add(cub->image.img, &free_mlx_image);
 	cub->image.addr = mlx_get_data_addr(cub->image.img,
 			&cub->image.bitdepth, &cub->image.linelen, &cub->image.endian);
 	cub->win = mlx_new_window(cub->mlx, S_WIDTH, S_HEIGHT, "cub3d");
+	if (!cub->win)
+		return (clean_exit(1, cub));
+	trash_add(cub->win, &free_mlx_win);
 	cub->player.spd = 10;
 	cub->player.pos = (t_dvec3){200, 0, 200};
 	init_info(&cub->info);
@@ -51,6 +76,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (usage_error(), 1);
 	cub = (t_cub){0};
+
 	init_cub(&cub);
 	init_hooks(&cub);
 	mlx_loop(cub.mlx);

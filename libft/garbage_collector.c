@@ -6,12 +6,11 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:01:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 10:34:30 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:35:06 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "garbage_collector.h"
-#include <stdlib.h>
 
 t_trash	*trash_add(void *addr, void (*free_fct)(void *))
 {

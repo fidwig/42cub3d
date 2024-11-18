@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 23:02:32 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/18 15:27:30 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 //ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);
 void			usage_error(void);
+void			stop_error(int exit_code, t_cub *cub, const char *msg);
 
 //HOOKS
 int				key_pressed_hook(int key, t_cub *cub);
