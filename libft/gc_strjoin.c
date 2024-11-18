@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin2.c                                      :+:      :+:    :+:   */
+/*   gc_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 13:03:57 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 13:04:15 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:54:46 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:54:58 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char			*s;
 
 	if (!s1)
-		return (ft_strdup2(s2));
+		return (gc_strdup(s2));
 	else if (!s2)
-		return (ft_strdup2(s1));
+		return (gc_strdup(s1));
 	l = ft_strlen((char *) s1) + ft_strlen((char *) s2) + 1;
 	s = (char *) malloc2(l * sizeof(char));
 	if (!s)

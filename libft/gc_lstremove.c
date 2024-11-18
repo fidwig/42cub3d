@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstremove2.c                                    :+:      :+:    :+:   */
+/*   gc_lstremove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 12:56:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 12:59:14 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:49:18 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:49:34 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_lstremove2(t_list **lst, t_list *link, void (*del)(void *))
 	if (first == link)
 	{
 		*lst = (*lst)->next;
-		ft_lstdelone2(first, del);
+		gc_lstdelone(first, del);
 		return ;
 	}
 	while (first && first->next && first->next != link)
@@ -30,6 +30,6 @@ void	ft_lstremove2(t_list **lst, t_list *link, void (*del)(void *))
 	if (first->next && first->next == link)
 	{
 		first->next = link->next;
-		ft_lstdelone2(link, del);
+		gc_lstdelone(link, del);
 	}
 }

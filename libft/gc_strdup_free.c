@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup_free2.c                                  :+:      :+:    :+:   */
+/*   gc_strdup_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 13:04:39 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 13:05:02 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:51:02 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:51:10 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup_free(const char *s, int free_s)
+char	*gc_strdup_free(const char *s, int free_s)
 {
 	size_t	len;
 	char	*new;

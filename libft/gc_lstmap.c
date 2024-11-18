@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap2.c                                       :+:      :+:    :+:   */
+/*   gc_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 12:54:03 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 12:59:01 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:48:16 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:48:38 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap2(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*gc_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*explorer;
 	t_list	*head;
@@ -29,7 +29,7 @@ t_list	*ft_lstmap2(t_list *lst, void *(*f)(void *), void (*del)(void *))
 			explorer->next = (t_list *) malloc2(sizeof(t_list));
 			if (!explorer->next)
 			{
-				ft_lstclear2(&head, del);
+				gc_lstclear(&head, del);
 				return (NULL);
 			}
 		}

@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear2.c                                     :+:      :+:    :+:   */
+/*   gc_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 12:55:06 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 12:58:34 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:50:50 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:50:59 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear2(t_list **lst, void (*del)(void *))
+char	*gc_strdup(const char *s)
 {
-	t_list	*tofree;
+	char	*dup;
+	size_t	i;
 
-	if (!lst)
-		return ;
-	while (*lst)
+	i = 0;
+	dup = (char *) malloc2((ft_strlen((char *) s) + 1) * sizeof(char));
+	if (!dup)
+		return (NULL);
+	while (s[i])
 	{
-		tofree = *lst;
-		*lst = (*lst)->next;
-		ft_lstdelone2(tofree, del);
+		dup[i] = s[i];
+		i++;
 	}
-	*lst = NULL;
+	dup[i] = '\0';
+	return (dup);
 }

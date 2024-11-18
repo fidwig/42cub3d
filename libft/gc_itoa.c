@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa2.c                                         :+:      :+:    :+:   */
+/*   gc_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 12:53:53 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 13:16:22 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:39:39 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:48:05 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	itoa_len(long n)
 	return (l);
 }
 
-char	*ft_itoa2(int n)
+char	*gc_itoa(int n)
 {
 	long	ln;
 	char	*s;

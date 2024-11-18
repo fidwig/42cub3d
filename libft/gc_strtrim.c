@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim2.c                                      :+:      :+:    :+:   */
+/*   gc_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 13:06:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 13:07:02 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:51:50 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:52:02 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_cins(char const *s, char c)
 	return (0);
 }
 
-char	*ft_strtrim2(char const *s1, char const *set)
+char	*gc_strtrim(char const *s1, char const *set)
 {
 	unsigned int	strim;
 	unsigned int	etrim;

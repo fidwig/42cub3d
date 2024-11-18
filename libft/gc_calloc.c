@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   gc_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsommet <jsommet@student.42.fr >           +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 16:01:23 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/18 12:59:06 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 17:45:16 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 17:45:20 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew2(void *content)
+void	*ft_calloc2(size_t nmemb, size_t size)
 {
-	t_list	*node;
+	void	*s;
+	size_t	i;
 
-	node = malloc(sizeof(t_list));
-	if (!node)
+	i = nmemb * size;
+	if (i != 0 && i / nmemb != size)
 		return (NULL);
-	node->content = content;
-	node->next = NULL;
-	return (node);
+	s = malloc2(nmemb * size);
+	if (!s)
+		return (NULL);
+	ft_bzero(s, nmemb * size);
+	return (s);
 }

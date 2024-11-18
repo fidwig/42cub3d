@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr2.c                                       :+:      :+:    :+:   */
+/*   gc_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 13:07:31 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 13:07:52 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:52:10 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:52:19 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_substr2(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen((char *)s) - 1)
-		return (ft_strdup2(""));
+		return (gc_strdup(""));
 	l = ft_strlen((char *)(s + start));
 	if (len < l)
 		l = len;

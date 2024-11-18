@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc2.c                                       :+:      :+:    :+:   */
+/*   gc_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 12:49:51 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 13:16:12 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:40:04 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:47:51 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc2(size_t nmemb, size_t size)
+void	gc_lstdelone(t_list *lst, void (*del)(void*))
 {
-	void	*s;
-	size_t	i;
-
-	i = nmemb * size;
-	if (i != 0 && i / nmemb != size)
-		return (NULL);
-	s = malloc2(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	if (!lst)
+		return ;
+	if (del)
+		del(lst->content);
+	free2(lst);
 }

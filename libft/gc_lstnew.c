@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup2.c                                       :+:      :+:    :+:   */
+/*   gc_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 12:57:49 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 12:59:32 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:48:45 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:48:59 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup2(const char *s)
+t_list	*gc_lstnew(void *content)
 {
-	char	*dup;
-	size_t	i;
+	t_list	*node;
 
-	i = 0;
-	dup = (char *) malloc2((ft_strlen((char *) s) + 1) * sizeof(char));
-	if (!dup)
+	node = malloc(sizeof(t_list));
+	if (!node)
 		return (NULL);
-	while (s[i])
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+	node->content = content;
+	node->next = NULL;
+	return (node);
 }

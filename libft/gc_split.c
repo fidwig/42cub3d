@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split2.c                                        :+:      :+:    :+:   */
+/*   gc_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 12:56:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 13:12:20 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:49:38 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:50:39 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	ft_free_split(char **split)
 	free2(split);
 }
 
-char	**ft_split2(char const *s, char c)
+char	**gc_split(char const *s, char c)
 {
 	int		l;
 	char	**split;
