@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 23:02:32 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/19 15:24:27 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <sys/types.h>
 // MLX
 # include "mlx.h"
-# include "mlx_int.h"
+/* # include "mlx_int.h" */
 // LIBFT
 # include "libft.h"
 // MY HEADERS

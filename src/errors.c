@@ -6,11 +6,12 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 21:55:35 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/19 15:39:26 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "mlx.h"
 
 void	free_map(t_cub *cub, t_map *map)
 {

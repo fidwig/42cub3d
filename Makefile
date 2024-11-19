@@ -1,7 +1,29 @@
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
+#    Updated: 2024/11/19 15:01:49 by bazaluga         ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
+
 NAME		:=	cub3D
 INCDIR		:=	inc
 SRCDIR		:=	src
-MLXDIR		:=	mlx
+
+ifeq ($(shell uname), Linux)
+	MLXDIR	:=	mlx
+	LFLAGS	:=	-L/usr/lib -lXext -lX11 -lm -lz
+	SRCS	:=	mlx_compat_linux.c
+else
+	MLXDIR	:=	mlx_macos
+	LFLAGS	:=	-framework OpenGL -framework AppKit -lm
+	SRCS	:=	mlx_compat_macos.c
+endif
+
 LIBFTDIR	:=	libft
 MLX			:=	$(MLXDIR)/libmlx.a
 LIBFT		:=	$(LIBFTDIR)/libft.a
@@ -16,7 +38,7 @@ DEPS		:=	$(OBJS:.o=.d)
 RM		:=	rm -rf
 CC		:=	cc
 CFLAGS	:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -g3
-LFLAGS	:=	-L/usr/lib -lXext -lX11 -lm -lz
+
 
 all: $(NAME)
 

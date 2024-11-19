@@ -6,11 +6,12 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:28:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 22:19:32 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/19 15:38:46 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+//include x11 lib corresponding to keys
 
 int	key_pressed_hook(int key, t_cub *cub)
 {

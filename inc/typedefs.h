@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 22:53:28 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/19 15:38:43 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define LARR 256
 # define RARR 257
+
+# include <stdbool.h>
 
 typedef unsigned int	t_uicol;
 
@@ -98,5 +100,18 @@ typedef struct s_cub
 
 	t_info		info;
 }	t_cub;
+
+# ifndef __linux__
+
+enum e_key
+{
+	XK_Escape = 53,
+	XK_Left = 123,
+	XK_Right = 124,
+	XK_Up = 126,
+	XK_Down = 125
+};
+
+# endif
 
 #endif // !TYPEDEFS_H

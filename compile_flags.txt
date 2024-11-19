@@ -1,3 +1,4 @@
 -Iinc
 -Imlx
+-Imlx_macos
 -Ilibft
