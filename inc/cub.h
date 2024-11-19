@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/19 15:24:27 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/19 22:25:23 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@
 # define S_HEIGHT	720
 # define BLACK		0x000000
 # define WHITE		0xFFFFFF
+
+// COMPATIBILITY
+int	mlx2_destroy_display(void *xvar);
 
 //ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);

@@ -6,7 +6,7 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/11/19 15:01:49 by bazaluga         ###   ########.fr        #
+#    Updated: 2024/11/19 22:38:21 by bazaluga         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -28,7 +28,7 @@ LIBFTDIR	:=	libft
 MLX			:=	$(MLXDIR)/libmlx.a
 LIBFT		:=	$(LIBFTDIR)/libft.a
 OBJDIR		:=	.obj
-SRCS		:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
+SRCS		+=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
 				parsing.c errors.c inputs.c runtime_info.c
 OBJS		:=	$(SRCS:%.c=%.o)
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))
@@ -61,7 +61,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 clean:
 	@$(RM) $(OBJS) $(DEPS) $(OBJDIR)
-	@make clean -C $(LIBFTDIR)
+	@make fclean -C $(LIBFTDIR)
 	@make clean -C $(MLXDIR)
 
 fclean: clean

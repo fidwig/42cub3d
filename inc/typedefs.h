@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/19 15:38:43 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/19 22:29:28 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,11 @@ enum e_key
 	XK_Left = 123,
 	XK_Right = 124,
 	XK_Up = 126,
-	XK_Down = 125
+	XK_Down = 125,
+	XK_a = 0,
+	XK_d = 2,
+	XK_w = 13,
+	XK_s = 1
 };
 
 # endif
