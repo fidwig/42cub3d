@@ -6,47 +6,44 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/17 17:18:02 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/19 19:50:36 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-double	wrap_angle(double angle)
-{
-	if (angle >= 2.0 * M_PI)
-		angle -= 2.0 * M_PI;
-	else if (angle < 0)
-		angle += 2.0 * M_PI;
-	return (angle);
-}
 
 void	rotate(t_cub *cub, int r)
 {
 	if (!r)
 		return ;
 	cub->player.rot = wrap_angle(cub->player.rot
-			+ ((double)r * (M_PI / 8.0) * cub->info.delta / 100));
+			+ ((double)r * (M_PI / 8.0) * cub->info.delta / 100.0));
 }
 
 void	move(t_cub *cub, int x, int y)
 {
 	t_dvec3	move;
+	t_dvec3	npos;
 	double	mangle;
+
 
 	if (x == 0 && y == 0)
 		return ;
 	mangle = wrap_angle(cub->player.rot + atan2(x, y));
-	move.x = cos(mangle) * cub->player.spd * (cub->info.delta / 100.0);
-	move.z = sin(mangle) * cub->player.spd * (cub->info.delta / 100.0);
+	move.x = cos(mangle) * cub->player.spd * (cub->info.delta / 1000.0);
+	move.z = sin(mangle) * cub->player.spd * (cub->info.delta / 1000.0);
+	npos.x = cub->player.pos.x + move.x;
+	npos.z = cub->player.pos.z + move.z;
+	if (cub->map.raw[(int)npos.x][(int)cub->player.pos.z] != '1')
+		cub->player.pos.x = npos.x;
+	if (cub->map.raw[(int)cub->player.pos.x][(int)npos.z] != '1')
+		cub->player.pos.z = npos.z;
 	/*
 	check for collisions
 	if (cub->map.raw[floor(cub->player.pos.x + move.x)]
 		[floor(cub->player.pos.y + move.y)])
 		return ;
 	*/
-	cub->player.pos.x += move.x;
-	cub->player.pos.z += move.z;
 }
 // move.x = x * cos(cub->player.rot + (M_PI / 2.0)) + y * cos(cub->player.rot);
 // move.z = x * sin(cub->player.rot + (M_PI / 2.0)) + y * sin(cub->player.rot);

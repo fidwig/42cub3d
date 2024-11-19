@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 23:02:32 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/19 19:32:37 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,26 @@
 # define BLACK		0x000000
 # define WHITE		0xFFFFFF
 
-//ERRORZ
+# define FOV		90
+
+// ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);
+int				clean_exit2(t_cub *cub);
 void			usage_error(void);
 
-//HOOKS
+// HOOKS
 int				key_pressed_hook(int key, t_cub *cub);
 int				key_released_hook(int key, t_cub *cub);
 
-//INPUTS
+// INPUTS
 void			inputs_handler(t_cub *cub);
 
-//INFO
+// INFO
 int				init_info(t_info *info);
 int				update_info(t_info *info);
+
+// ANGLE MATH
+double			wrap_angle(double angle);
+double			deg2rad(int deg);
 
 #endif // !CUB_H

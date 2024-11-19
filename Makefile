@@ -7,7 +7,7 @@ MLX			:=	$(MLXDIR)/libmlx.a
 LIBFT		:=	$(LIBFTDIR)/libft.a
 OBJDIR		:=	.obj
 SRCS		:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
-				parsing.c errors.c inputs.c runtime_info.c
+				parsing.c errors.c inputs.c runtime_info.c angles.c
 OBJS		:=	$(SRCS:%.c=%.o)
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))
 OBJS		:=	$(addprefix $(OBJDIR)/, $(OBJS))

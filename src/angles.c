@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics.h                                         :+:      :+:    :+:   */
+/*   angles.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 17:34:30 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/19 19:32:51 by jsommet          ###   ########.fr       */
+/*   Created: 2024/11/19 16:39:53 by jsommet           #+#    #+#             */
+/*   Updated: 2024/11/19 16:46:01 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GRAPHICS_H
-# define GRAPHICS_H
+#include "cub.h"
 
-void			clear_image(t_image *image, t_uicol color);
-t_trgb			utorgb(unsigned int color);
-unsigned int	rgbtou(t_trgb trgb);
-void			pixel_put(t_image *data, int x, int y, int color);
+double	wrap_angle(double angle)
+{
+	if (angle >= 2.0 * M_PI)
+		angle -= 2.0 * M_PI;
+	else if (angle < 0)
+		angle += 2.0 * M_PI;
+	return (angle);
+}
 
-void			raycasting(t_cub *cub);
-
-#endif // !GRAPHIX
+double	deg2rad(int deg)
+{
+	return ((deg / 180.0) * M_PI);
+}

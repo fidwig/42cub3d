@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 21:55:35 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/19 19:19:09 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	free_map(t_cub *cub, t_map *map)
 {
 	(void) map;
 	(void) cub;
+	//for each char* map[i] free(map[i])
 	//free_(map.raw);
 	// mlx_destroy_image(cub->mlx, map->tex_nor.img);
 	// mlx_destroy_image(cub->mlx, map->tex_eas.img);
@@ -34,6 +35,16 @@ void	clean_exit(int exit_code, t_cub *cub)
 	free(cub->mlx);
 	free_map(cub, &cub->map);
 	exit(exit_code);
+}
+
+int	clean_exit2(t_cub *cub)
+{
+	mlx_destroy_image(cub->mlx, cub->image.img);
+	mlx_destroy_window(cub->mlx, cub->win);
+	mlx_destroy_display(cub->mlx);
+	free(cub->mlx);
+	free_map(cub, &cub->map);
+	exit(EXIT_SUCCESS);
 }
 
 void	usage_error(void)
