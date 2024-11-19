@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 22:53:28 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/19 21:07:15 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,41 @@ typedef struct s_map
 	t_image		tex_floor;
 }	t_map;
 
+typedef enum e_dir
+{
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST
+}	t_dir;
+
+typedef struct s_hit
+{
+	t_vec3		pos;
+	float		light;
+	t_dir		facing;
+	// surface type (wall, door, special wall?)
+}	t_hit;
+
 typedef struct s_ray
 {
 	double	angle;
 	double	length;
-	int		flag;
+	t_hit	info;
 }	t_ray;
+
+typedef struct s_cast_info
+{
+	t_ray	ray;
+	int		flag;
+	t_dvec3	pos;
+	t_vec3	mpos;
+	t_dvec3	side_dist;
+	t_dvec3	delta;
+	t_vec3	step;
+	bool	hit;
+}	t_cast_info;
+
 
 typedef struct s_info
 {

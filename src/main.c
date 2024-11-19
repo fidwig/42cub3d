@@ -6,21 +6,21 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/19 19:33:08 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/19 21:59:06 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	init_cub(t_cub *cub)
+void	cub_init(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	cub->image.img = mlx_new_image(cub->mlx, S_WIDTH, S_HEIGHT);
 	cub->image.addr = mlx_get_data_addr(cub->image.img,
 			&cub->image.bitdepth, &cub->image.linelen, &cub->image.endian);
 	cub->win = mlx_new_window(cub->mlx, S_WIDTH, S_HEIGHT, "cub3d");
-	cub->player.spd = 6;
-	cub->player.pos = (t_dvec3){3, 0, 3};
+	cub->player.spd = 3;
+	cub->player.pos = (t_dvec3){3, 0, 2};
 	init_info(&cub->info);
 }
 
@@ -56,18 +56,18 @@ int	main(int argc, char **argv)
 	// MANUAL MAP
 	// cub.map.raw = malloc(sizeof(char *) * 9);
 	char *manmap[8] = {
-		"11111111111",
-		"10000000001",
-		"10000001101",
-		"10000001001",
-		"10001111001",
-		"11011000001",
-		"10000000001",
-		"11111111111"
+		"1111111111111",
+		"1000000000001",
+		"1001000110001",
+		"1000000100001",
+		"1000111100001",
+		"1101100000101",
+		"1000000000001",
+		"1111111111111"
 	};
 	cub.map.raw = manmap;
 	//
-	init_cub(&cub);
+	cub_init(&cub);
 	init_hooks(&cub);
 	mlx_loop(cub.mlx);
 	return (0);
