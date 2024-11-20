@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:37:31 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/19 22:07:14 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/20 01:28:11 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	set_ray_info(t_ray *ray, int flag)
 {
 	if (flag)
 	{
-		if (sin(ray->angle) > 0)
+		if (ray->dir.y > 0)
 			ray->info.facing = NORTH;
 		else
 			ray->info.facing = SOUTH;
 	}
 	else
 	{
-		if (cos(ray->angle) > 0)
+		if (ray->dir.x > 0)
 			ray->info.facing = EAST;
 		else
 			ray->info.facing = WEST;
@@ -33,11 +33,11 @@ void	set_ray_info(t_ray *ray, int flag)
 void	cast_init(t_cast_info *cast)
 {
 	cast->delta = (t_dvec3){1e30, 1e30, 0};
-	if (cos(cast->ray.angle) != 0)
-		cast->delta.x = fabs(1 / cos(cast->ray.angle));
-	if (sin(cast->ray.angle) != 0)
-		cast->delta.y = fabs(1 / sin(cast->ray.angle));
-	if (cos(cast->ray.angle) < 0)
+	if (cast->ray.dir.x != 0)
+		cast->delta.x = fabs(1 / cast->ray.dir.x);
+	if (cast->ray.dir.y != 0)
+		cast->delta.y = fabs(1 / cast->ray.dir.y);
+	if (cast->ray.dir.x < 0)
 	{
 		cast->step.x = -1;
 		cast->side_dist.x = (cast->pos.x - cast->mpos.x) * cast->delta.x;
@@ -47,7 +47,7 @@ void	cast_init(t_cast_info *cast)
 		cast->step.x = 1;
 		cast->side_dist.x = (cast->mpos.x + 1.0 - cast->pos.x) * cast->delta.x;
 	}
-	if (sin(cast->ray.angle) < 0)
+	if (cast->ray.dir.y < 0)
 	{
 		cast->step.y = -1;
 		cast->side_dist.y = (cast->pos.y - cast->mpos.y) * cast->delta.y;
@@ -83,18 +83,12 @@ void	dda(t_cast_info	*cast, t_map map)
 		cast->ray.length = cast->side_dist.y - cast->delta.y;
 }
 
-t_ray	cast_ray(t_dvec3 origin, double angle, t_map map)
+t_ray	cast_ray(t_dvec3 origin, t_dvec3 dir, t_map map)
 {
 	t_cast_info	cast;
 
-	// -------- FOR FISHEYE CORRECTION --------
-	//calculate ray position and direction
-	// double cameraX = 2 * x / double(w) - 1; //x-coordinate in camera space
-	// double rayDirX = dirX + planeX * cameraX;
-	// double rayDirY = dirY + planeY * cameraX;
-
 	cast = (t_cast_info){0};
-	cast.ray.angle = angle;
+	cast.ray.dir = dir;
 	cast.pos = (t_dvec3){origin.x, origin.z, 0};
 	cast.mpos = (t_vec3){(int)origin.x, (int)origin.z, 0};
 	cast_init(&cast);
@@ -105,34 +99,24 @@ t_ray	cast_ray(t_dvec3 origin, double angle, t_map map)
 
 void	raycasting(t_cub *cub)
 {
-	int		i;
-	t_ray	ray;
-	double	rays_angle_delta;
-	double	ray_angle;
+	int			i;
+	t_ray		ray;
+	t_dvec3		ray_dir;
+	double		camera_x;
+	t_camera	cam;
 
-	rays_angle_delta = deg2rad(FOV) / S_WIDTH;
+	cam.focal = tan(deg2rad(FOV / 2.0));
+	cam.plane = (t_dvec3){cos(cub->player.rot - M_PI / 2.0) * cam.focal,
+		sin(cub->player.rot - M_PI / 2.0) * cam.focal, 0};
 	i = 0;
-	while (i < S_WIDTH)
+	while (i < SW)
 	{
-		ray_angle = (i - S_WIDTH / 2.0) * (rays_angle_delta) + cub->player.rot;
-		ray = cast_ray(cub->player.pos, ray_angle, cub->map);
-		ray.length *= pow(cos(ray_angle - cub->player.rot), 0.65);
-		int lineheight = (int)(S_HEIGHT / ray.length);
-		if (lineheight > S_HEIGHT) lineheight = S_HEIGHT;
-		int j = 0;
-		t_trgb col;
-		if (ray.info.facing == NORTH) col = utorgb(0xA52341);
-		else if (ray.info.facing == EAST) col = utorgb(0x67A523);
-		else if (ray.info.facing == SOUTH) col = utorgb(0x4167A5);
-		else if (ray.info.facing == WEST) col = utorgb(0x234167);
-		col.r *= 1 - (ray.length / 15);
-		col.g *= 1 - (ray.length / 15);
-		col.b *= 1 - (ray.length / 15);
-		while (j < lineheight)
-		{
-			pixel_put(&cub->image, i, (S_HEIGHT / 2 - lineheight / 2) + j, rgbtou(col));
-			j++;
-		}
+		camera_x = 2.0 * (i / ((double)SW * cam.focal)) - 1.0;
+		ray_dir = (t_dvec3){cos(cub->player.rot) + cam.plane.x * camera_x,
+			sin(cub->player.rot) + cam.plane.y * camera_x, 0};
+		ray = cast_ray(cub->player.pos, ray_dir, cub->map);
+		draw_column(cub, i, (int)(SH / ray.length) / cam.focal, ray);
 		i++;
 	}
 }
+		/*________TEMP________*/

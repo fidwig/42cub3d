@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:45:24 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/14 18:05:05 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/20 00:16:29 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ int	update_info(t_info *info)
 
 	frame = get_now(MSEC) - info->start_time;
 	info->delta = (frame - info->last_frame);
-	info->framerate = 1000.0 / info->delta;
+	if (DEBUG)
+		info->framerate = 1000.0 / info->delta;
+	// printf("%d\n", (int)info->framerate);
 	info->last_frame = frame;
 	return (0);
 }

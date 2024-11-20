@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/19 21:59:06 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/20 01:46:42 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,23 @@
 void	cub_init(t_cub *cub)
 {
 	cub->mlx = mlx_init();
-	cub->image.img = mlx_new_image(cub->mlx, S_WIDTH, S_HEIGHT);
+	cub->image.img = mlx_new_image(cub->mlx, SW, SH);
 	cub->image.addr = mlx_get_data_addr(cub->image.img,
 			&cub->image.bitdepth, &cub->image.linelen, &cub->image.endian);
-	cub->win = mlx_new_window(cub->mlx, S_WIDTH, S_HEIGHT, "cub3d");
-	cub->player.spd = 3;
+	cub->win = mlx_new_window(cub->mlx, SW, SH, "cub3d");
+	cub->player.spd = 2;
 	cub->player.pos = (t_dvec3){3, 0, 2};
+	cub->player.rot = 0;
 	init_info(&cub->info);
 }
 
+	// pixel_put(&cub->image, cub->player.pos.x * 10.0, cub->player.pos.z * 10.0, 0x65A0C1);
+	// pixel_put(&cub->image, cub->player.pos.x * 10.0 + cos(cub->player.rot) * 10.0, cub->player.pos.z * 10.0 + sin(cub->player.rot) * 10, 0x65A0C1);
 int	update(t_cub *cub)
 {
 	inputs_handler(cub);
 	clear_image(&cub->image, BLACK);
-	pixel_put(&cub->image, cub->player.pos.x * 10.0, cub->player.pos.z * 10.0, 0x65A0C1);
-	pixel_put(&cub->image, cub->player.pos.x * 10.0 + cos(cub->player.rot) * 10.0, cub->player.pos.z * 10.0 + sin(cub->player.rot) * 10, 0x65A0C1);
+	// floor casting (floor and ceiling)
 	raycasting(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->image.img, 0, 0);
 	update_info(&cub->info);
@@ -53,20 +55,28 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (usage_error(), 1);
 	cub = (t_cub){0};
-	// MANUAL MAP
-	// cub.map.raw = malloc(sizeof(char *) * 9);
-	char *manmap[8] = {
-		"1111111111111",
-		"1000000000001",
-		"1001000110001",
-		"1000000100001",
-		"1000111100001",
-		"1101100000101",
-		"1000000000001",
-		"1111111111111"
+	char *manmap[100] = {
+		"111111111111111111111111111111111111",
+		"110000000000000111111111100000000001",
+		"100000000000010000111111100000000001",
+		"100000000000010000000000000000000001",
+		"111000000010011111111111100000000001",
+		"111000000010011111111111100000000001",
+		"111111101111111111111111111111111111",
+		"111111101111000000000110000000000001",
+		"111111101111000000000110111111111101",
+		"111111101111000000000110100000000101",
+		"111111101111000000000110101111110101",
+		"111111101111000000000110101000010101",
+		"111111100000000000000110101111010101",
+		"111111111111000000000110100000010101",
+		"111100000001000000000110111111110101",
+		"111100100001000000101110000000010101",
+		"111100100001111111101111111111010001",
+		"111100000000000000000000000000011111",
+		"111111111111111111111111111111111111"
 	};
 	cub.map.raw = manmap;
-	//
 	cub_init(&cub);
 	init_hooks(&cub);
 	mlx_loop(cub.mlx);

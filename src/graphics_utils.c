@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 00:49:59 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/13 22:03:35 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/19 22:50:04 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	clear_image(t_image *image, t_uicol color)
 
 	i = 0;
 	j = 0;
-	while (i < S_WIDTH)
+	while (i < SW)
 	{
 		j = 0;
-		while (j < S_HEIGHT)
+		while (j < SH)
 		{
 			pixel_put(image, i, j, color);
 			j++;
@@ -54,7 +54,7 @@ void	pixel_put(t_image *image, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x > S_WIDTH || y < 0 || y > S_HEIGHT)
+	if (x < 0 || x > SW || y < 0 || y > SH)
 		return ;
 	dst = image->addr + (y * image->linelen + x * (image->bitdepth / 8));
 	*(unsigned int *)dst = color;

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/19 21:07:15 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/20 00:32:28 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_hit
 
 typedef struct s_ray
 {
-	double	angle;
+	t_dvec3	dir;
 	double	length;
 	t_hit	info;
 }	t_ray;
@@ -105,7 +105,6 @@ typedef struct s_cast_info
 	bool	hit;
 }	t_cast_info;
 
-
 typedef struct s_info
 {
 	double			framerate;
@@ -114,6 +113,12 @@ typedef struct s_info
 	unsigned long	start_time;
 	unsigned long	last_frame;
 }	t_info;
+
+typedef struct s_camera
+{
+	double	focal;
+	t_dvec3	plane;
+}	t_camera;
 
 typedef struct s_cub
 {

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/19 21:42:53 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/20 00:16:55 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@
 
 # define USEC 0
 # define MSEC 1
+# define DEBUG 0
 
-# define S_WIDTH	1280
-# define S_HEIGHT	720
+# define SW	1280
+# define SH	720
 # define BLACK		0x000000
 # define WHITE		0xFFFFFF
 
-# define FOV		90
+# define FOV		100
 // # define MAX_RAYLEN	500
 
 // ERRORZ

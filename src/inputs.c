@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/19 20:27:07 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/20 01:28:35 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,15 @@ void	rotate(t_cub *cub, int r)
 	if (!r)
 		return ;
 	cub->player.rot = wrap_angle(cub->player.rot
-			+ ((double)r * (M_PI / 8.0) * cub->info.delta / 100.0));
+			+ ((double)r * (M_PI / 10.0) * cub->info.delta / 100.0));
+}
+
+double	sign(double n)
+{
+	if (n < 0)
+		return (-1);
+	else
+		return (1);
 }
 
 void	move(t_cub *cub, int x, int y)
@@ -26,7 +34,6 @@ void	move(t_cub *cub, int x, int y)
 	t_dvec3	npos;
 	double	mangle;
 
-
 	if (x == 0 && y == 0)
 		return ;
 	mangle = wrap_angle(cub->player.rot + atan2(x, y));
@@ -34,16 +41,12 @@ void	move(t_cub *cub, int x, int y)
 	move.z = sin(mangle) * cub->player.spd * (cub->info.delta / 1000.0);
 	npos.x = cub->player.pos.x + move.x;
 	npos.z = cub->player.pos.z + move.z;
-	if (cub->map.raw[(int)npos.x][(int)cub->player.pos.z] != '1')
+	if (cub->map.raw[(int)(npos.x + 0.1 * sign(move.x))]
+		[(int)cub->player.pos.z] != '1')
 		cub->player.pos.x = npos.x;
-	if (cub->map.raw[(int)cub->player.pos.x][(int)npos.z] != '1')
+	if (cub->map.raw[(int)cub->player.pos.x]
+		[(int)(npos.z + 0.1 * sign(move.z))] != '1')
 		cub->player.pos.z = npos.z;
-	/*
-	check for collisions
-	if (cub->map.raw[floor(cub->player.pos.x + move.x)]
-		[floor(cub->player.pos.y + move.y)])
-		return ;
-	*/
 }
 // move.x = x * cos(cub->player.rot + (M_PI / 2.0)) + y * cos(cub->player.rot);
 // move.z = x * sin(cub->player.rot + (M_PI / 2.0)) + y * sin(cub->player.rot);
@@ -52,7 +55,7 @@ void	move(t_cub *cub, int x, int y)
 
 void	inputs_handler(t_cub *cub)
 {
-	move(cub, cub->inputs[XK_d] - cub->inputs[XK_a],
+	move(cub, cub->inputs[XK_a] - cub->inputs[XK_d],
 		cub->inputs[XK_w] - cub->inputs[XK_s]);
-	rotate(cub, cub->inputs[RARR] - cub->inputs[LARR]);
+	rotate(cub, cub->inputs[LARR] - cub->inputs[RARR]);
 }
