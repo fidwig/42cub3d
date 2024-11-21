@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/18 15:19:03 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/21 21:25:00 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	init_cub(t_cub *cub)
 	if (!cub->win)
 		return (clean_exit(1, cub));
 	trash_add(cub->win, &free_mlx_win);
-	cub->player.spd = 10;
-	cub->player.pos = (t_dvec3){200, 0, 200};
+	cub->player.spd = -1;
+	cub->player.pos = (t_dvec3){-1, -1, -1};
 	init_info(&cub->info);
 }
 

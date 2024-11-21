@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/21 14:40:05 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/21 20:40:09 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@
 # include <sys/types.h>
 // MLX
 # include "mlx.h"
-# include "mlx_int.h"
+# ifdef __linux__
+#  include "mlx_int.h"
+# endif
 // LIBFT
 # include "libft.h"
 // MY HEADERS
@@ -66,5 +68,7 @@ int				update_info(t_info *info);
 
 //PARSING
 int				get_infos(t_cub *cub, int fd);
+bool			get_map(t_cub *cub, int fd);
+
 
 #endif // !CUB_H
