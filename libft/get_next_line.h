@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:33:39 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/02/23 20:29:54 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/21 09:21:17 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #  define BUFFER_SIZE 4095
 # endif
 # define FD_MAX 1024
-# include <limits.h>
+# include <stdlib.h>
 
 typedef struct s_remain
 {

@@ -1,14 +1,11 @@
 #include "garbage_collector.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 int main()
 {
-	char *str = malloc2(sizeof(char) * 10);
-	ft_bzero(str, 10);
-	ft_strcpy(str, "coucou\n");
-	write(1, str, 10);
-	char *ptr = malloc(10000);
-	trash_add(ptr, &free);
-	trash_clear();
+	char *end;
+	long long n = ft_strtoll("12    ,123", &end, 10);
+	printf("n = %lld, end = <%s>\n", n, end);
 }

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/18 15:27:30 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:40:05 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,8 @@ void			inputs_handler(t_cub *cub);
 //INFO
 int				init_info(t_info *info);
 int				update_info(t_info *info);
+
+//PARSING
+int				get_infos(t_cub *cub, int fd);
 
 #endif // !CUB_H

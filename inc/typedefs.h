@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/18 15:33:46 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:29:50 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,19 @@
 # define RARR 257
 # include <stdbool.h>
 
+# define MAPCHARS "10NSEW "
+
 typedef unsigned int	t_uicol;
+
+enum e_mapchars
+{
+	WALL = 0,
+	SPACE,
+	N,
+	S,
+	E,
+	W
+};
 
 typedef struct s_image
 {
@@ -26,6 +38,8 @@ typedef struct s_image
 	int		bitdepth;
 	int		linelen;
 	int		endian;
+	int		width;
+	int		height;
 }	t_image;
 
 typedef struct s_trgb

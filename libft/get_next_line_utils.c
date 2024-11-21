@@ -6,11 +6,12 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:36:33 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/02/23 20:31:56 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/21 09:19:35 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+#include <limits.h>
 
 int	ft_find_nl(const char *s, char **nl)
 {

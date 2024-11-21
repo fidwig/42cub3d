@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:22:56 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/18 18:18:31 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/21 09:17:55 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "garbage_collector.h"
+# include "get_next_line.h"
 
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
@@ -108,5 +109,6 @@ t_list			*gc_lstmap(t_list *lst, void *(*f)(void *),
 void			ft_lstremove(t_list **lst, t_list *link, void (*del)(void *));
 void			gc_lstremove(t_list **lst, t_list *link, void (*del)(void *));
 void			ft_lstunlink(t_list **lst, t_list *link);
+long long		ft_strtoll(const char *nptr, char **endptr, int base);
 
 #endif
