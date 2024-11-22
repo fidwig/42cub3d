@@ -6,13 +6,13 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/21 23:25:32 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/22 01:12:55 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	rotate(t_cub *cub, int r)
+void	rotate(t_cub *cub, float r)
 {
 	if (!r)
 		return ;
