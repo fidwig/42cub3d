@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/20 00:16:55 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/22 01:02:55 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 # define USEC 0
 # define MSEC 1
 # define DEBUG 0
+// FIXED_FRAMERATE < 1 : unlimited
+# define FIXED_FRAMERATE 0
 
 # define SW	1280
 # define SH	720
@@ -54,7 +56,7 @@
 
 // ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);
-int				clean_exit2(t_cub *cub);
+int				clean_exit_hook(t_cub *cub);
 void			usage_error(void);
 
 // HOOKS
@@ -67,6 +69,9 @@ void			inputs_handler(t_cub *cub);
 // INFO
 int				init_info(t_info *info);
 int				update_info(t_info *info);
+
+// MINIMAP
+void			draw_minimap(t_cub *cub);
 
 // ANGLE MATH
 double			wrap_angle(double angle);

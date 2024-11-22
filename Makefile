@@ -8,12 +8,13 @@ LIBFT		:=	$(LIBFTDIR)/libft.a
 OBJDIR		:=	.obj
 HEADERS		:=	cub.h graphics.h typedefs.h
 SRCS		:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
-				parsing.c errors.c inputs.c runtime_info.c angles.c
+				parsing.c errors.c inputs.c runtime_info.c angles.c		\
+				floorcasting.c minimap.c
 OBJS		:=	$(SRCS:%.c=%.o)
 HEADERS		:=	$(addprefix $(INCDIR)/, $(HEADERS))
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))
 OBJS		:=	$(addprefix $(OBJDIR)/, $(OBJS))
-DEPS		:=	$(OBJS:.c=.o)
+DEPS		:=	$(OBJS:.o=.d)
 
 RM			:=	rm -rf
 CC			:=	cc

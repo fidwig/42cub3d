@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 00:49:59 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/19 22:50:04 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/22 00:47:26 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,31 @@ void	clear_image(t_image *image, t_uicol color)
 
 	i = 0;
 	j = 0;
-	while (i < SW)
+	while (i < image->width)
 	{
 		j = 0;
-		while (j < SH)
+		while (j < image->height)
 		{
 			pixel_put(image, i, j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_image(t_image *dest, t_image *src, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < src->width)
+	{
+		j = 0;
+		while (j < src->height)
+		{
+			pixel_put(dest, x + i, y + j, pixel_get(*src, i, j));
 			j++;
 		}
 		i++;
@@ -54,8 +73,18 @@ void	pixel_put(t_image *image, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x > SW || y < 0 || y > SH)
+	if (x < 0 || x >= image->width || y < 0 || y >= image->height)
 		return ;
-	dst = image->addr + (y * image->linelen + x * (image->bitdepth / 8));
+	dst = image->addr + (y * image->len + x * (image->bpp / 8));
 	*(unsigned int *)dst = color;
+}
+
+unsigned int	pixel_get(t_image image, int x, int y)
+{
+	char	*dst;
+
+	if (x < 0 || x > image.width || y < 0 || y > image.height)
+		return (0x0);
+	dst = image.addr + (y * image.len + x * (image.bpp / 8));
+	return (*(unsigned int *)dst);
 }
