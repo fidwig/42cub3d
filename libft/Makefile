@@ -29,16 +29,12 @@ OBJSBONUS = ${SRCSBONUS:.c=.o}
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADER)
-	ar -rcs $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(OBJSBONUS) $(HEADER)
+	ar -rcs $(NAME) $(OBJS) $(OBJSBONUS)
 	ranlib $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $^ 
-
-bonus: $(NAME) $(OBJSBONUS)
-	ar -rcs $(NAME) $(OBJSBONUS)
-	ranlib $(NAME)
 
 clean:
 	rm -rf $(OBJS) $(OBJSBONUS)

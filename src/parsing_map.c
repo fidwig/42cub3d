@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:59:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/23 15:23:05 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 16:05:32 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	check_map_line(t_cub *cub, char *line, int row)
 	{
 		if (!ft_strchr(MAPCHARS, line[i++]))
 			return (0);
-		if (cub->player.spd > 0 || line[i] >= N && line[i] <= W)
+		if (cub->player.spd > 0 || (line[i] >= N && line[i] <= W))
 		{
 			if (row == 0 || i == 0 || !line[i + 1])
 				return (false);
@@ -53,7 +53,6 @@ static int	check_map_line(t_cub *cub, char *line, int row)
 static bool	lst_to_map(t_cub *cub, t_list *lines, int size)
 {
 	t_list	*node;
-	int		len;
 	int		i;
 
 	cub->map.raw = (char **)ft_calloc(size, sizeof(char *));

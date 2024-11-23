@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/23 15:36:06 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 15:54:32 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	free_mlx_display(void *cub)
 {
-	mlx_destroy_display(((t_cub *)cub)->mlx);
+	mlx2_destroy_display(((t_cub *)cub)->mlx);
 }
 
 void	free_mlx_image(void *cub)

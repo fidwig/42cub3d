@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/18 15:27:43 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 16:05:05 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	free_map(t_cub *cub, t_map *map)
 
 void	clean_exit(int exit_code, t_cub *cub)
 {
+	(void)cub;
 	trash_clear();
 	/* mlx_destroy_image(cub->mlx, cub->image.img); */
 	/* mlx_destroy_window(cub->mlx, cub->win); */
@@ -41,7 +42,9 @@ void	clean_exit(int exit_code, t_cub *cub)
 
 void	stop_error(int exit_code, t_cub *cub, const char *msg)
 {
-	ft_dprintf(STDERR_FILENO, "Error\n%s\n", msg);
+	ft_putstr_fd("Error\n", STDERR_FILENO);
+	ft_putstr_fd((char *)msg, STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO);
 	clean_exit(exit_code, cub);
 }
 

@@ -15,7 +15,6 @@
 
 # define LARR 256
 # define RARR 257
-# include <stdbool.h>
 
 # define MAPCHARS "10NSEW "
 
@@ -114,5 +113,22 @@ typedef struct s_cub
 
 	t_info		info;
 }	t_cub;
+
+# ifndef __linux__
+
+enum e_key
+{
+	XK_Escape = 53,
+	XK_Left = 123,
+	XK_Right = 124,
+	XK_Up = 126,
+	XK_Down = 125,
+	XK_a = 0,
+	XK_d = 2,
+	XK_w = 13,
+	XK_s = 1
+};
+
+# endif
 
 #endif // !TYPEDEFS_H
