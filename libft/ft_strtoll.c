@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:09:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/23 21:41:50 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 22:51:29 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	set_endptr(const char *nptr, char **endptr, int base)
 			break ;
 		nptr++;
 	}
-	if (nptr > *endptr + 1)
+	if (nptr > *endptr)
 		*endptr = (char *)nptr;
 }
 
