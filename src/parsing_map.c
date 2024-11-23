@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:59:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/23 16:05:32 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 21:44:10 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "get_next_line.h"
 #include "libft.h"
 
-static bool	empty_line(char *line)
+bool	empty_line(char *line)
 {
 	while (*line)
 	{
@@ -30,22 +30,24 @@ static int	check_map_line(t_cub *cub, char *line, int row)
 	size_t	i;
 
 	i = 0;
-	while (line[i])
+	while (line[i] && line[i] != '\n')
 	{
-		if (!ft_strchr(MAPCHARS, line[i++]))
+		if (!ft_strchr(MAPCHARS, line[i]))
 			return (0);
-		if (cub->player.spd > 0 || (line[i] >= N && line[i] <= W))
+		if (line[i] == N || line[i] == S
+			|| line[i] == E || line[i] == W)
 		{
-			if (row == 0 || i == 0 || !line[i + 1])
+			if (cub->player.spd > 0 || row == 0 || i == 0 || !line[i + 1])
 				return (false);
-			cub->player.rot = (M_PI/2 * (line[i] == N)) + (M_PI * (line[i] == W))
-			+ ((3 * M_PI)/2 * (line[i] == S));
+			cub->player.rot = (M_PI / 2 * (line[i] == N))
+				+ (M_PI * (line[i] == W)) + ((3 * M_PI) / 2 * (line[i] == S));
 			cub->player.spd = 10;
 			cub->player.pos.x = i;
 			cub->player.pos.y = row;
 			cub->player.pos.z = 0;
-			line[i] = MAPCHARS[EMPTY];
+			line[i] = EMPTY;
 		}
+		i++;
 	}
 	return (i);
 }
@@ -70,7 +72,7 @@ static bool	lst_to_map(t_cub *cub, t_list *lines, int size)
 	return (true);
 }
 
-static void skip_empty_lines(int fd, char **line)
+static void	skip_empty_lines(int fd, char **line)
 {
 	if (!*line)
 		*line = get_next_line(fd);
@@ -100,11 +102,12 @@ bool	get_map(t_cub *cub, int fd)
 		line[i_end] = 0;
 		trash_add(line, &free);
 		if (!ft_lstadd_back(&lines, gc_lstnew(line)))
-			return (false);
+			return (close(fd), false);
+		line = get_next_line(fd);
 		size++;
 	}
 	skip_empty_lines(fd, &line);
 	if (line)
-		return (free(line), false);
-	return (lst_to_map(cub, lines, size));
+		return (close(fd), free(line), false);
+	return (!(cub->player.spd == 0) && lst_to_map(cub, lines, size));
 }

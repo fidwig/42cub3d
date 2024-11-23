@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/23 16:05:05 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 18:54:27 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ void	clean_exit(int exit_code, t_cub *cub)
 {
 	(void)cub;
 	trash_clear();
-	/* mlx_destroy_image(cub->mlx, cub->image.img); */
-	/* mlx_destroy_window(cub->mlx, cub->win); */
-	/* mlx_destroy_display(cub->mlx); */
+	if (cub->image.img)
+		mlx_destroy_image(cub->mlx, cub->image.img);
+	if (cub->win)
+		mlx_destroy_window(cub->mlx, cub->win);
+	if (cub->mlx)
+		mlx2_destroy_display(cub->mlx);
 	/* free(cub->mlx); */
 	/* free_map(cub, &cub->map); */
 	exit(exit_code);

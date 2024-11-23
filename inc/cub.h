@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/21 12:10:10 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 21:41:22 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define WHITE		0xFFFFFF
 
 // COMPATIBILITY
-int	mlx2_destroy_display(void *xvar);
+int				mlx2_destroy_display(void *xvar);
 
 //ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);
@@ -70,9 +70,9 @@ int				init_info(t_info *info);
 int				update_info(t_info *info);
 
 //PARSING
-int				get_infos(t_cub *cub, int fd);
+bool			empty_line(char *line);
+int				get_infos(t_cub *cub, int fd, int *infos_count);
 bool			get_map(t_cub *cub, int fd);
 int				parse_scene(t_cub *cub, char *map_name);
-
 
 #endif // !CUB_H

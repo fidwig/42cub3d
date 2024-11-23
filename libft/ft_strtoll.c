@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:09:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/21 09:12:33 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 21:41:50 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ long long	ft_strtoll(const char *nptr, char **endptr, int base)
 	char		tmp;
 
 	if (endptr)
-			*endptr = NULL;
+		*endptr = NULL;
 	if (!nptr || ((base != 0 && base < 2) || base > 36))
 		return (0);
 	nptr += ignore_start(nptr, &sign, &base, endptr);

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/23 13:58:30 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 21:33:39 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ typedef unsigned int	t_uicol;
 
 enum e_mapchars
 {
-	WALL = 0,
-	EMPTY,
-	N,
-	S,
-	E,
-	W,
-	SPACE
+	WALL = MAPCHARS[0],
+	EMPTY = MAPCHARS[1],
+	N = MAPCHARS[2],
+	S = MAPCHARS[3],
+	E = MAPCHARS[4],
+	W = MAPCHARS[5],
+	SPACE = MAPCHARS[6],
+	TMPEMPTY = '9'
 };
 
 typedef struct s_image
@@ -74,9 +75,13 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		**raw;
+	char		*tex_nor_name;
 	t_image		tex_nor;
+	char		*tex_sou_name;
 	t_image		tex_sou;
+	char		*tex_eas_name;
 	t_image		tex_eas;
+	char		*tex_wes_name;
 	t_image		tex_wes;
 
 	t_uicol		col_ceil;
