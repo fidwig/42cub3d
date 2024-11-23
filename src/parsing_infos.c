@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/23 23:04:56 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 23:20:55 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 static void	get_next_num(char **line, bool last)
 {
-	while (**line == ' ')
+	while (**line && **line == ' ')
 		(*line)++;
-	if ((!last && **line != ',') || (last && **line != '\n'))
+	if ((!last && **line != ',') || (last && **line))
 		*line = NULL;
-	else
+	else if (!last)
 		(*line)++;
 }
 
@@ -117,7 +117,7 @@ int	get_infos(t_cub *cub, int fd, int *infos_count)
 		else if (!empty_line(line))
 			return (close(fd), free(line), 4);
 		free(line);
-		line = get_next_line(fd);
+		line = ft_strtrim_free(get_next_line(fd), " \n");
 	}
 	return (!(*infos_count == 6));
 }

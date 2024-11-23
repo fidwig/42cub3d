@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:59:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/23 22:59:18 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 23:40:14 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static bool	lst_to_map(t_cub *cub, t_list *lines, int size)
 	t_list	*node;
 	int		i;
 
-	cub->map.raw = (char **)ft_calloc(size, sizeof(char *));
+	cub->map.raw = (char **)ft_calloc(size + 1, sizeof(char *));
 	if (!cub->map.raw)
 		return (false);
 	i = 0;

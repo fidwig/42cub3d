@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:36:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/23 21:42:41 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 23:38:18 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static bool	check_name(char *map_name)
 
 static int	dfs(char **map, int x, int y)
 {
-	if (x < 0 || !map[x] || y < 0 || !map[x][y] || map[x][y] == SPACE)
+	if (y < 0 || !map[y] || x < 0 || !map[y][x])
 		return (0);
-	if (map[x][y] == WALL || map[x][y] == TMPEMPTY)
+	if (map[y][x] == WALL || map[y][x] == TMPEMPTY)
 		return (1);
-	map[x][y] = TMPEMPTY;
+	map[y][x] = TMPEMPTY;
 	if (!dfs(map, x - 1, y))
 		return (0);
 	if (!dfs(map, x + 1, y))
@@ -48,23 +48,23 @@ static int	check_map(char **map, t_player *p)
 
 	if (!dfs(map, p->pos.x, p->pos.y))
 		return (0);
-	x = 0;
-	while (map[x])
+	y = 0;
+	while (map[y])
 	{
-		y = 0;
-		while (map[x][y])
+		x = 0;
+		while (map[y][x])
 		{
-			if (map[x][y] == EMPTY)
+			if (map[y][x] == EMPTY)
 			{
 				if (!dfs(map, x, y))
 					return (0);
-				x = -1;
+				y = -1;
 				break ;
 			}
 			else
-				y++;
+				x++;
 		}
-		x++;
+		y++;
 	}
 	return (1);
 }
