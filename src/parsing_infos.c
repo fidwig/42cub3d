@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/21 15:12:15 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 15:06:29 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static bool	get_color(t_cub *cub, char *line, char part)
 	end = line;
 	rgb.r = ft_strtoll(line, &end, 10);
 	if (rgb.r < 0 || rgb.r > 255 || line == end || (*end != ' ' && *end != ','))
-		return (free(line), stop_error(1, cub, "Bad floor/ceil color"), false);
+		return (free(line), stop_error(1, cub, "Bad floor/ceil color"), false); //change this & use
+																				//return code to close
+																				//the fd
 	while (*end && *end != ',')
 		end++;
 	end += (*end == ',');

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/21 20:40:09 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 15:27:20 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int				update_info(t_info *info);
 //PARSING
 int				get_infos(t_cub *cub, int fd);
 bool			get_map(t_cub *cub, int fd);
+int				parse_scene(t_cub *cub, char *map_name);
 
 
 #endif // !CUB_H

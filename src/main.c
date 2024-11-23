@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/21 21:25:00 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 15:36:06 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,11 @@ int	main(int argc, char **argv)
 
 	(void) argc;
 	(void) argv;
-	if (argc < 2)
+	if (argc != 2)
 		return (usage_error(), 1);
 	cub = (t_cub){0};
-
+	if (!parse_scene(&cub, argv[1]))
+		stop_error(1, &cub, "Scene parsing");
 	init_cub(&cub);
 	init_hooks(&cub);
 	mlx_loop(cub.mlx);

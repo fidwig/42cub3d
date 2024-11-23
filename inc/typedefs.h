@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/21 14:29:50 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:58:30 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ typedef unsigned int	t_uicol;
 enum e_mapchars
 {
 	WALL = 0,
-	SPACE,
+	EMPTY,
 	N,
 	S,
 	E,
-	W
+	W,
+	SPACE
 };
 
 typedef struct s_image

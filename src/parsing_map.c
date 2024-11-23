@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:59:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/21 21:26:23 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 15:23:05 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,17 @@ static int	check_map_line(t_cub *cub, char *line, int row)
 	{
 		if (!ft_strchr(MAPCHARS, line[i++]))
 			return (0);
-		if (line[i] >= N && line[i] <= W)
+		if (cub->player.spd > 0 || line[i] >= N && line[i] <= W)
 		{
 			if (row == 0 || i == 0 || !line[i + 1])
 				return (false);
 			cub->player.rot = (M_PI/2 * (line[i] == N)) + (M_PI * (line[i] == W))
-			+ (-M_PI/2 * (line[i] == S));
+			+ ((3 * M_PI)/2 * (line[i] == S));
 			cub->player.spd = 10;
 			cub->player.pos.x = i;
 			cub->player.pos.y = row;
 			cub->player.pos.z = 0;
+			line[i] = MAPCHARS[EMPTY];
 		}
 	}
 	return (i);
@@ -106,7 +107,5 @@ bool	get_map(t_cub *cub, int fd)
 	skip_empty_lines(fd, &line);
 	if (line)
 		return (free(line), false);
-	if (!lst_to_map(cub, lines, size))
-		return (false);
-	return (true);
+	return (lst_to_map(cub, lines, size));
 }
