@@ -6,24 +6,13 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:59:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/23 21:44:10 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 22:59:18 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include "get_next_line.h"
 #include "libft.h"
-
-bool	empty_line(char *line)
-{
-	while (*line)
-	{
-		if (*line != ' ' && *line != '\n')
-			return (false);
-		line++;
-	}
-	return (true);
-}
 
 static int	check_map_line(t_cub *cub, char *line, int row)
 {

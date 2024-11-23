@@ -6,7 +6,7 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/11/23 15:53:37 by bazaluga         ###   ########.fr        #
+#    Updated: 2024/11/23 23:02:27 by bazaluga         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,7 +29,8 @@ MLX			:=	$(MLXDIR)/libmlx.a
 LIBFT		:=	$(LIBFTDIR)/libft.a
 OBJDIR		:=	.obj
 SRCS		+=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
-				parsing.c parsing_infos.c parsing_map.c errors.c inputs.c \
+				parsing.c parsing_infos.c parsing_map.c parsing_utils.c \
+				errors.c inputs.c \
 				runtime_info.c
 OBJS		:=	$(SRCS:%.c=%.o)
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))

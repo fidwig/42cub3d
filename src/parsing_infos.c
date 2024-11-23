@@ -6,11 +6,12 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/23 21:44:57 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 23:04:56 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "libft.h"
 #include <fcntl.h>
 
 static void	get_next_num(char **line, bool last)
@@ -58,7 +59,7 @@ static bool	get_colour(t_cub *cub, char *line, char part)
 		return (false);
 	if (part == 'C')
 		cub->map.col_ceil = rgbtou(rgb);
-	if (part == 'F')
+	else if (part == 'F')
 		cub->map.col_floor = rgbtou(rgb);
 	return (true);
 }
@@ -70,7 +71,6 @@ static bool	get_texture(t_cub *cub, char *line)
 	int		fd_tex;
 
 	name = NULL;
-	line[ft_strlen(line) - 1] = 0;
 	i = 2;
 	while (line[i] && line[i] == ' ')
 		i++;
@@ -82,12 +82,15 @@ static bool	get_texture(t_cub *cub, char *line)
 		name = &cub->map.tex_wes_name;
 	else if (!ft_strncmp(line, "EA ", 3))
 		name = &cub->map.tex_eas_name;
-	fd_tex = open(&line[i], O_RDONLY);
-	if (fd_tex == -1)
+	if (*name)
 		return (false);
-	close(fd_tex);
-	*name = gc_strdup(&line[i]);
-	return (true);
+	*name = gc_strtrim(&line[i], " \n");
+	if (ft_strcmp(&(*name)[ft_strlen(*name) - 4], ".xpm"))
+		return (free2(*name), *name=NULL, false);
+	fd_tex = open(*name, O_RDONLY);
+	if (fd_tex == -1)
+		return (free2(*name), false);
+	return (close(fd_tex),true);
 }
 
 int	get_infos(t_cub *cub, int fd, int *infos_count)
@@ -95,7 +98,7 @@ int	get_infos(t_cub *cub, int fd, int *infos_count)
 	char	*line;
 
 	*infos_count = 0;
-	line = get_next_line(fd);
+	line = ft_strtrim_free(get_next_line(fd), " \n");
 	while (line && *infos_count < 6)
 	{
 		if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)

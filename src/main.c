@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/23 18:49:28 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/23 22:13:44 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void	init_cub(t_cub *cub)
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
 		clean_exit(1, cub);
-	get_tex_imgs(cub->mlx, &cub->map);
+	if (!get_tex_imgs(cub->mlx, &cub->map))
+		stop_error(1, cub, "Openning textures failed");
 	cub->image.img = mlx_new_image(cub->mlx, S_WIDTH, S_HEIGHT);
 	if (!cub->image.img)
 		clean_exit(1, cub);
