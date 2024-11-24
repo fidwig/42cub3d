@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/22 01:02:55 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/24 18:49:01 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define SH	720
 # define BLACK		0x000000
 # define WHITE		0xFFFFFF
+# define DARKRED	0x802020
 
 # define FOV		100
 // # define MAX_RAYLEN	500

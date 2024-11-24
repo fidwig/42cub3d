@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/22 01:43:22 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/24 18:52:55 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	cub_init(t_cub *cub)
 int	update(t_cub *cub)
 {
 	inputs_handler(cub);
-	clear_image(&cub->image, BLACK);
+	// clear_image(&cub->image, BLACK);
+	clear_image_bicolor(&cub->image, cub->map.col_ceil, cub->map.col_floor);
 	// floorcasting(cub);
 	raycasting(cub);
 	draw_minimap(cub);
@@ -88,15 +89,17 @@ int	main(int argc, char **argv)
 	cub.map.raw = manmap;
 	cub.map.width = 37;
 	cub.map.height = 19;
+	cub.map.col_ceil = DARKRED;
+	cub.map.col_floor = BLACK;
 	cub_init(&cub);
 	init_hooks(&cub);
 	t_image	tmp;
 	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/walltex.xpm", &tmp.width, &tmp.height);
 	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
-	cub.map.tex_nor = tmp;
-	cub.map.tex_eas = tmp;
-	cub.map.tex_sou = tmp;
-	cub.map.tex_wes = tmp;
+	cub.map.tex_nor = tmp;//create_notex(&cub);
+	cub.map.tex_eas = tmp;//create_notex(&cub);
+	cub.map.tex_sou = tmp;//create_notex(&cub);
+	cub.map.tex_wes = tmp;//create_notex(&cub);
 	mlx_loop(cub.mlx);
 	return (0);
 }
