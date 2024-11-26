@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:57:33 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/24 19:14:16 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/26 16:51:02 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 int	is_wall(char c)
 {
-	return (c == '1' || c == 'D' || c == 'O');
+	return (c == '1' || c == 'D' || c == 'T');
+}
+
+int	is_visible(char c)
+{
+	return (c == '1' || c == 'D' || c == 'O' || c == 'T');
 }
 
 int	is_door(char c)

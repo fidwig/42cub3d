@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/21 23:22:31 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/26 16:44:50 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ struct s_map
 	t_uicol		col_floor;
 	t_image		tex_ceil;
 	t_image		tex_floor;
+	t_image		door_tex;
+	t_image		opendoor_tex;
+	t_image		torch_tex;
 };
 
 enum e_dir
@@ -99,6 +102,7 @@ enum e_dir
 
 struct s_hit
 {
+	double		dist;
 	t_vec3		pos;
 	t_dir		facing;
 	float		light;
@@ -112,7 +116,8 @@ struct s_ray
 	t_dvec3	dir;
 	t_dvec3	origin;
 	double	length;
-	t_hit	info;
+	int		hit_count;
+	t_hit	info[RAY_DEPTH];
 };
 
 struct s_cast_data
@@ -124,6 +129,7 @@ struct s_cast_data
 	t_dvec3	side_dist;
 	t_dvec3	delta;
 	t_vec3	step;
+	t_map	map;
 	bool	hit;
 };
 
@@ -134,6 +140,7 @@ struct s_info
 	double			runtime;
 	unsigned long	start_time;
 	unsigned long	last_frame;
+	unsigned long	frame_count;
 };
 
 struct s_camera

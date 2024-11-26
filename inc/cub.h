@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/24 18:49:01 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/26 16:20:15 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "libft.h"
 // MY HEADERS
 // ---TYPES
+# define RAY_DEPTH 3
 # include "typedefs.h"
 // ---GRAPHIX
 # include "graphics.h"
@@ -70,6 +71,7 @@ void			inputs_handler(t_cub *cub);
 // INFO
 int				init_info(t_info *info);
 int				update_info(t_info *info);
+unsigned long	get_now(int unit);
 
 // MINIMAP
 void			draw_minimap(t_cub *cub);
@@ -77,5 +79,21 @@ void			draw_minimap(t_cub *cub);
 // ANGLE MATH
 double			wrap_angle(double angle);
 double			deg2rad(int deg);
+
+// RACASTING
+void			set_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
+void			cast_init(t_cast_data *cast);
+void			dda(t_cast_data	*cast, t_map map);
+t_ray			cast_ray(t_dvec3 origin, t_dvec3 dir, t_map map);
+
+// ACTIONS
+void			act_ray(t_cub *cub);
+
+int				is_wall(char c);
+int				is_door(char c);
+int				is_see_through(char c);
+int				is_torch(char c);
+int				is_prop(char c);
+int				is_visible(char c);
 
 #endif // !CUB_H
