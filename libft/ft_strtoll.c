@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:09:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/23 22:51:29 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:57:31 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ static char	get_base_rank(char c, int base)
 
 static void	set_endptr(const char *nptr, char **endptr, int base)
 {
+	char	got_num;
+
+	got_num = 0;
 	if (!endptr)
 		return ;
 	while (nptr && *nptr)
@@ -66,8 +69,9 @@ static void	set_endptr(const char *nptr, char **endptr, int base)
 		if (get_base_rank(*nptr, base) == -1)
 			break ;
 		nptr++;
+		got_num = 1;
 	}
-	if (nptr > *endptr)
+	if (nptr > *endptr && got_num)
 		*endptr = (char *)nptr;
 }
 
