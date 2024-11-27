@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 00:49:59 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/26 15:05:52 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/27 14:19:21 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ void	clear_image(t_image *image, t_uicol color)
 
 void	clear_image_bicolor(t_image *image, t_uicol color1, t_uicol color2)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
-	i = 0;
-	j = 0;
-	while (i < image->width)
+	j = -1;
+	while (2 * (++j) < image->height)
 	{
-		j = -1;
-		while (++j < image->height / 2)
+		i = -1;
+		while (++i < image->width)
+		{
 			pixel_put(image, i, j, color1);
-		while (++j < image->height)
-			pixel_put(image, i, j, color2);
-		i++;
+			pixel_put(image, i, image->height -	 j, color2);
+			// pixel_put(image, i, image->height - j, dim_color(color2, 1 - (j << 1) / (double) image->height));
+		}
 	}
 }
 
@@ -122,4 +122,15 @@ t_image	create_notex(t_cub *cub)
 	pixel_put(&notex, 1, 0, 0xFF77FF);
 	// pixel_put(&notex, 1, 1, BLACK);
 	return (notex);
+}
+
+t_uicol	dim_color(t_uicol col, double light)
+{
+	t_trgb	rgb;
+
+	rgb = utorgb(col);
+	rgb.r = clamp(rgb.r * light, 0, 255);
+	rgb.g = clamp(rgb.g * light, 0, 255);
+	rgb.b = clamp(rgb.b * light, 0, 255);
+	return (rgbtou(rgb));
 }
