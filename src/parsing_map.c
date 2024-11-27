@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:59:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/27 12:34:34 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:34:09 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static int	check_map_line(t_cub *cub, char *line, int row)
 			cub->player.rot = (M_PI / 2 * (line[i] == N))
 				+ (M_PI * (line[i] == W)) + ((3 * M_PI) / 2 * (line[i] == S));
 			cub->player.spd = 10;
-			cub->player.pos.x = i;
-			cub->player.pos.y = row;
-			cub->player.pos.z = 0;
+			cub->player.pos.x = i + 0.5;
+			cub->player.pos.y = 0;
+			cub->player.pos.z = row + 0.5;
 			line[i] = EMPTY;
 		}
 		i++;

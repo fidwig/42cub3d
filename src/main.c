@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 12:40:55 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:33:25 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,15 @@ static void	cub_init(t_cub *cub)
 		clean_exit(1, cub);
 	cub->image.addr = mlx_get_data_addr(cub->image.img,
 			&cub->image.bpp, &cub->image.len, &cub->image.endian);
+	cub->image.width = SW;
+	cub->image.height = SH;
+	cub->minimap.img = mlx_new_image(cub->mlx, 100, 100);
+	cub->minimap.addr = mlx_get_data_addr(cub->minimap.img,
+			&cub->minimap.bpp, &cub->minimap.len, &cub->minimap.endian);
+	cub->minimap.width = 100;
+	cub->minimap.height = 100;
 	cub->win = mlx_new_window(cub->mlx, SW, SH, "cub3d");
+	cub->player.spd = 2;
 	if (!cub->win)
 		clean_exit(1, cub);
 	init_info(&cub->info);
@@ -91,8 +99,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (usage_error(), 1);
 	cub = (t_cub){0};
-	cub.map.col_ceil = DARKRED;
-	cub.map.col_floor = BLACK;
+	// cub.map.col_ceil = DARKRED;
+	// cub.map.col_floor = BLACK;
 	if (!parse_scene(&cub, argv[1]))
 		stop_error(1, &cub, "Scene parsing");
 	cub_init(&cub);
