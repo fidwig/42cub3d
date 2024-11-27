@@ -6,7 +6,7 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/11/27 10:47:05 by bazaluga         ###   ########.fr        #
+#    Updated: 2024/11/27 12:42:37 by bazaluga         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -30,8 +30,8 @@ LIBFT		:=	$(LIBFTDIR)/libft.a
 OBJDIR		:=	.obj
 HEADERS		:=	cub.h graphics.h typedefs.h
 SRCS		+=	angles.c errors.c graphics.c graphics_utils.c hooks.c inputs.c \
-				main.c minimap.c parsing.c \
-				parsing.c raycasting.c runtime_info.c
+				main.c minimap.c parsing.c parsing_infos.c parsing_map.c \
+				parsing_utils.c raycasting.c runtime_info.c
 OBJS		:=	$(SRCS:%.c=%.o)
 HEADERS		:=	$(addprefix $(INCDIR)/, $(HEADERS))
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))
@@ -83,7 +83,7 @@ $(BOBJDIR)/%.o: $(BONUSDIR)/%.c
 
 clean:
 	@$(RM) $(OBJDIR) $(BOBJDIR)
-	@make clean -C $(LIBFTDIR)
+	@make fclean -C $(LIBFTDIR)
 	@make clean -C $(MLXDIR)
 
 fclean: clean

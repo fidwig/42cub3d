@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   gc_strdup_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsommet <jsommet@student.42.fr >           +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 16:07:15 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/18 09:11:05 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:51:02 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:51:10 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_lstadd_front(t_list **lst, t_list *new)
+char	*gc_strdup_free(const char *s, int free_s)
 {
-	if (!lst || !new)
+	size_t	len;
+	char	*new;
+
+	len = ft_strlen(s);
+	new = (char *)malloc2(sizeof(char) * (len + 1));
+	if (!new)
 		return (NULL);
-	new->next = *lst;
-	*lst = new;
+	ft_strlcpy(new, s, len + 1);
+	if (free_s)
+		free2((char *)s);
 	return (new);
 }

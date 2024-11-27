@@ -6,12 +6,13 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:34:30 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/26 15:05:30 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/27 11:56:36 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
+# include "typedefs.h"
 
 // UTILZ
 void			clear_image(t_image *image, t_uicol color);

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 10:28:24 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:58:33 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,22 @@ typedef struct s_info		t_info;
 typedef struct s_camera		t_camera;
 typedef struct s_cub		t_cub;
 typedef enum e_dir			t_dir;
+
+# define MAPCHARS "10NSEW "
+
+typedef unsigned int	t_uicol;
+
+enum e_mapchars
+{
+	WALL = MAPCHARS[0],
+	EMPTY = MAPCHARS[1],
+	N = MAPCHARS[2],
+	S = MAPCHARS[3],
+	E = MAPCHARS[4],
+	W = MAPCHARS[5],
+	SPACE = MAPCHARS[6],
+	TMPEMPTY = '9'
+};
 
 struct s_image
 {
@@ -81,9 +97,13 @@ struct s_map
 	int			width;
 	int			height;
 
+	char		*tex_nor_name;
 	t_image		tex_nor;
+	char		*tex_sou_name;
 	t_image		tex_sou;
+	char		*tex_eas_name;
 	t_image		tex_eas;
+	char		*tex_wes_name;
 	t_image		tex_wes;
 
 	t_uicol		col_ceil;

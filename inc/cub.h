@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 10:28:17 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:05:13 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@
 int	mlx2_destroy_display(void *xvar);
 
 # define FOV		100
-// # define MAX_RAYLEN	500
 
 // ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);
 int				clean_exit_hook(t_cub *cub);
 void			usage_error(void);
+void			stop_error(int exit_code, t_cub *cub, const char *msg);
 
 // HOOKS
 int				key_pressed_hook(int key, t_cub *cub);
@@ -99,5 +99,12 @@ int				is_see_through(char c);
 int				is_torch(char c);
 int				is_prop(char c);
 int				is_visible(char c);
+
+//PARSING
+bool			empty_line(char *line);
+char			*ft_strtrim_free(const char *str, const char *charset);
+int				get_infos(t_cub *cub, int fd, int *infos_count);
+bool			get_map(t_cub *cub, int fd);
+int				parse_scene(t_cub *cub, char *map_name);
 
 #endif // !CUB_H

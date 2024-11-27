@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   gc_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsommet <jsommet@student.42.fr >           +#+  +:+       +#+        */
+/*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 16:07:15 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/18 09:11:05 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/18 18:40:04 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/11/18 18:47:51 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_lstadd_front(t_list **lst, t_list *new)
+void	gc_lstdelone(t_list *lst, void (*del)(void*))
 {
-	if (!lst || !new)
-		return (NULL);
-	new->next = *lst;
-	*lst = new;
-	return (new);
+	if (!lst)
+		return ;
+	if (del)
+		del(lst->content);
+	free2(lst);
 }
