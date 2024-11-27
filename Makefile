@@ -6,7 +6,7 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/11/27 10:23:03 by bazaluga         ###   ########.fr        #
+#    Updated: 2024/11/27 10:47:05 by bazaluga         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,9 +29,9 @@ MLX			:=	$(MLXDIR)/libmlx.a
 LIBFT		:=	$(LIBFTDIR)/libft.a
 OBJDIR		:=	.obj
 HEADERS		:=	cub.h graphics.h typedefs.h
-SRCS		:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
-				parsing.c errors.c inputs.c runtime_info.c angles.c		\
-				minimap.c
+SRCS		+=	angles.c errors.c graphics.c graphics_utils.c hooks.c inputs.c \
+				main.c minimap.c parsing.c \
+				parsing.c raycasting.c runtime_info.c
 OBJS		:=	$(SRCS:%.c=%.o)
 HEADERS		:=	$(addprefix $(INCDIR)/, $(HEADERS))
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))
@@ -52,7 +52,6 @@ DEPS	:=	$(BOBJS:.o=.d)
 RM			:=	rm -rf
 CC			:=	cc
 CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR)
-LFLAGS		:=	-L/usr/lib -lXext -lX11 -lm -lz
 
 all: $(NAME)
 
