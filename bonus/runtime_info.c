@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:45:24 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/22 01:01:47 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/26 16:44:59 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	update_info(t_info *info)
 		info->delta = (frame - info->last_frame);
 	}
 	// if (DEBUG)
+	info->frame_count++;
 	info->framerate = 1000.0 / info->delta;
 	printf("%d\n", (int)info->framerate);
 	info->last_frame = frame;

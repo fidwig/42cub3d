@@ -6,12 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 10:30:30 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:51:43 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "mlx.h"
 
 void	free_map(t_cub *cub, t_map *map)
 {
@@ -32,7 +31,7 @@ void	clean_exit(int exit_code, t_cub *cub)
 {
 	mlx_destroy_image(cub->mlx, cub->image.img);
 	mlx_destroy_window(cub->mlx, cub->win);
-	mlx2_destroy_display(cub->mlx);
+	mlx_destroy_display(cub->mlx);
 	free(cub->mlx);
 	free_map(cub, &cub->map);
 	exit(exit_code);

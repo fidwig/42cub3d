@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/24 18:52:55 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/26 17:00:56 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,31 +66,31 @@ int	main(int argc, char **argv)
 		return (usage_error(), 1);
 	cub = (t_cub){0};
 	char *manmap[100] = {
-		"111111111111111111111111111111111111",
-		"110000000000000111111111100000000001",
-		"100000000000010000111111100000000001",
-		"1000000000000100000000000000000000001",
-		"111000000010011111111111100000000001",
-		"111000000000011111111111100000000001",
-		"111111101111111111111111111111111111",
-		"111111101111000000000110000000000001",
-		"111111101111000000000110111111111101",
-		"111111101111000000000110100000000101",
-		"111111101111000000000110101111110101",
-		"111111101111000000000110101000010101",
-		"111111100000000000000110101111010101",
-		"111111111111000000000110100000010101",
-		"111100000001000000000110111111110101",
-		"111100100001000000101110000000010101",
-		"111100100001111111101111111111010001",
-		"111100000000000000000000000000011111",
-		"111111111111111111111111111111111111"
+		ft_strdup("111111111111111111111111111111111111"),
+		ft_strdup("110000000000000111111111100000000001"),
+		ft_strdup("100000000000010000111111100000000001"),
+		ft_strdup("100000000000010000000000000000000001"),
+		ft_strdup("111000000010011111111111100000000001"),
+		ft_strdup("1110000000000T1111111111100000000001"),
+		ft_strdup("1111111D1111111111111111111111111111"),
+		ft_strdup("111111101111000000000110000000000001"),
+		ft_strdup("111111T01111000000000T10111111111101"),
+		ft_strdup("111111101111000000000110100000000101"),
+		ft_strdup("11111110T111000000000110101111110101"),
+		ft_strdup("111111T01111000000000110101000010101"),
+		ft_strdup("111111100000000000000110101111010101"),
+		ft_strdup("1111111T1111000000000T10100000010101"),
+		ft_strdup("111100000001000000000110111111110101"),
+		ft_strdup("11110010000T000000101110000000010101"),
+		ft_strdup("111100100001111T11101111111111010001"),
+		ft_strdup("111100000000000000000000000000011111"),
+		ft_strdup("111111111111111111111111111111111111")
 	};
 	cub.map.raw = manmap;
 	cub.map.width = 37;
 	cub.map.height = 19;
-	cub.map.col_ceil = DARKRED;
-	cub.map.col_floor = BLACK;
+	cub.map.col_ceil = 0x1a1019;
+	cub.map.col_floor = 0x483c3d;
 	cub_init(&cub);
 	init_hooks(&cub);
 	t_image	tmp;
@@ -100,6 +100,15 @@ int	main(int argc, char **argv)
 	cub.map.tex_eas = tmp;//create_notex(&cub);
 	cub.map.tex_sou = tmp;//create_notex(&cub);
 	cub.map.tex_wes = tmp;//create_notex(&cub);
+	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/door_tex.xpm", &tmp.width, &tmp.height);
+	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
+	cub.map.door_tex = tmp;
+	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/dooropen_tex.xpm", &tmp.width, &tmp.height);
+	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
+	cub.map.opendoor_tex = tmp;
+	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/torch_set.xpm", &tmp.width, &tmp.height);
+	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
+	cub.map.torch_tex = tmp;
 	mlx_loop(cub.mlx);
 	return (0);
 }

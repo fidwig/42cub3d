@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:37:31 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/25 17:15:13 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/26 16:20:00 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ void	set_ray_info(t_ray ray, t_cast_data cast, t_hit *info)
 	info->pos = cast.mpos;
 	info->flag = cast.flag;
 	if (cast.flag)
-		info->x_wall = ray.origin.x + ray.length * ray.dir.x;
+		info->dist = cast.side_dist.y - cast.delta.y;
 	else
-		info->x_wall = ray.origin.z + ray.length * ray.dir.y;
+		info->dist = cast.side_dist.x - cast.delta.x;
+	if (cast.flag)
+		info->x_wall = ray.origin.x + info->dist * ray.dir.x;
+	else
+		info->x_wall = ray.origin.z + info->dist * ray.dir.y;
 	info->x_wall -= floor(info->x_wall);
-	info->dist = ray.length;
+	info->type = cast.map.raw[cast.mpos.y][cast.mpos.x];
 }
 
 void	cast_init(t_cast_data *cast)
@@ -83,12 +87,15 @@ void	dda(t_cast_data	*cast, t_map map)
 			cast->mpos.y += cast->step.y;
 			cast->flag = 1;
 		}
-		cast->hit = (map.raw[cast->mpos.y][cast->mpos.x] == '1');
+		if (is_visible(map.raw[cast->mpos.y][cast->mpos.x]))
+		{
+			set_ray_info(cast->ray, *cast,
+				&cast->ray.info[cast->ray.hit_count]);
+			cast->ray.hit_count++;
+			cast->hit = (!is_see_through(map.raw[cast->mpos.y][cast->mpos.x])
+					|| cast->ray.hit_count >= RAY_DEPTH);
+		}
 	}
-	if (cast->flag == 0)
-		cast->ray.length = cast->side_dist.x - cast->delta.x;
-	else
-		cast->ray.length = cast->side_dist.y - cast->delta.y;
 }
 
 t_ray	cast_ray(t_dvec3 origin, t_dvec3 dir, t_map map)
@@ -96,13 +103,13 @@ t_ray	cast_ray(t_dvec3 origin, t_dvec3 dir, t_map map)
 	t_cast_data	cast;
 
 	cast = (t_cast_data){0};
+	cast.map = map;
 	cast.ray.dir = dir;
 	cast.ray.origin = origin;
 	cast.pos = (t_dvec3){origin.x, origin.z, 0};
 	cast.mpos = (t_vec3){(int)origin.x, (int)origin.z, 0};
 	cast_init(&cast);
 	dda(&cast, map);
-	set_ray_info(cast.ray, cast, &cast.ray.info[0]);
 	return (cast.ray);
 }
 
@@ -124,7 +131,7 @@ void	raycasting(t_cub *cub)
 		ray_dir = (t_dvec3){cos(cub->player.rot) + cam.plane.x * camera_x,
 			sin(cub->player.rot) + cam.plane.y * camera_x, 0};
 		ray = cast_ray(cub->player.pos, ray_dir, cub->map);
-		draw_column(cub, x, (int)(SH / (ray.length * cam.focal)), ray);
+		draw_column_layers(cub, x, ray, cam.focal);
 	}
 }
 /*________TEMP________*/

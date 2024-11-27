@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 00:49:59 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/26 15:05:52 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/26 16:15:18 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ void	pixel_put(t_image *image, int x, int y, unsigned int color)
 
 	if (x < 0 || x >= image->width || y < 0 || y >= image->height)
 		return ;
-	// if ((color >> 24 & 0xFF) == 0xFF)
-	// 	return ;
+	if (((color >> 24) & 0xFF) == 0xFF)
+		return ;
 	dst = image->addr + (y * image->len + x * (image->bpp / 8));
-	*(unsigned int *)dst = color;
+	*(unsigned int *)dst = color;//blend_colors(*(unsigned int *)dst, color);
 }
 
 unsigned int	pixel_get(t_image image, int x, int y)
@@ -122,4 +122,36 @@ t_image	create_notex(t_cub *cub)
 	pixel_put(&notex, 1, 0, 0xFF77FF);
 	// pixel_put(&notex, 1, 1, BLACK);
 	return (notex);
+}
+
+t_uicol	dim_color(t_uicol col, double light)
+{
+	t_trgb	rgb;
+
+	rgb = utorgb(col);
+	rgb.r = clamp(rgb.r * light, 0, 255);
+	rgb.g = clamp(rgb.g * light, 0, 255);
+	rgb.b = clamp(rgb.b * light, 0, 255);
+	return (rgbtou(rgb));
+}
+
+t_uicol	blend_colors(t_uicol b, t_uicol c)
+{
+	t_trgb	base;
+	t_trgb	rgb;
+	float	blend;
+	t_trgb	result;
+
+	base = utorgb(b);
+	rgb = utorgb(c);
+	if (((c >> 24) & 0xFF) == 0xFF)
+		return (b);
+	else if (((c >> 24) & 0xFF) == 0x00)
+		return (c);
+	blend = rgb.t / 255;
+	result.r = (unsigned char) (blend) * (float) base.r + (1.0 - blend) * (float) rgb.r;
+	result.g = (unsigned char) (blend) * (float) base.g + (1.0 - blend) * (float) rgb.g;
+	result.b = (unsigned char) (blend) * (float) base.b + (1.0 - blend) * (float) rgb.b;
+	result.t = 0;
+	return (rgbtou(result));
 }
