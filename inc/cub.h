@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 11:05:13 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/28 08:56:11 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,14 @@ int				is_torch(char c);
 int				is_prop(char c);
 int				is_visible(char c);
 
-//PARSING
+// PARSING
 bool			empty_line(char *line);
 char			*ft_strtrim_free(const char *str, const char *charset);
 int				get_infos(t_cub *cub, int fd, int *infos_count);
 bool			get_map(t_cub *cub, int fd);
 int				parse_scene(t_cub *cub, char *map_name);
+
+// UTILZ
+size_t			lst_get_maxstr(t_list *lst);
 
 #endif // !CUB_H

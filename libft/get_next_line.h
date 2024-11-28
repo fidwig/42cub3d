@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:33:39 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/21 09:21:17 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/28 09:56:08 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_remain
 
 /********************************* UTILS **************************************/
 
-void	*ft_memset(void	*s, int c, size_t n);
 int		ft_find_nl(const char *s, char **nl);
 void	*ft_calloc_gnl(char **dst, size_t nmemb, size_t size);
 void	*ft_memmove(void *dst, const void *src, size_t n);

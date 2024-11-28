@@ -6,13 +6,11 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/23 23:20:55 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:10:58 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "libft.h"
-#include <fcntl.h>
 
 static void	get_next_num(char **line, bool last)
 {
@@ -86,11 +84,11 @@ static bool	get_texture(t_cub *cub, char *line)
 		return (false);
 	*name = gc_strtrim(&line[i], " \n");
 	if (ft_strcmp(&(*name)[ft_strlen(*name) - 4], ".xpm"))
-		return (free2(*name), *name=NULL, false);
+		return (free2(*name), *name = NULL, false);
 	fd_tex = open(*name, O_RDONLY);
 	if (fd_tex == -1)
 		return (free2(*name), false);
-	return (close(fd_tex),true);
+	return (close(fd_tex), true);
 }
 
 int	get_infos(t_cub *cub, int fd, int *infos_count)

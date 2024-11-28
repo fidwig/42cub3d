@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:59:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/27 13:34:09 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/28 10:08:41 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,44 @@ static int	check_map_line(t_cub *cub, char *line, int row)
 	return (i);
 }
 
+static bool	add_line_to_lines(t_list *line, char **raw, size_t len_line)
+{
+	size_t	act_len;
+
+	act_len = ft_strlen((const char *)(line->content));
+	if (act_len < len_line)
+	{
+		*raw = gc_calloc(len_line + 1, sizeof(char));
+		if (!*raw)
+			return (false);
+		ft_strlcpy(*raw, (const char *)line->content, act_len + 1);
+		ft_memset(&(*raw)[act_len], ' ', len_line - act_len);
+		free2(line->content);
+	}
+	else
+		*raw = (char *)(line->content);
+	return (true);
+}
+
 static bool	lst_to_map(t_cub *cub, t_list *lines, int size)
 {
 	t_list	*node;
 	int		i;
-	int		len;
+	size_t	len_line;
 
+	len_line = lst_get_maxstr(lines);
+	cub->map.width = len_line;
 	cub->map.raw = (char **)ft_calloc(size + 1, sizeof(char *));
 	if (!cub->map.raw)
 		return (false);
-	cub->map.width = 0;
 	i = 0;
 	while (lines)
 	{
 		node = lines;
 		lines = lines->next;
-		cub->map.raw[i] = node->content;
+		if (!add_line_to_lines(node, &cub->map.raw[i], len_line))
+			return (false);
 		free2(node);
-		len = ft_strlen(cub->map.raw[i]);
-		if (len > cub->map.width)
-			cub->map.width = len;
 		i++;
 	}
 	cub->map.height = i;

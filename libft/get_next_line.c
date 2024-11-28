@@ -6,12 +6,13 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:33:32 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/21 09:21:25 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/28 09:57:16 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
+#include "libft.h"
 
 static void	*remain_clear(t_remain *buf)
 {

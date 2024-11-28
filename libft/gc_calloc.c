@@ -6,13 +6,13 @@
 /*   By: bazaluga </var/spool/mail/bazaluga>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:45:16 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 17:45:20 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/28 09:52:32 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc2(size_t nmemb, size_t size)
+void	*gc_calloc(size_t nmemb, size_t size)
 {
 	void	*s;
 	size_t	i;
