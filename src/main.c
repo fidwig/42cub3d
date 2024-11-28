@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/28 14:17:59 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:45:46 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static void	cub_init(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
-		clean_exit(1, cub);
+		stop_error(1, cub, "Mlx init failed");
 	if (!get_tex_imgs(cub->mlx, &cub->map))
 		stop_error(1, cub, "Openning textures failed");
 	cub->image.img = mlx_new_image(cub->mlx, SW, SH);
 	if (!cub->image.img)
-		clean_exit(1, cub);
+		stop_error(1, cub, "Image creation failed");
 	cub->image.addr = mlx_get_data_addr(cub->image.img,
 			&cub->image.bpp, &cub->image.len, &cub->image.endian);
 	cub->image.width = SW;
@@ -62,9 +62,9 @@ static void	cub_init(t_cub *cub)
 	cub->minimap.width = 100;
 	cub->minimap.height = 100;
 	cub->win = mlx_new_window(cub->mlx, SW, SH, "cub3d");
-	cub->player.spd = 2;
 	if (!cub->win)
-		clean_exit(1, cub);
+		stop_error(1, cub, "Window creation failed");
+	cub->player.spd = 2;
 	init_info(&cub->info);
 }
 
