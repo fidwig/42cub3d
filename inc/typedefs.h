@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 10:00:49 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/04 19:01:22 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define LARR 256
 # define RARR 257
-# define RAY_DEPTH 3
+# define RAY_DEPTH 10
 
 # include <stdbool.h>
 

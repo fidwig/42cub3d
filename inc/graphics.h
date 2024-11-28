@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:34:30 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 11:56:36 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:42:16 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ unsigned int	pixel_get(t_image image, int x, int y);
 t_image			create_notex(t_cub *cub);
 t_uicol			dim_color(t_uicol col, double light);
 t_uicol			blend_colors(t_uicol b, t_uicol c);
+void			set_transparency(t_image *i, unsigned char t);
 
 double			clamp(double n, double mini, double maxi);
 void			draw_column(t_cub *cub, int x, int h, t_ray ray);
