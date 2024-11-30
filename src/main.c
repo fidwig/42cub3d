@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 13:33:25 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/30 18:03:32 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static void	init_hooks(t_cub *cub)
 	mlx_hook(cub->win, 2, 1L << 0, key_pressed_hook, cub);
 	mlx_hook(cub->win, 3, 1L << 1, key_released_hook, cub);
 	mlx_hook(cub->win, 17, 0L, clean_exit_hook, cub);
+	mlx_hook(cub->win, 6, 1L << 6, &mouse_event_hook, cub);
 	mlx_loop_hook(cub->mlx, update, cub);
 }
 

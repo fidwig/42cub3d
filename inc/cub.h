@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 11:05:13 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:01:22 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void			stop_error(int exit_code, t_cub *cub, const char *msg);
 // HOOKS
 int				key_pressed_hook(int key, t_cub *cub);
 int				key_released_hook(int key, t_cub *cub);
+int				mouse_event_hook(int x, int y, t_cub *cub);
 
 // INPUTS
 void			inputs_handler(t_cub *cub);

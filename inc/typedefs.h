@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 11:58:33 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/30 17:54:54 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define LARR 256
 # define RARR 257
+# define MOUSETRIGGER 258
 # define RAY_DEPTH 3
 
 # include <stdbool.h>
@@ -177,7 +178,7 @@ struct s_cub
 	void		*mlx;
 	void		*win;
 	t_image		image;
-	bool		inputs[258];
+	bool		inputs[259];
 
 	t_player	player;
 	t_map		map;

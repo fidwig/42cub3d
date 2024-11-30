@@ -6,11 +6,12 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/22 01:12:55 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/30 17:59:59 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "typedefs.h"
 
 void	rotate(t_cub *cub, float r)
 {
@@ -57,5 +58,12 @@ void	inputs_handler(t_cub *cub)
 {
 	move(cub, cub->inputs[XK_d] - cub->inputs[XK_a],
 		cub->inputs[XK_w] - cub->inputs[XK_s]);
-	rotate(cub, cub->inputs[RARR] - cub->inputs[LARR]);
+	rotate(cub, (cub->inputs[RARR] - cub->inputs[LARR]) *
+		(cub->inputs[MOUSETRIGGER] * 1.5 + !cub->inputs[MOUSETRIGGER] * 1));
+	if (cub->inputs[MOUSETRIGGER])
+	{
+		cub->inputs[RARR] = false;
+		cub->inputs[LARR] = false;
+		cub->inputs[MOUSETRIGGER] = false;
+	}
 }
