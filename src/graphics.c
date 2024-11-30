@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 14:22:32 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/30 02:04:32 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,14 @@ void	draw_column(t_cub *cub, int x, int h, t_ray ray)
 		texcoord.x = tex.width - texcoord.x - 1;
 	texcoord.y = -1;
 	j = SH / 2 - h / 2;
+	if (j < 0)
+		j = -1;
 	// j = SH / 2 - h / 2.5;
 	while (++j < (SH / 2 + h / 2))
 	{
-		if (j > SH || j < 0)
+		if (j > SH)
+			break ;
+		if (j < 0)
 			continue ;
 		texcoord.z = (int)(tex.height * ((j - (SH / 2 - h / 2)) % h) / h);
 		if (texcoord.y != texcoord.z)
@@ -66,28 +70,4 @@ void	draw_column(t_cub *cub, int x, int h, t_ray ray)
 		}
 		pixel_put(&cub->image, x, j, rgbtou(col));
 	}
-	// if (!is_prop(ray.info.type))
-	// 	return ;
-	// t_image prop_tex;
-	// prop_tex = get_prop_tex(cub, ray.info.type);
-	// j = SH / 2 - h / 2;
-	// texcoord.x = (int)(ray.info.x_wall * tex.width);
-	// if (ray.info.facing == EAST || ray.info.facing == SOUTH)
-	// 	texcoord.x = tex.width - texcoord.x - 1;
-	// texcoord.y = -1;
-	// while (++j < (SH / 2 + h / 2))
-	// {
-	// 	if (j > SH || j < 0)
-	// 		continue ;
-	// 	texcoord.z = (int)(tex.height * ((SH / 2 + h / 2 - j) % h) / h);
-	// 	if (texcoord.y != texcoord.z)
-	// 	{
-	// 		texcoord.y = texcoord.z;
-	// 		col = utorgb(pixel_get(prop_tex, texcoord.x, texcoord.y));
-	// 		col.r = clamp(col.r * light, 0, 255);
-	// 		col.g = clamp(col.g * light, 0, 255);
-	// 		col.b = clamp(col.b * light, 0, 255);
-	// 	}
-	// 	pixel_put(&cub->image, x, j, rgbtou(col));
-	// }
 }
