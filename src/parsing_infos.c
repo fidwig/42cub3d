@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/28 10:10:58 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:28:30 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,5 @@ int	get_infos(t_cub *cub, int fd, int *infos_count)
 		free(line);
 		line = ft_strtrim_free(get_next_line(fd), " \n");
 	}
-	return (!(*infos_count == 6));
+	return (free(line), !(*infos_count == 6));
 }

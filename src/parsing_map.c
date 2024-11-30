@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:59:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/28 10:08:41 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:31:51 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static bool	lst_to_map(t_cub *cub, t_list *lines, int size)
 
 	len_line = lst_get_maxstr(lines);
 	cub->map.width = len_line;
-	cub->map.raw = (char **)ft_calloc(size + 1, sizeof(char *));
+	cub->map.raw = (char **)gc_calloc(size + 1, sizeof(char *));
 	if (!cub->map.raw)
 		return (false);
 	i = 0;

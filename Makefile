@@ -6,7 +6,7 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/11/28 14:19:42 by bazaluga         ###   ########.fr        #
+#    Updated: 2024/11/30 19:55:05 by bazaluga         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -68,10 +68,10 @@ $(MLX): $(MLXDIR)
 	@make -sC $(MLXDIR)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
-	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME) $(LFLAGS)
 
 bonus: $(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS)
-	$(CC) $(CFLAGS) $(LFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME) $(LFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -MMD -MP -o $@ -c $^
