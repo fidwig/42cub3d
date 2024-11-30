@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 11:58:33 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:35:03 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ typedef unsigned int	t_uicol;
 
 enum e_mapchars
 {
-	WALL = MAPCHARS[0],
-	EMPTY = MAPCHARS[1],
-	N = MAPCHARS[2],
-	S = MAPCHARS[3],
-	E = MAPCHARS[4],
-	W = MAPCHARS[5],
-	SPACE = MAPCHARS[6],
+	WALL = '1',
+	EMPTY = '0',
+	N = 'N',
+	S = 'S',
+	E = 'E',
+	W = 'W',
+	SPACE = ' ',
 	TMPEMPTY = '9'
 };
 
