@@ -6,11 +6,12 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/30 19:28:30 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:02:11 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include <fcntl.h>
 
 static void	get_next_num(char **line, bool last)
 {

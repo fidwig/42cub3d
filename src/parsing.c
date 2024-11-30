@@ -6,11 +6,12 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:36:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/30 19:53:04 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:01:57 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include <fcntl.h>
 
 static bool	check_name(char *map_name)
 {
