@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:28:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/30 18:03:05 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:03:38 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,16 @@ int	key_released_hook(int key, t_cub *cub)
 
 int	mouse_event_hook(int x, int y, t_cub *cub)
 {
-	static int	old_x = 0;
+	// static int	old_x = 0;
 
 	(void)y;
-	if (x - old_x > 0)
-		cub->inputs[RARR] = true;
-	else if (x - old_x < 0)
-		cub->inputs[LARR] = true;
-	cub->inputs[MOUSETRIGGER] = true;
-	old_x = x;
+	cub->mouse_movement = x - (SW / 2);
+	// cub->mouse_movement = x - old_x;
+	// if (x - old_x > 0)
+	// 	cub->inputs[RARR] = true;
+	// else if (x - old_x < 0)
+	// 	cub->inputs[LARR] = true;
+	// cub->inputs[MOUSETRIGGER] = true;
+	// old_x = x;
 	return (0);
 }

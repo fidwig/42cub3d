@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/30 17:59:59 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:08:02 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,10 @@ void	inputs_handler(t_cub *cub)
 {
 	move(cub, cub->inputs[XK_d] - cub->inputs[XK_a],
 		cub->inputs[XK_w] - cub->inputs[XK_s]);
-	rotate(cub, (cub->inputs[RARR] - cub->inputs[LARR]) *
-		(cub->inputs[MOUSETRIGGER] * 1.5 + !cub->inputs[MOUSETRIGGER] * 1));
-	if (cub->inputs[MOUSETRIGGER])
-	{
-		cub->inputs[RARR] = false;
-		cub->inputs[LARR] = false;
-		cub->inputs[MOUSETRIGGER] = false;
-	}
+	rotate(cub, (cub->inputs[RARR] - cub->inputs[LARR]));
+	if (cub->mouse_movement)
+		rotate(cub, (float) cub->mouse_movement * 0.15);
+	cub->mouse_movement = 0;
+	if (MOUSE_LOCK)
+		mlx_mouse_move(cub->mlx, cub->win, SW / 2, SH / 2);
 }

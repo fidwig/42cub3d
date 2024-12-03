@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/30 18:03:32 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:04:10 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static void	cub_init(t_cub *cub)
 	cub->player.spd = 2;
 	if (!cub->win)
 		clean_exit(1, cub);
+	if (MOUSE_HIDE)
+		mlx_mouse_hide(cub->mlx, cub->win);
 	init_info(&cub->info);
 }
 

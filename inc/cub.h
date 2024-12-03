@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/30 18:01:22 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:37:15 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@
 # define BLACK		0x000000
 # define WHITE		0xFFFFFF
 # define DARKRED	0x802020
+# define MOUSE_LOCK 1
+# define MOUSE_HIDE 1
 
 // COMPATIBILITY
 int	mlx2_destroy_display(void *xvar);
