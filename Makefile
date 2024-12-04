@@ -1,4 +1,4 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,11 +6,13 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/12/03 15:38:04 by bazaluga         ###   ########.fr        #
+#    Updated: 2024/12/04 09:54:44 by bazaluga         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 NAME		:=	cub3D
+NAMETMP		:=	.mandatory_tmp
+NAMEB		:=	.bonus_tmp
 INCDIR		:=	inc
 SRCDIR		:=	src
 
@@ -42,7 +44,7 @@ DEPS		:=	$(OBJS:.o=.d)
 BOBJDIR		:=	.bobj
 BONUSDIR	:=	bonus
 BSRCS	:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
-				parsing.c errors.c inputs.c runtime_info.c angles.c		\
+				errors.c inputs.c runtime_info.c angles.c		\
 				floorcasting.c minimap.c act_ray.c wall_id.c
 BOBJS	:=	$(BSRCS:%.c=%.o)
 BSRCS	:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
@@ -51,9 +53,11 @@ BDEPS	:=	$(BOBJS:.o=.d)
 
 RM			:=	rm -rf
 CC			:=	cc
-CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -g3
+CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR)
 
 all: $(NAME)
+
+bonus: $(NAMEB)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
@@ -73,16 +77,23 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 $(BOBJDIR)/%.o: $(BONUSDIR)/%.c
 	$(CC) $(CFLAGS) -MMD -o $@ -c $<
 
-$(NAME): $(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
-	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
+$(NAMETMP):	$(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
+		@rm -f $(NAMEB)
+		$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
+		@touch $(NAMETMP)
 
-bonus: $(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS)
-	$(CC) $(CFLAGS) $(LFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME)
+$(NAME):	$(NAMETMP)
+
+$(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS)
+		@rm -f $(NAMETMP)
+		$(CC) $(CFLAGS) $(LFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME)
+		@touch $(NAMEB)
 
 clean:
 	@$(RM) $(OBJDIR) $(BOBJDIR)
-	@make fclean -C $(LIBFTDIR)
-	@make clean -C $(MLXDIR)
+	@$(RM) $(NAMEB) $(NAMETMP)
+	@make fclean -sC $(LIBFTDIR)
+	@make clean -sC $(MLXDIR)
 
 fclean: clean
 	@$(RM) $(NAME)

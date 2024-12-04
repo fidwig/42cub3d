@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/03 15:04:10 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/04 09:33:21 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ static void	cub_init(t_cub *cub)
 	cub->player.spd = 2;
 	if (!cub->win)
 		clean_exit(1, cub);
-	if (MOUSE_HIDE)
-		mlx_mouse_hide(cub->mlx, cub->win);
 	init_info(&cub->info);
 }
 
@@ -89,7 +87,6 @@ static void	init_hooks(t_cub *cub)
 	mlx_hook(cub->win, 2, 1L << 0, key_pressed_hook, cub);
 	mlx_hook(cub->win, 3, 1L << 1, key_released_hook, cub);
 	mlx_hook(cub->win, 17, 0L, clean_exit_hook, cub);
-	mlx_hook(cub->win, 6, 1L << 6, &mouse_event_hook, cub);
 	mlx_loop_hook(cub->mlx, update, cub);
 }
 

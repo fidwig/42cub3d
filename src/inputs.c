@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/03 15:08:02 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/04 09:36:11 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,4 @@ void	inputs_handler(t_cub *cub)
 	move(cub, cub->inputs[XK_d] - cub->inputs[XK_a],
 		cub->inputs[XK_w] - cub->inputs[XK_s]);
 	rotate(cub, (cub->inputs[RARR] - cub->inputs[LARR]));
-	if (cub->mouse_movement)
-		rotate(cub, (float) cub->mouse_movement * 0.15);
-	cub->mouse_movement = 0;
-	if (MOUSE_LOCK)
-		mlx_mouse_move(cub->mlx, cub->win, SW / 2, SH / 2);
 }
