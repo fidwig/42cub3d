@@ -6,7 +6,7 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/12/04 10:17:54 by bazaluga         ###   ########.fr        #
+#    Updated: 2024/12/04 10:42:08 by bazaluga         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -43,13 +43,14 @@ DEPS		:=	$(OBJS:.o=.d)
 ############## BONUS ################
 BOBJDIR		:=	.bobj
 BONUSDIR	:=	bonus
-BSRCS	:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
-				errors.c inputs.c runtime_info.c angles.c		\
-				floorcasting.c minimap.c act_ray.c wall_id.c
-BOBJS	:=	$(BSRCS:%.c=%.o)
-BSRCS	:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
-BOBJS	:=	$(addprefix $(BOBJDIR)/, $(BOBJS))
-BDEPS	:=	$(BOBJS:.o=.d)
+BSRCS		:=	act_ray.c angles.c errors.c floorcasting.c graphics.c \
+				graphics_utils.c hooks.c inputs.c lst_get_maxstr.c main.c \
+				minimap.c parsing.c parsing_infos.c parsing_map.c parsing_utils.c\
+				raycasting.c runtime_info.c wall_id.c
+BOBJS		:=	$(BSRCS:%.c=%.o)
+BSRCS		:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
+BOBJS		:=	$(addprefix $(BOBJDIR)/, $(BOBJS))
+BDEPS		:=	$(BOBJS:.o=.d)
 
 RM			:=	rm -rf
 CC			:=	cc
