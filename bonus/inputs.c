@@ -6,11 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/26 16:21:11 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 09:35:45 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub_bonus.h"
 
 void	rotate(t_cub *cub, float r)
 {
@@ -60,4 +60,9 @@ void	inputs_handler(t_cub *cub)
 	rotate(cub, cub->inputs[RARR] - cub->inputs[LARR]);
 	if (cub->inputs[XK_space])
 		act_ray(cub);
+	if (cub->mouse_movement)
+		rotate(cub, (float) cub->mouse_movement * 0.15);
+	cub->mouse_movement = 0;
+	if (MOUSE_LOCK)
+		mlx_mouse_move(cub->mlx, cub->win, SW / 2, SH / 2);
 }

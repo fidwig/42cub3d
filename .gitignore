@@ -1,6 +1,9 @@
 .DS_Store
 .obj
+.bobj
 *.o
 *.out
 cub3D
 *.a
+.mandatory_tmp
+.bonus_tmp

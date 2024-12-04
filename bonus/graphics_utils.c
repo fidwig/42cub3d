@@ -6,11 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 00:49:59 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/26 16:15:18 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 09:40:38 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub_bonus.h"
 
 void	clear_image(t_image *image, t_uicol color)
 {
@@ -87,6 +87,16 @@ unsigned int	rgbtou(t_trgb trgb)
 	return (color);
 }
 
+void	pixel_put_force(t_image *image, int x, int y, unsigned int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= image->width || y < 0 || y >= image->height)
+		return ;
+	dst = image->addr + (y * image->len + x * (image->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
 void	pixel_put(t_image *image, int x, int y, unsigned int color)
 {
 	char	*dst;
@@ -148,10 +158,32 @@ t_uicol	blend_colors(t_uicol b, t_uicol c)
 		return (b);
 	else if (((c >> 24) & 0xFF) == 0x00)
 		return (c);
-	blend = rgb.t / 255;
-	result.r = (unsigned char) (blend) * (float) base.r + (1.0 - blend) * (float) rgb.r;
-	result.g = (unsigned char) (blend) * (float) base.g + (1.0 - blend) * (float) rgb.g;
-	result.b = (unsigned char) (blend) * (float) base.b + (1.0 - blend) * (float) rgb.b;
+	blend = rgb.t / 255.0;
+	result.r = (unsigned char)((blend) * (float) base.r + (1.0 - blend) * (float) rgb.r);
+	result.g = (unsigned char)((blend) * (float) base.g + (1.0 - blend) * (float) rgb.g);
+	result.b = (unsigned char)((blend) * (float) base.b + (1.0 - blend) * (float) rgb.b);
 	result.t = 0;
 	return (rgbtou(result));
+}
+
+void	set_transparency(t_image *i, unsigned char t)
+{
+	int		x;
+	int		y;
+	t_trgb	rgb;
+
+	x = 0;
+	while (x < i->width)
+	{
+		y = 0;
+		while (y < i->height)
+		{
+			rgb = utorgb(pixel_get(*i, x, y));
+			rgb.t = t;
+			pixel_put_force(i, x, y, rgbtou(rgb));
+			printf("color: %x\n", pixel_get(*i, x, y));
+			y++;
+		}
+		x++;
+	}
 }

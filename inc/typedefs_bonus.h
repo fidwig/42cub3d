@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   typedefs.h                                         :+:      :+:    :+:   */
+/*   typedefs_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 10:00:49 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/12/04 09:27:34 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPEDEFS_H
-# define TYPEDEFS_H
+#ifndef TYPEDEFS_BONUS_H
+# define TYPEDEFS_BONUS_H
 
 # define LARR 256
 # define RARR 257
@@ -35,7 +35,7 @@ typedef struct s_camera		t_camera;
 typedef struct s_cub		t_cub;
 typedef enum e_dir			t_dir;
 
-# define MAPCHARS "10NSEW "
+# define MAPCHARS "10NSEWDO "
 
 typedef unsigned int	t_uicol;
 
@@ -47,6 +47,8 @@ enum e_mapchars
 	S = 'S',
 	E = 'E',
 	W = 'W',
+	DOOR = 'D',
+	DOOR_OPEN = 'O',
 	SPACE = ' ',
 	TMPEMPTY = '9'
 };
@@ -178,6 +180,7 @@ struct s_cub
 	void		*win;
 	t_image		image;
 	bool		inputs[258];
+	double		mouse_movement;
 
 	t_player	player;
 	t_map		map;
@@ -203,4 +206,4 @@ enum e_key
 
 # endif
 
-#endif // !TYPEDEFS_H
+#endif

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   inputs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/22 01:12:55 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 09:36:11 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "typedefs.h"
 
 void	rotate(t_cub *cub, float r)
 {
@@ -57,5 +58,5 @@ void	inputs_handler(t_cub *cub)
 {
 	move(cub, cub->inputs[XK_d] - cub->inputs[XK_a],
 		cub->inputs[XK_w] - cub->inputs[XK_s]);
-	rotate(cub, cub->inputs[RARR] - cub->inputs[LARR]);
+	rotate(cub, (cub->inputs[RARR] - cub->inputs[LARR]));
 }

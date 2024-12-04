@@ -6,11 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:57:33 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/26 16:51:02 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 09:41:25 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub_bonus.h"
 
 int	is_wall(char c)
 {

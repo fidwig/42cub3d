@@ -6,11 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:37:31 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/26 16:20:00 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 09:41:12 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub_bonus.h"
 
 void	set_ray_info(t_ray ray, t_cast_data cast, t_hit *info)
 {
@@ -40,6 +40,36 @@ void	set_ray_info(t_ray ray, t_cast_data cast, t_hit *info)
 		info->x_wall = ray.origin.z + info->dist * ray.dir.y;
 	info->x_wall -= floor(info->x_wall);
 	info->type = cast.map.raw[cast.mpos.y][cast.mpos.x];
+}
+
+void	add_ray_info(t_ray ray, t_cast_data cast, t_hit *info)
+{
+	*info = ray.info[ray.hit_count - 1];
+	if (cast.side_dist.x < cast.side_dist.y)
+	{
+		if (ray.dir.x > 0)
+			info->facing = EAST;
+		else
+			info->facing = WEST;
+		info->dist = cast.side_dist.x;
+		info->pos.x += cast.step.x;
+		info->flag = 0;
+	}
+	else
+	{
+		if (ray.dir.y > 0)
+			info->facing = NORTH;
+		else
+			info->facing = SOUTH;
+		info->dist = cast.side_dist.y;
+		info->pos.y += cast.step.y;
+		info->flag = 1;
+	}
+	if (info->flag)
+		info->x_wall = ray.origin.x + info->dist * ray.dir.x;
+	else
+		info->x_wall = ray.origin.z + info->dist * ray.dir.y;
+	info->x_wall -= floor(info->x_wall);
 }
 
 void	cast_init(t_cast_data *cast)
@@ -73,6 +103,15 @@ void	cast_init(t_cast_data *cast)
 
 void	dda(t_cast_data	*cast, t_map map)
 {
+	if (is_see_through(map.raw[cast->mpos.y][cast->mpos.x]))
+	{
+		cast->flag = (cast->side_dist.x >= cast->side_dist.y);
+		cast->side_dist.x += cast->delta.x;
+		cast->side_dist.y += cast->delta.y;
+		set_ray_info(cast->ray, *cast, &cast->ray.info[cast->ray.hit_count++]);
+		cast->side_dist.x -= cast->delta.x;
+		cast->side_dist.y -= cast->delta.y;
+	}
 	while (!cast->hit)
 	{
 		if (cast->side_dist.x < cast->side_dist.y)
@@ -94,6 +133,11 @@ void	dda(t_cast_data	*cast, t_map map)
 			cast->ray.hit_count++;
 			cast->hit = (!is_see_through(map.raw[cast->mpos.y][cast->mpos.x])
 					|| cast->ray.hit_count >= RAY_DEPTH);
+			if (!cast->hit && cast->ray.hit_count < RAY_DEPTH - 1)
+			{
+				add_ray_info(cast->ray, *cast, &cast->ray.info[cast->ray.hit_count]);
+				cast->ray.hit_count++;
+			}
 		}
 	}
 }
