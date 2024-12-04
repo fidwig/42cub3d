@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.h                                              :+:      :+:    :+:   */
+/*   cub_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 10:14:05 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
+/*   Updated: 2024/12/04 09:32:00 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_H
-# define CUB_H
+#ifndef CUB_BONUS_H
+# define CUB_BONUS_H
 
 # ifndef __USE_MISC
 #  define __USE_MISC
@@ -34,9 +34,9 @@
 # include "libft.h"
 // MY HEADERS
 // ---TYPES
-# include "typedefs.h"
+# include "typedefs_bonus.h"
 // ---GRAPHIX
-# include "graphics.h"
+# include "graphics_bonus.h"
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -70,6 +70,7 @@ void			stop_error(int exit_code, t_cub *cub, const char *msg);
 // HOOKS
 int				key_pressed_hook(int key, t_cub *cub);
 int				key_released_hook(int key, t_cub *cub);
+int				mouse_event_hook(int x, int y, t_cub *cub);
 
 // INPUTS
 void			inputs_handler(t_cub *cub);
@@ -102,14 +103,11 @@ int				is_torch(char c);
 int				is_prop(char c);
 int				is_visible(char c);
 
-// PARSING
+//PARSING
 bool			empty_line(char *line);
 char			*ft_strtrim_free(const char *str, const char *charset);
 int				get_infos(t_cub *cub, int fd, int *infos_count);
 bool			get_map(t_cub *cub, int fd);
 int				parse_scene(t_cub *cub, char *map_name);
 
-// UTILZ
-size_t			lst_get_maxstr(t_list *lst);
-
-#endif // !CUB_H
+#endif

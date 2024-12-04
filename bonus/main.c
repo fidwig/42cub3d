@@ -6,11 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/27 13:17:12 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 09:34:13 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub_bonus.h"
 
 void	cub_init(t_cub *cub)
 {
@@ -29,6 +29,8 @@ void	cub_init(t_cub *cub)
 	cub->player.spd = 2;
 	cub->player.pos = (t_dvec3){3.5, 0, 2.5};
 	cub->player.rot = 0;
+	if (MOUSE_HIDE)
+		mlx_mouse_hide(cub->mlx, cub->win);
 	init_info(&cub->info);
 }
 
@@ -53,6 +55,7 @@ void	init_hooks(t_cub *cub)
 	mlx_hook(cub->win, 2, 1L << 0, key_pressed_hook, cub);
 	mlx_hook(cub->win, 3, 1L << 1, key_released_hook, cub);
 	mlx_hook(cub->win, 17, 0L, clean_exit_hook, cub);
+	mlx_hook(cub->win, 6, 1L << 6, &mouse_event_hook, cub);
 	mlx_loop_hook(cub->mlx, update, cub);
 }
 
@@ -70,10 +73,10 @@ int	main(int argc, char **argv)
 		ft_strdup("110000000000000111111111100000000001"),
 		ft_strdup("100000000000010000111111100000000001"),
 		ft_strdup("100000000000010000000000000000000001"),
-		ft_strdup("111000000010011111111111100000000001"),
+		ft_strdup("1110000000D0011111111111100000000001"),
 		ft_strdup("1110000000000T1111111111100000000001"),
 		ft_strdup("1111111D1111111111111111111111111111"),
-		ft_strdup("111111101111000000000110000000000001"),
+		ft_strdup("1111111D1111000000000110000000000001"),
 		ft_strdup("111111T01111000000000T10111111111101"),
 		ft_strdup("111111101111000000000110100000000101"),
 		ft_strdup("11111110T111000000000110101111110101"),
@@ -81,7 +84,7 @@ int	main(int argc, char **argv)
 		ft_strdup("111111100000000000000110101111010101"),
 		ft_strdup("1111111T1111000000000T10100000010101"),
 		ft_strdup("111100000001000000000110111111110101"),
-		ft_strdup("11110010000T000000101110000000010101"),
+		ft_strdup("11110010000T0000001D1110000000010101"),
 		ft_strdup("111100100001111T11101111111111010001"),
 		ft_strdup("111100000000000000000000000000011111"),
 		ft_strdup("111111111111111111111111111111111111")
@@ -94,7 +97,7 @@ int	main(int argc, char **argv)
 	cub_init(&cub);
 	init_hooks(&cub);
 	t_image	tmp;
-	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/walltex.xpm", &tmp.width, &tmp.height);
+	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/grass.xpm", &tmp.width, &tmp.height);
 	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
 	cub.map.tex_nor = tmp;//create_notex(&cub);
 	cub.map.tex_eas = tmp;//create_notex(&cub);
@@ -105,6 +108,7 @@ int	main(int argc, char **argv)
 	cub.map.door_tex = tmp;
 	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/dooropen_tex.xpm", &tmp.width, &tmp.height);
 	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
+	// set_transparency(&tmp, 0xAA);
 	cub.map.opendoor_tex = tmp;
 	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/torch_set.xpm", &tmp.width, &tmp.height);
 	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);

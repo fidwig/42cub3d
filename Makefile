@@ -6,11 +6,13 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/11/30 19:55:05 by bazaluga         ###   ########.fr        #
+#    Updated: 2024/12/04 10:17:54 by bazaluga         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME		:=	cub3D
+NAMETMP		:=	.mandatory_tmp
+NAMEB		:=	.bonus_tmp
 INCDIR		:=	inc
 SRCDIR		:=	src
 
@@ -32,7 +34,7 @@ HEADERS		:=	cub.h graphics.h typedefs.h
 SRCS		+=	angles.c errors.c graphics.c graphics_utils.c hooks.c inputs.c \
 				lst_get_maxstr.c main.c minimap.c parsing.c parsing_infos.c \
 				parsing_map.c parsing_utils.c raycasting.c runtime_info.c
-OBJS		:=	$(SRCS:%.c=%.o)
+OBJS		:=	$(SRCS:.c=.o)
 HEADERS		:=	$(addprefix $(INCDIR)/, $(HEADERS))
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))
 OBJS		:=	$(addprefix $(OBJDIR)/, $(OBJS))
@@ -42,18 +44,20 @@ DEPS		:=	$(OBJS:.o=.d)
 BOBJDIR		:=	.bobj
 BONUSDIR	:=	bonus
 BSRCS	:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
-				parsing.c errors.c inputs.c runtime_info.c angles.c		\
+				errors.c inputs.c runtime_info.c angles.c		\
 				floorcasting.c minimap.c act_ray.c wall_id.c
 BOBJS	:=	$(BSRCS:%.c=%.o)
 BSRCS	:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
 BOBJS	:=	$(addprefix $(BOBJDIR)/, $(BOBJS))
-DEPS	:=	$(BOBJS:.o=.d)
+BDEPS	:=	$(BOBJS:.o=.d)
 
 RM			:=	rm -rf
 CC			:=	cc
 CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR)
 
 all: $(NAME)
+
+bonus: $(NAMEB)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
@@ -67,28 +71,35 @@ $(LIBFT): $(LIBFTDIR)
 $(MLX): $(MLXDIR)
 	@make -sC $(MLXDIR)
 
-$(NAME): $(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
-	$(CC) $(CFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME) $(LFLAGS)
-
-bonus: $(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS)
-	$(CC) $(CFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME) $(LFLAGS)
-
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -MMD -MP -o $@ -c $^
+	$(CC) $(CFLAGS) -MMD -o $@ -c $<
 
 $(BOBJDIR)/%.o: $(BONUSDIR)/%.c
-	$(CC) $(CFLAGS) -MMD -MP -o $@ -c $^
+	$(CC) $(CFLAGS) -MMD -o $@ -c $<
 
--include: $(DEPS) $(BDEPS)
+$(NAMETMP):	$(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
+		@rm -f $(NAMEB)
+		$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
+		@touch $(NAMETMP)
+
+$(NAME):	$(NAMETMP)
+
+$(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS)
+		@rm -f $(NAMETMP)
+		$(CC) $(CFLAGS) $(LFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME)
+		@touch $(NAMEB)
 
 clean:
 	@$(RM) $(OBJDIR) $(BOBJDIR)
-	@make fclean -C $(LIBFTDIR)
-	@make clean -C $(MLXDIR)
+	@$(RM) $(NAMEB) $(NAMETMP)
+	@make fclean -sC $(LIBFTDIR)
+	@make clean -sC $(MLXDIR)
 
 fclean: clean
 	@$(RM) $(NAME)
 
 re: fclean all
+
+-include $(DEPS) $(BDEPS)
 
 .PHONY: all clean flcean re bonus
