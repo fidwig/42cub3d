@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 19:15:19 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 19:29:47 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define LARR 256
 # define RARR 257
-# define RAY_DEPTH 15
 
 # include <stdbool.h>
 
@@ -140,7 +139,7 @@ struct s_ray
 	t_dvec3	origin;
 	double	length;
 	int		hit_count;
-	t_hit	info[RAY_DEPTH];
+	t_hit	info;
 };
 
 struct s_cast_data

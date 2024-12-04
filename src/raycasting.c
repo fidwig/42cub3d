@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:37:31 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/25 17:15:13 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 19:30:39 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_ray	cast_ray(t_dvec3 origin, t_dvec3 dir, t_map map)
 	cast.mpos = (t_vec3){(int)origin.x, (int)origin.z, 0};
 	cast_init(&cast);
 	dda(&cast, map);
-	set_ray_info(cast.ray, cast, &cast.ray.info[0]);
+	set_ray_info(cast.ray, cast, &cast.ray.info);
 	return (cast.ray);
 }
 
