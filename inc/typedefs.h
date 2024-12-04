@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 19:05:26 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 19:15:19 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ struct s_hit
 	float		light;
 	int			flag;
 	double		x_wall;
-	char		type; //wall '1', close door 'D', open door 'O', light 'L', etc, special wall?
+	char		type; //wall '1', close door 'D', open door 'O', etc, special wall?
 };
 
 struct s_ray

@@ -1,14 +1,14 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
+#    By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/12/04 09:54:44 by bazaluga         ###   ########.fr        #
+#    Updated: 2024/12/04 19:21:57 by jsommet          ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 NAME		:=	cub3D
 NAMETMP		:=	.mandatory_tmp
@@ -31,8 +31,8 @@ MLX			:=	$(MLXDIR)/libmlx.a
 LIBFT		:=	$(LIBFTDIR)/libft.a
 OBJDIR		:=	.obj
 HEADERS		:=	cub.h graphics.h typedefs.h
-SRCS		+=	angles.c errors.c graphics.c graphics_utils.c hooks.c inputs.c \
-				main.c minimap.c parsing.c parsing_infos.c parsing_map.c \
+SRCS		+=	angles.c errors.c graphics.c graphics_utils.c hooks.c inputs.c	\
+				main.c minimap.c parsing.c parsing_infos.c parsing_map.c 		\
 				parsing_utils.c raycasting.c runtime_info.c
 OBJS		:=	$(SRCS:.c=.o)
 HEADERS		:=	$(addprefix $(INCDIR)/, $(HEADERS))
@@ -43,13 +43,13 @@ DEPS		:=	$(OBJS:.o=.d)
 ############## BONUS ################
 BOBJDIR		:=	.bobj
 BONUSDIR	:=	bonus
-BSRCS	:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
-				errors.c inputs.c runtime_info.c angles.c		\
+BSRCS		:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
+				errors.c inputs.c runtime_info.c angles.c				\
 				floorcasting.c minimap.c act_ray.c wall_id.c
-BOBJS	:=	$(BSRCS:%.c=%.o)
-BSRCS	:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
-BOBJS	:=	$(addprefix $(BOBJDIR)/, $(BOBJS))
-BDEPS	:=	$(BOBJS:.o=.d)
+BOBJS		:=	$(BSRCS:%.c=%.o)
+BSRCS		:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
+BOBJS		:=	$(addprefix $(BOBJDIR)/, $(BOBJS))
+BDEPS		:=	$(BOBJS:.o=.d)
 
 RM			:=	rm -rf
 CC			:=	cc

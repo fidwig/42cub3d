@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedefs_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/04 09:27:34 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/04 19:11:03 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define LARR 256
 # define RARR 257
-# define RAY_DEPTH 3
+# define RAY_DEPTH 15
 
 # include <stdbool.h>
 
@@ -186,6 +186,7 @@ struct s_cub
 	t_map		map;
 	t_image		minimap;
 
+	t_image		notex;
 	t_info		info;
 };
 

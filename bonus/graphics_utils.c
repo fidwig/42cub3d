@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 00:49:59 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 19:00:03 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 19:06:10 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,25 +145,33 @@ t_uicol	dim_color(t_uicol col, double light)
 	return (rgbtou(rgb));
 }
 
+t_uicol	halve(t_uicol a)
+{
+	return (a >> 1 & 0x7f7f7f7f);
+}
+
 t_uicol	blend_colors(t_uicol b, t_uicol c)
 {
-	t_trgb	base;
-	t_trgb	rgb;
-	float	blend;
-	t_trgb	result;
+	// t_trgb	base;
+	// t_trgb	rgb;
+	// float	blend;
+	// t_trgb	result;
 
-	base = utorgb(b);
-	rgb = utorgb(c);
 	if (((c >> 24) & 0xFF) == 0xFF)
 		return (b);
 	else if (((c >> 24) & 0xFF) == 0x00)
 		return (c);
-	blend = rgb.t / 255.0;
-	result.r = (unsigned char)((blend) * (float) base.r + (1.0 - blend) * (float) rgb.r);
-	result.g = (unsigned char)((blend) * (float) base.g + (1.0 - blend) * (float) rgb.g);
-	result.b = (unsigned char)((blend) * (float) base.b + (1.0 - blend) * (float) rgb.b);
-	result.t = 0;
-	return (rgbtou(result));
+	c = halve(c);
+	b = halve(b);
+	return (c + b);
+	// base = utorgb(b);
+	// rgb = utorgb(c);
+	// blend = rgb.t / 255.0;
+	// result.r = (unsigned char)((blend) * (float) base.r + (1.0 - blend) * (float) rgb.r);
+	// result.g = (unsigned char)((blend) * (float) base.g + (1.0 - blend) * (float) rgb.g);
+	// result.b = (unsigned char)((blend) * (float) base.b + (1.0 - blend) * (float) rgb.b);
+	// result.t = 0;
+	// return (rgbtou(result));
 }
 
 void	set_transparency(t_image *i, unsigned char t)

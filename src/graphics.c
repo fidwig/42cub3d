@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/30 02:04:32 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/11/30 02:32:49 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	draw_column(t_cub *cub, int x, int h, t_ray ray)
 	j = SH / 2 - h / 2;
 	if (j < 0)
 		j = -1;
-	// j = SH / 2 - h / 2.5;
 	while (++j < (SH / 2 + h / 2))
 	{
 		if (j > SH)

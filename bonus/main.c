@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 19:04:51 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 19:11:26 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	main(int argc, char **argv)
 	cub_init(&cub);
 	init_hooks(&cub);
 	t_image	tmp;
-	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/grass.xpm", &tmp.width, &tmp.height);
+	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/walltex.xpm", &tmp.width, &tmp.height);
 	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
 	cub.map.tex_nor = tmp;//create_notex(&cub);
 	cub.map.tex_eas = tmp;//create_notex(&cub);
@@ -113,6 +113,7 @@ int	main(int argc, char **argv)
 	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/torch_set.xpm", &tmp.width, &tmp.height);
 	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
 	cub.map.torch_tex = tmp;
+	cub.notex = create_notex(&cub);
 	mlx_loop(cub.mlx);
 	return (0);
 }
