@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 19:11:41 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/06 17:25:37 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ t_image	get_tex(t_cub *cub, char type, t_dir facing)
 	else if (type == 'O')
 		return (cub->map.opendoor_tex);
 	else
-		return (cub->notex);
+		return (get_wall_tex(cub, facing));
+	// return (cub->notex);
 }
 
 void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
@@ -58,20 +59,18 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 	texcoord.x = (int)(info.x_wall * tex.width);
 	if (info.facing == EAST || info.facing == SOUTH)
 		texcoord.x = tex.width - texcoord.x - 1;
-	texcoord.y = -1;
-	j = SH / 2 - h / 2;
+	texcoord.z = -1;
+	j = SH / 2 - h / 2 + 1;
 	if (j < 0)
 		j = -1;
 	while (++j < (SH / 2 + h / 2))
 	{
 		if (j > SH)
 			break ;
-		texcoord.z = (int)(tex.height * ((j - (SH / 2 - h / 2)) % h) / h);
+		texcoord.y = (int)(tex.height * ((j - (SH / 2 - h / 2)) % h) / h);
 		if (texcoord.y != texcoord.z)
-		{
-			texcoord.y = texcoord.z;
 			col = dim_color(pixel_get(tex, texcoord.x, texcoord.y), light);
-		}
+		texcoord.z = texcoord.y;
 		pixel_put(&cub->image, x, j, col);
 	}
 }

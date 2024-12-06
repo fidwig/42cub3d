@@ -6,7 +6,7 @@
 #    By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/12/04 19:21:57 by jsommet          ###   ########.fr        #
+#    Updated: 2024/12/06 17:21:47 by jsommet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,10 @@ DEPS		:=	$(OBJS:.o=.d)
 ############## BONUS ################
 BOBJDIR		:=	.bobj
 BONUSDIR	:=	bonus
-BSRCS		:=	main.c raycasting.c graphics.c graphics_utils.c hooks.c \
-				errors.c inputs.c runtime_info.c angles.c				\
-				floorcasting.c minimap.c act_ray.c wall_id.c
+BSRCS		:=	main.c raycasting.c graphics.c hooks.c			\
+				errors.c inputs.c runtime_info.c angles.c		\
+				floorcasting.c minimap.c act_ray.c wall_id.c	\
+				colors_utils.c image_utils.c
 BOBJS		:=	$(BSRCS:%.c=%.o)
 BSRCS		:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
 BOBJS		:=	$(addprefix $(BOBJDIR)/, $(BOBJS))
