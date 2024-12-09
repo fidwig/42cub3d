@@ -6,7 +6,7 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/12/10 14:40:24 by bazaluga         ###   ########.fr        #
+#    Updated: 2025/01/06 12:55:59 by bazaluga         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -41,7 +41,7 @@ HEADERS		:=	$(addprefix $(INCDIR)/, $(HEADERS))
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))
 OBJS		:=	$(addprefix $(OBJDIR)/, $(OBJS))
 DEPS		:=	$(OBJS:.o=.d)
-#############################v########
+
 ############## BONUS ################
 BOBJDIR		:=	.bobj
 BHEADERS	:=	cub_bonus.h graphics_bonus.h typedefs_bonus.h

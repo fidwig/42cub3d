@@ -6,11 +6,12 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:37:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/10 00:43:45 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:18:22 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
+#include "libft.h"
 
 static int	check_map_line(t_cub *cub, char *line, int row)
 {
@@ -26,6 +27,7 @@ static int	check_map_line(t_cub *cub, char *line, int row)
 		{
 			if (cub->player.spd > 0 || row == 0 || i == 0 || !line[i + 1])
 				return (false);
+			//problem: inverted rotations
 			cub->player.rot = (M_PI / 2 * (line[i] == N))
 				+ (M_PI * (line[i] == W)) + ((3 * M_PI) / 2 * (line[i] == S));
 			cub->player.spd = 10;
@@ -96,7 +98,7 @@ static void	skip_empty_lines(int fd, char **line)
 
 bool	get_map(t_cub *cub, int fd)
 {
-	//add verif: if ! door_tex && (D || O) in map => error
+	//add better errors messages handling
 	char	*line;
 	int		i_end;
 	t_list	*lines;

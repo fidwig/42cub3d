@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/10 00:15:23 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:40:36 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ static void	clean_imgs_tex(t_cub *cub)
 		mlx_destroy_image(cub->mlx, cub->map.eas_tex.img);
 	if (cub->map.wes_tex.img)
 		mlx_destroy_image(cub->mlx, cub->map.wes_tex.img);
+	if (cub->map.door_tex.img)
+		mlx_destroy_image(cub->mlx, cub->map.door_tex.img);
+	if (cub->map.opendoor_tex.img)
+		mlx_destroy_image(cub->mlx, cub->map.opendoor_tex.img);
+	if (cub->map.ceil_tex.img)
+		mlx_destroy_image(cub->mlx, cub->map.ceil_tex.img);
+	if (cub->map.floor_tex.img)
+		mlx_destroy_image(cub->mlx, cub->map.floor_tex.img);
 	if (cub->minimap.img)
 		mlx_destroy_image(cub->mlx, cub->minimap.img);
 }

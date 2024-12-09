@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:46:27 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/10 14:21:24 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:24:33 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	get_texture(t_cub *cub, char *line)
 	char	**name;
 	int		fd_tex;
 
+	if (empty_line(line))
+		return (0);
 	i = 2;
 	while (line[i] && line[i] == ' ')
 		i++;

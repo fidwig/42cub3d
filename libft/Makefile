@@ -20,7 +20,22 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strle
 		gc_strtrim.c \
 		gc_substr.c \
 		garbage_collector.c \
-		garbage_collector_utils.c
+		garbage_collector_utils.c \
+		ft_dprintf.c \
+		ft_printf.c \
+		ft_ftoa_printf.c \
+		ft_printf_buffer.c \
+		ft_printf_buffer2.c \
+		ft_printf_char_str_handlers.c \
+		ft_printf_convert_buffer.c \
+		ft_printf_flags_parsing.c \
+		ft_printf_float_handlers.c \
+		ft_printf_helpers.c \
+		ft_printf_hex_handlers.c \
+		ft_printf_int_handlers.c \
+		ft_printf_node.c \
+		ft_printf_uint_handlers.c \
+		ft_printf_utils.c
 
 OBJS = $(SRCS:.c=.o)
 HEADER = libft.h
