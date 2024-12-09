@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/06 17:33:05 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/09 15:37:10 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int	main(int argc, char **argv)
 	cub.map.raw = manmap;
 	cub.map.width = 37;
 	cub.map.height = 19;
-	cub.map.col_ceil = 0x1a1019;
-	cub.map.col_floor = 0x483c3d;
+	cub.map.col_ceil = 0;
+	cub.map.col_floor = 0;
 	cub_init(&cub);
 	init_hooks(&cub);
 	t_image	tmp;

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 09:35:45 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:35:07 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ void	inputs_handler(t_cub *cub)
 	if (cub->inputs[XK_space])
 		act_ray(cub);
 	if (cub->mouse_movement)
-		rotate(cub, (float) cub->mouse_movement * 0.15);
-	cub->mouse_movement = 0;
-	if (MOUSE_LOCK)
-		mlx_mouse_move(cub->mlx, cub->win, SW / 2, SH / 2);
+	{
+		rotate(cub, (float) cub->mouse_movement * 0.05);
+		cub->mouse_movement = 0;
+		if (MOUSE_LOCK)
+			mlx_mouse_move(cub->mlx, cub->win, SW / 2, SH / 2);
+	}
 }
