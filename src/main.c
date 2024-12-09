@@ -6,12 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 10:14:40 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:31:42 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "mlx.h"
 
 static bool	get_tex_imgs(void *mlx, t_map *map)
 {
@@ -72,7 +71,6 @@ static int	update(t_cub *cub)
 {
 	inputs_handler(cub);
 	clear_image_bicolor(&cub->image, cub->map.col_ceil, cub->map.col_floor);
-	// floorcasting(cub);
 	raycasting(cub);
 	draw_minimap(cub);
 	draw_image(&cub->image, &cub->minimap, 10, 10);
@@ -98,8 +96,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (usage_error(), 1);
 	cub = (t_cub){0};
-	// cub.map.col_ceil = DARKRED;
-	// cub.map.col_floor = BLACK;
 	if (!parse_scene(&cub, argv[1]))
 		stop_error(1, &cub, "Scene parsing");
 	cub_init(&cub);

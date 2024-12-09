@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:37:31 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 09:41:12 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:09:44 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,14 @@
 
 void	set_ray_info(t_ray ray, t_cast_data cast, t_hit *info)
 {
-	if (cast.flag)
-	{
-		if (ray.dir.y > 0)
-			info->facing = NORTH;
-		else
-			info->facing = SOUTH;
-	}
+	if (cast.flag && ray.dir.y > 0)
+		info->facing = NORTH;
+	else if (cast.flag)
+		info->facing = SOUTH;
+	else if (!cast.flag && ray.dir.x > 0)
+		info->facing = EAST;
 	else
-	{
-		if (ray.dir.x > 0)
-			info->facing = EAST;
-		else
-			info->facing = WEST;
-	}
+		info->facing = WEST;
 	info->pos = cast.mpos;
 	info->flag = cast.flag;
 	if (cast.flag)
@@ -45,17 +39,8 @@ void	set_ray_info(t_ray ray, t_cast_data cast, t_hit *info)
 void	add_ray_info(t_ray ray, t_cast_data cast, t_hit *info)
 {
 	*info = ray.info[ray.hit_count - 1];
-	if (cast.side_dist.x < cast.side_dist.y)
-	{
-		if (ray.dir.x > 0)
-			info->facing = EAST;
-		else
-			info->facing = WEST;
-		info->dist = cast.side_dist.x;
-		info->pos.x += cast.step.x;
-		info->flag = 0;
-	}
-	else
+	info->flag = cast.side_dist.x >= cast.side_dist.y;
+	if (info->flag)
 	{
 		if (ray.dir.y > 0)
 			info->facing = NORTH;
@@ -63,7 +48,15 @@ void	add_ray_info(t_ray ray, t_cast_data cast, t_hit *info)
 			info->facing = SOUTH;
 		info->dist = cast.side_dist.y;
 		info->pos.y += cast.step.y;
-		info->flag = 1;
+	}
+	else
+	{
+		if (ray.dir.x > 0)
+			info->facing = EAST;
+		else
+			info->facing = WEST;
+		info->dist = cast.side_dist.x;
+		info->pos.x += cast.step.x;
 	}
 	if (info->flag)
 		info->x_wall = ray.origin.x + info->dist * ray.dir.x;
@@ -135,7 +128,8 @@ void	dda(t_cast_data	*cast, t_map map)
 					|| cast->ray.hit_count >= RAY_DEPTH);
 			if (!cast->hit && cast->ray.hit_count < RAY_DEPTH - 1)
 			{
-				add_ray_info(cast->ray, *cast, &cast->ray.info[cast->ray.hit_count]);
+				add_ray_info(cast->ray, *cast,
+					&cast->ray.info[cast->ray.hit_count]);
 				cast->ray.hit_count++;
 			}
 		}

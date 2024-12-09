@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:57:33 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 09:41:25 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:04:31 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	is_torch(char c)
 	return (c == 'L');
 }
 
-int	is_prop(char c)
-{
-	return (is_torch(c) || c == 'D');
-}
+// int	is_prop(char c)
+// {
+// 	return (is_torch(c) || c == 'D');
+// }

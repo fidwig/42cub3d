@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/11/28 14:35:03 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:30:56 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define LARR 256
 # define RARR 257
-# define RAY_DEPTH 3
 
 # include <stdbool.h>
 
@@ -131,7 +130,7 @@ struct s_hit
 	float		light;
 	int			flag;
 	double		x_wall;
-	char		type; //wall '1', close door 'D', open door 'O', light 'L', etc, special wall?
+	char		type; //wall '1', close door 'D', open door 'O', etc, special wall?
 };
 
 struct s_ray
@@ -140,7 +139,7 @@ struct s_ray
 	t_dvec3	origin;
 	double	length;
 	int		hit_count;
-	t_hit	info[RAY_DEPTH];
+	t_hit	info;
 };
 
 struct s_cast_data

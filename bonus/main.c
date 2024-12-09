@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/04 09:34:13 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:29:32 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,10 @@ void	cub_init(t_cub *cub)
 	init_info(&cub->info);
 }
 
-	// pixel_put(&cub->minimap, cub->player.pos.x * 10.0, cub->player.pos.z * 10.0, 0x65A0C1);
-	// pixel_put(&cub->minimap, cub->player.pos.x * 10.0 + cos(cub->player.rot) * 10.0, cub->player.pos.z * 10.0 + sin(cub->player.rot) * 10, 0x65A0C1);
 int	update(t_cub *cub)
 {
 	inputs_handler(cub);
-	// clear_image(&cub->image, BLACK);
 	clear_image_bicolor(&cub->image, cub->map.col_ceil, cub->map.col_floor);
-	// floorcasting(cub);
 	raycasting(cub);
 	draw_minimap(cub);
 	draw_image(&cub->image, &cub->minimap, 10, 10);
@@ -113,6 +109,7 @@ int	main(int argc, char **argv)
 	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/torch_set.xpm", &tmp.width, &tmp.height);
 	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
 	cub.map.torch_tex = tmp;
+	// cub.notex = create_notex(&cub);
 	mlx_loop(cub.mlx);
 	return (0);
 }

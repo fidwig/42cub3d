@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics_utils.c                                   :+:      :+:    :+:   */
+/*   image_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 00:49:59 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/06 18:13:42 by jsommet          ###   ########.fr       */
+/*   Created: 2024/12/06 16:56:18 by jsommet           #+#    #+#             */
+/*   Updated: 2024/12/06 16:58:39 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub_bonus.h"
 
 void	clear_image(t_image *image, t_uicol color)
 {
@@ -33,18 +33,19 @@ void	clear_image(t_image *image, t_uicol color)
 
 void	clear_image_bicolor(t_image *image, t_uicol color1, t_uicol color2)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
-	j = -1;
-	while (2 * (++j) < image->height)
+	i = 0;
+	j = 0;
+	while (i < image->width)
 	{
-		i = -1;
-		while (++i < image->width)
-		{
+		j = -1;
+		while (++j < image->height / 2)
 			pixel_put(image, i, j, color1);
-			pixel_put(image, i, image->height - j, color2);
-		}
+		while (++j < image->height)
+			pixel_put(image, i, j, color2);
+		i++;
 	}
 }
 
@@ -67,33 +68,14 @@ void	draw_image(t_image *dest, t_image *src, int x, int y)
 	}
 }
 
-t_trgb	utorgb(unsigned int color)
-{
-	t_trgb	trgb;
-
-	trgb.t = (color >> 24) & 0xFF;
-	trgb.r = (color >> 16) & 0xFF;
-	trgb.g = (color >> 8) & 0xFF;
-	trgb.b = color & 0xFF;
-	return (trgb);
-}
-
-unsigned int	rgbtou(t_trgb trgb)
-{
-	unsigned int	color;
-
-	color = (trgb.t << 24 | trgb.r << 16 | trgb.g << 8 | trgb.b);
-	return (color);
-}
-
 void	pixel_put(t_image *image, int x, int y, unsigned int color)
 {
 	char	*dst;
 
 	if (x < 0 || x >= image->width || y < 0 || y >= image->height)
 		return ;
-	// if ((color >> 24 & 0xFF) == 0xFF)
-	// 	return ;
+	if (((color >> 24) & 0xFF) == 0xFF)
+		return ;
 	dst = image->addr + (y * image->len + x * (image->bpp / 8));
 	*(unsigned int *)dst = color;
 }
