@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/09 16:30:56 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/09 22:45:52 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,16 @@ struct s_map
 	int			width;
 	int			height;
 
-	char		*tex_nor_name;
-	t_image		tex_nor;
-	char		*tex_sou_name;
-	t_image		tex_sou;
-	char		*tex_eas_name;
-	t_image		tex_eas;
-	char		*tex_wes_name;
-	t_image		tex_wes;
-
-	t_uicol		col_ceil;
-	t_uicol		col_floor;
-	t_image		tex_ceil;
-	t_image		tex_floor;
-	t_image		door_tex;
-	t_image		opendoor_tex;
-	t_image		torch_tex;
+	char		*nor_tex_name;
+	t_image		nor_tex;
+	char		*sou_tex_name;
+	t_image		sou_tex;
+	char		*eas_tex_name;
+	t_image		eas_tex;
+	char		*wes_tex_name;
+	t_image		wes_tex;
+	t_uicol		ceil_col;
+	t_uicol		floor_col;
 };
 
 enum e_dir

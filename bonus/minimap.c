@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:43:48 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/09 15:43:23 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/10 00:11:07 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_wall(t_cub *cub, int x, int y, t_dvec3 offset)
 	if (cub->map.raw[(int)cub->player.pos.z + y - 6]
 		[(int)cub->player.pos.x + x - 6] == '1')
 		draw_square(&cub->minimap, texcoord, 10,
-			(cub->map.col_ceil & 0xefefef) | 0x101010);
+			(cub->map.ceil_col & 0xefefef) | 0x101010);
 }
 
 void	draw_minimap(t_cub *cub)
@@ -46,7 +46,7 @@ void	draw_minimap(t_cub *cub)
 
 	offset.x = cub->player.pos.x - floor(cub->player.pos.x);
 	offset.y = cub->player.pos.z - floor(cub->player.pos.z);
-	clear_image(&cub->minimap, (cub->map.col_floor & 0xdddddd) | 0x0);
+	clear_image(&cub->minimap, (cub->map.floor_col & 0xdddddd) | 0x0);
 	y = -1;
 	while (++y < 12)
 	{
@@ -63,7 +63,7 @@ void	draw_minimap(t_cub *cub)
 		}
 	}
 	draw_square(&cub->minimap, (t_vec3){48, 48, 0},
-		3, cub->map.col_ceil | 0x222222);
+		3, cub->map.ceil_col | 0x222222);
 	draw_square(&cub->minimap, (t_vec3){49 + cos(cub->player.rot) * 5.0,
-		49 + sin(cub->player.rot) * 5.0, 0}, 2, cub->map.col_ceil | 0x222222);
+		49 + sin(cub->player.rot) * 5.0, 0}, 2, cub->map.ceil_col | 0x222222);
 }

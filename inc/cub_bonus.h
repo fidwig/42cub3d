@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/04 19:14:36 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/10 00:16:19 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,10 @@
 # define DARKRED	0x802020
 # define MOUSE_LOCK 1
 # define MOUSE_HIDE 1
+# define FOV		100
 
 // COMPATIBILITY
 int				mlx2_destroy_display(void *xvar);
-
-# define FOV		100
 
 // ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);
@@ -109,5 +108,9 @@ char			*ft_strtrim_free(const char *str, const char *charset);
 int				get_infos(t_cub *cub, int fd, int *infos_count);
 bool			get_map(t_cub *cub, int fd);
 int				parse_scene(t_cub *cub, char *map_name);
+int				get_texture(t_cub *cub, char *line);
+
+// UTILZ
+size_t			lst_get_maxstr(t_list *lst);
 
 #endif

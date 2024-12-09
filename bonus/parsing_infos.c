@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/04 12:11:11 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/10 00:49:07 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,37 +57,39 @@ static bool	get_colour(t_cub *cub, char *line, char part)
 	if (!line)
 		return (false);
 	if (part == 'C')
-		cub->map.col_ceil = rgbtou(rgb);
+		cub->map.ceil_col = rgbtou(rgb);
 	else if (part == 'F')
-		cub->map.col_floor = rgbtou(rgb);
+		cub->map.floor_col = rgbtou(rgb);
+	else
+		return (false);
 	return (true);
 }
 
 int	get_infos(t_cub *cub, int fd, int *infos_count)
 {
 	char	*line;
+	int		got_tex;
 
 	*infos_count = 0;
 	line = ft_strtrim_free(get_next_line(fd), " \n");
 	while (line && *infos_count < 6)
 	{
-		if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)// cut this function
-			|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
-		{
-			if (!get_texture(cub, line))
-				return (close(fd), free(line), 2);
-			(*infos_count)++;
-		}
-		else if (!ft_strncmp(line, "F ", 2) || (!ft_strncmp(line, "C ", 2)))
+		got_tex = get_texture(cub, line);
+		if (!got_tex && !empty_line(line))
+			return (close(fd), free(line), 4);
+		else if (got_tex == -1
+			&& (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2)))
 		{
 			if (!get_colour(cub, line + 2, line[0]))
 				return (close(fd), free(line), 3);
 			(*infos_count)++;
 		}
-		else if (!empty_line(line))
-			return (close(fd), free(line), 4);
+		else if (got_tex == -1)
+			return (close(fd), free(line), 2);
+		else if (got_tex)
+			(*infos_count)++;
 		free(line);
 		line = ft_strtrim_free(get_next_line(fd), " \n");
 	}
-	return (free(line), !(*infos_count == 6));
+	return (free(line), !(*infos_count == 6 || *infos_count == 8));
 }

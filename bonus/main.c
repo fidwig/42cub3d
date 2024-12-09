@@ -6,16 +6,51 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/09 16:29:32 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/10 00:50:21 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
 
-void	cub_init(t_cub *cub)
+static bool	get_tex_imgs(void *mlx, t_map *map)
+{//need to add ceil/floor & doors & doors_open
+	map->nor_tex.img = mlx_xpm_file_to_image(mlx, map->nor_tex_name,
+			&map->nor_tex.width, &map->nor_tex.height);
+	if (!map->nor_tex.img)
+		return (false);
+	map->nor_tex.addr = mlx_get_data_addr(map->nor_tex.img,
+			&map->nor_tex.bpp, &map->nor_tex.len, &map->nor_tex.endian);
+	map->sou_tex.img = mlx_xpm_file_to_image(mlx, map->sou_tex_name,
+			&map->sou_tex.width, &map->sou_tex.height);
+	if (!map->sou_tex.img)
+		return (false);
+	map->sou_tex.addr = mlx_get_data_addr(map->sou_tex.img,
+			&map->sou_tex.bpp, &map->sou_tex.len, &map->sou_tex.endian);
+	map->eas_tex.img = mlx_xpm_file_to_image(mlx, map->eas_tex_name,
+			&map->eas_tex.width, &map->eas_tex.height);
+	if (!map->eas_tex.img)
+		return (false);
+	map->eas_tex.addr = mlx_get_data_addr(map->eas_tex.img,
+			&map->eas_tex.bpp, &map->eas_tex.len, &map->eas_tex.endian);
+	map->wes_tex.img = mlx_xpm_file_to_image(mlx, map->wes_tex_name,
+			&map->wes_tex.width, &map->wes_tex.height);
+	if (!map->wes_tex.img)
+		return (false);
+	map->wes_tex.addr = mlx_get_data_addr(map->wes_tex.img,
+			&map->wes_tex.bpp, &map->wes_tex.len, &map->wes_tex.endian);
+	return (true);
+}
+
+static void	cub_init(t_cub *cub)
 {
 	cub->mlx = mlx_init();
+	if (!cub->mlx)
+		stop_error(1, cub, "Mlx init failed");
+	if (!get_tex_imgs(cub->mlx, &cub->map))
+		stop_error(1, cub, "Openning textures failed");
 	cub->image.img = mlx_new_image(cub->mlx, SW, SH);
+	if (!cub->image.img)
+		stop_error(1, cub, "Image creation failed");
 	cub->image.addr = mlx_get_data_addr(cub->image.img,
 			&cub->image.bpp, &cub->image.len, &cub->image.endian);
 	cub->image.width = SW;
@@ -26,18 +61,16 @@ void	cub_init(t_cub *cub)
 	cub->minimap.width = 100;
 	cub->minimap.height = 100;
 	cub->win = mlx_new_window(cub->mlx, SW, SH, "cub3d");
+	if (!cub->win)
+		stop_error(1, cub, "Window creation failed");
 	cub->player.spd = 2;
-	cub->player.pos = (t_dvec3){3.5, 0, 2.5};
-	cub->player.rot = 0;
-	if (MOUSE_HIDE)
-		mlx_mouse_hide(cub->mlx, cub->win);
 	init_info(&cub->info);
 }
 
-int	update(t_cub *cub)
+static int	update(t_cub *cub)
 {
 	inputs_handler(cub);
-	clear_image_bicolor(&cub->image, cub->map.col_ceil, cub->map.col_floor);
+	clear_image_bicolor(&cub->image, cub->map.ceil_col, cub->map.floor_col);
 	raycasting(cub);
 	draw_minimap(cub);
 	draw_image(&cub->image, &cub->minimap, 10, 10);
@@ -46,12 +79,11 @@ int	update(t_cub *cub)
 	return (0);
 }
 
-void	init_hooks(t_cub *cub)
+static void	init_hooks(t_cub *cub)
 {
 	mlx_hook(cub->win, 2, 1L << 0, key_pressed_hook, cub);
 	mlx_hook(cub->win, 3, 1L << 1, key_released_hook, cub);
 	mlx_hook(cub->win, 17, 0L, clean_exit_hook, cub);
-	mlx_hook(cub->win, 6, 1L << 6, &mouse_event_hook, cub);
 	mlx_loop_hook(cub->mlx, update, cub);
 }
 
@@ -59,57 +91,13 @@ int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	(void) argc;
-	(void) argv;
-	if (argc < 2)
+	if (argc != 2)
 		return (usage_error(), 1);
 	cub = (t_cub){0};
-	char *manmap[100] = {
-		ft_strdup("111111111111111111111111111111111111"),
-		ft_strdup("110000000000000111111111100000000001"),
-		ft_strdup("100000000000010000111111100000000001"),
-		ft_strdup("100000000000010000000000000000000001"),
-		ft_strdup("1110000000D0011111111111100000000001"),
-		ft_strdup("1110000000000T1111111111100000000001"),
-		ft_strdup("1111111D1111111111111111111111111111"),
-		ft_strdup("1111111D1111000000000110000000000001"),
-		ft_strdup("111111T01111000000000T10111111111101"),
-		ft_strdup("111111101111000000000110100000000101"),
-		ft_strdup("11111110T111000000000110101111110101"),
-		ft_strdup("111111T01111000000000110101000010101"),
-		ft_strdup("111111100000000000000110101111010101"),
-		ft_strdup("1111111T1111000000000T10100000010101"),
-		ft_strdup("111100000001000000000110111111110101"),
-		ft_strdup("11110010000T0000001D1110000000010101"),
-		ft_strdup("111100100001111T11101111111111010001"),
-		ft_strdup("111100000000000000000000000000011111"),
-		ft_strdup("111111111111111111111111111111111111")
-	};
-	cub.map.raw = manmap;
-	cub.map.width = 37;
-	cub.map.height = 19;
-	cub.map.col_ceil = 0x1a1019;
-	cub.map.col_floor = 0x483c3d;
+	if (!parse_scene(&cub, argv[1]))
+		stop_error(1, &cub, "Scene parsing");
 	cub_init(&cub);
 	init_hooks(&cub);
-	t_image	tmp;
-	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/grass.xpm", &tmp.width, &tmp.height);
-	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
-	cub.map.tex_nor = tmp;//create_notex(&cub);
-	cub.map.tex_eas = tmp;//create_notex(&cub);
-	cub.map.tex_sou = tmp;//create_notex(&cub);
-	cub.map.tex_wes = tmp;//create_notex(&cub);
-	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/door_tex.xpm", &tmp.width, &tmp.height);
-	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
-	cub.map.door_tex = tmp;
-	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/dooropen_tex.xpm", &tmp.width, &tmp.height);
-	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
-	// set_transparency(&tmp, 0xAA);
-	cub.map.opendoor_tex = tmp;
-	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/torch_set.xpm", &tmp.width, &tmp.height);
-	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
-	cub.map.torch_tex = tmp;
-	// cub.notex = create_notex(&cub);
 	mlx_loop(cub.mlx);
 	return (0);
 }

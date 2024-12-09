@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:37:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/04 10:37:16 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/10 00:43:45 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ static void	skip_empty_lines(int fd, char **line)
 
 bool	get_map(t_cub *cub, int fd)
 {
+	//add verif: if ! door_tex && (D || O) in map => error
 	char	*line;
 	int		i_end;
 	t_list	*lines;

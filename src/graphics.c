@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:54 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/09 23:28:55 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ double	clamp(double n, double mini, double maxi)
 t_image	get_tex(t_cub *cub, t_dir facing)
 {
 	if (facing == NORTH)
-		return (cub->map.tex_nor);
+		return (cub->map.nor_tex);
 	else if (facing == EAST)
-		return (cub->map.tex_eas);
+		return (cub->map.eas_tex);
 	else if (facing == SOUTH)
-		return (cub->map.tex_sou);
+		return (cub->map.sou_tex);
 	else
-		return (cub->map.tex_wes);
+		return (cub->map.wes_tex);
 }
 
 void	draw_column(t_cub *cub, int x, int h, t_ray ray)

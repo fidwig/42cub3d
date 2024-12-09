@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/09 16:29:56 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/10 00:16:25 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,10 @@
 # define DARKRED	0x802020
 # define MOUSE_LOCK 1
 # define MOUSE_HIDE 1
+# define FOV		100
 
 // COMPATIBILITY
-int	mlx2_destroy_display(void *xvar);
-
-# define FOV		100
+int				mlx2_destroy_display(void *xvar);
 
 // ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);

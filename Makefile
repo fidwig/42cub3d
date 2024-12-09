@@ -6,7 +6,7 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/12/04 10:42:08 by bazaluga         ###   ########.fr        #
+#    Updated: 2024/12/10 00:28:20 by bazaluga         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,10 +20,12 @@ ifeq ($(shell uname), Linux)
 	MLXDIR	:=	mlx
 	LFLAGS	:=	-L/usr/lib -lXext -lX11 -lm -lz
 	SRCS	:=	mlx_compat_linux.c
+	BSRCS	:=	mlx_compat_linux.c
 else
 	MLXDIR	:=	mlx_macos
 	LFLAGS	:=	-framework OpenGL -framework AppKit -lm
 	SRCS	:=	mlx_compat_macos.c
+	BSRCS	:=	mlx_compat_macos.c
 endif
 
 LIBFTDIR	:=	libft
@@ -43,9 +45,9 @@ DEPS		:=	$(OBJS:.o=.d)
 ############## BONUS ################
 BOBJDIR		:=	.bobj
 BONUSDIR	:=	bonus
-BSRCS		:=	act_ray.c angles.c errors.c floorcasting.c graphics.c \
-				graphics_utils.c hooks.c inputs.c lst_get_maxstr.c main.c \
-				minimap.c parsing.c parsing_infos.c parsing_map.c parsing_utils.c\
+BSRCS		+=	act_ray.c angles.c colors_utils.c errors.c graphics.c hooks.c \
+				image_utils.c inputs.c lst_get_maxstr.c main.c minimap.c parsing.c \
+				parsing_infos.c parsing_map.c parsing_tex.c parsing_utils.c \
 				raycasting.c runtime_info.c wall_id.c
 BOBJS		:=	$(BSRCS:%.c=%.o)
 BSRCS		:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
@@ -54,7 +56,7 @@ BDEPS		:=	$(BOBJS:.o=.d)
 
 RM			:=	rm -rf
 CC			:=	cc
-CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR)
+CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -g3
 
 all: $(NAME)
 
@@ -85,7 +87,7 @@ $(NAMETMP):	$(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
 
 $(NAME):	$(NAMETMP)
 
-$(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS)
+$(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS) Makefile
 		@rm -f $(NAMETMP)
 		$(CC) $(CFLAGS) $(LFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME)
 		@touch $(NAMEB)
