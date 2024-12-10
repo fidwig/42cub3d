@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/09 23:37:42 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:19:58 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ typedef struct s_camera		t_camera;
 typedef struct s_cub		t_cub;
 typedef enum e_dir			t_dir;
 
-# define MAPCHARS "10NSEWDO "
+# define ERRORS_TXT = {"", "Missing texture(s) and/or colour(s)", \
+		"Problem getting textures", "Problem getting floor/ceil colours", \
+		"Unexpected line while getting textures & colours",				\
+		"Problem getting the map"}
 
-typedef unsigned int	t_uicol;
+# define MAPCHARS "10NSEWDO "
 
 enum e_mapchars
 {
@@ -55,6 +58,7 @@ enum e_mapchars
 
 struct s_image
 {
+	char	*name;
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -99,29 +103,29 @@ struct s_map
 	int			width;
 	int			height;
 
-	char		*nor_tex_name;
-	t_image		nor_tex;
 	t_uicol		nor_col;
-	char		*sou_tex_name;
-	t_image		sou_tex;
 	t_uicol		sou_col;
-	char		*eas_tex_name;
-	t_image		eas_tex;
 	t_uicol		eas_col;
-	char		*wes_tex_name;
-	t_image		wes_tex;
 	t_uicol		wes_col;
-	char		*ceil_tex_name;
-	t_image		ceil_tex;
 	t_uicol		ceil_col;
-	char		*floor_tex_name;
-	t_image		floor_tex;
 	t_uicol		floor_col;
-	char		*door_tex_name;
+	/* char		*nor_tex_name; */
+	t_image		nor_tex;
+	/* char		*sou_tex_name; */
+	t_image		sou_tex;
+	/* char		*eas_tex_name; */
+	t_image		eas_tex;
+	/* char		*wes_tex_name; */
+	t_image		wes_tex;
+	/* char		*ceil_tex_name; */
+	t_image		ceil_tex;
+	/* char		*floor_tex_name; */
+	t_image		floor_tex;
+	/* char		*door_tex_name; */
 	t_image		door_tex;
-	char		*opendoor_tex_name;
+	/* char		*opendoor_tex_name; */
 	t_image		opendoor_tex;
-	char		*torch_tex_name;
+	/* char		*torch_tex_name; */
 	t_image		torch_tex;
 };
 

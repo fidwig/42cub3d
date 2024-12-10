@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/10 00:49:07 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:13:36 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,31 +65,31 @@ static bool	get_colour(t_cub *cub, char *line, char part)
 	return (true);
 }
 
-int	get_infos(t_cub *cub, int fd, int *infos_count)
+int	get_infos(t_cub *cub, int fd, int *infos_count, char **line)
 {
-	char	*line;
+	/* char	*line; */
 	int		got_tex;
 
 	*infos_count = 0;
-	line = ft_strtrim_free(get_next_line(fd), " \n");
-	while (line && *infos_count < 6)
+	*line = ft_strtrim_free(get_next_line(fd), " \n");
+	while (line && *infos_count < 8)
 	{
-		got_tex = get_texture(cub, line);
-		if (!got_tex && !empty_line(line))
-			return (close(fd), free(line), 4);
+		got_tex = get_texture(cub, *line);
+		if (!got_tex && !empty_line(*line))
+			return (4);//be careful : close fd & free line if  needed in parse_scene
 		else if (got_tex == -1
-			&& (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2)))
+			&& (!ft_strncmp(*line, "C ", 2) || !ft_strncmp(*line, "F ", 2)))
 		{
-			if (!get_colour(cub, line + 2, line[0]))
-				return (close(fd), free(line), 3);
+			if (!get_colour(cub, (*line) + 2, (*line)[0]))
+				return (close(fd), free(*line), 3);
 			(*infos_count)++;
 		}
 		else if (got_tex == -1)
-			return (close(fd), free(line), 2);
+			return (close(fd), free(*line), 2);
 		else if (got_tex)
 			(*infos_count)++;
-		free(line);
-		line = ft_strtrim_free(get_next_line(fd), " \n");
+		free(*line);
+		*line = ft_strtrim_free(get_next_line(fd), " \n");
 	}
-	return (free(line), !(*infos_count == 6 || *infos_count == 8));
+	return (1);
 }

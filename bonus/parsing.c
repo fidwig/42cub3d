@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/04 10:36:54 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:20:53 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,19 @@ static void	reset_map(char **map)
 
 int	parse_scene(t_cub *cub, char *map_name)
 {
-	int	fd;
-	int	res;
-	int	infos_count;
+	int		fd;
+	int		res;
+	int		infos_count;
+	char	*line;
 
 	if (!check_name(map_name))
 		stop_error(1, cub, "Bad scene file extension");
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		stop_error(1, cub, "Can't open map file");
-	res = get_infos(cub, fd, &infos_count);
+	line = NULL;
+	res = get_infos(cub, fd, &infos_count, &line);
+	//check if ret == 4 && infos_count >= 6 => do not free line & close fd, else do it
 	if (res == 1)
 		stop_error(1, cub, "Missing texture(s) and/or colour(s)");
 	if (res == 2)

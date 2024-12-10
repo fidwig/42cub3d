@@ -6,40 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/10 00:50:21 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:00:33 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
-
-static bool	get_tex_imgs(void *mlx, t_map *map)
-{//need to add ceil/floor & doors & doors_open
-	map->nor_tex.img = mlx_xpm_file_to_image(mlx, map->nor_tex_name,
-			&map->nor_tex.width, &map->nor_tex.height);
-	if (!map->nor_tex.img)
-		return (false);
-	map->nor_tex.addr = mlx_get_data_addr(map->nor_tex.img,
-			&map->nor_tex.bpp, &map->nor_tex.len, &map->nor_tex.endian);
-	map->sou_tex.img = mlx_xpm_file_to_image(mlx, map->sou_tex_name,
-			&map->sou_tex.width, &map->sou_tex.height);
-	if (!map->sou_tex.img)
-		return (false);
-	map->sou_tex.addr = mlx_get_data_addr(map->sou_tex.img,
-			&map->sou_tex.bpp, &map->sou_tex.len, &map->sou_tex.endian);
-	map->eas_tex.img = mlx_xpm_file_to_image(mlx, map->eas_tex_name,
-			&map->eas_tex.width, &map->eas_tex.height);
-	if (!map->eas_tex.img)
-		return (false);
-	map->eas_tex.addr = mlx_get_data_addr(map->eas_tex.img,
-			&map->eas_tex.bpp, &map->eas_tex.len, &map->eas_tex.endian);
-	map->wes_tex.img = mlx_xpm_file_to_image(mlx, map->wes_tex_name,
-			&map->wes_tex.width, &map->wes_tex.height);
-	if (!map->wes_tex.img)
-		return (false);
-	map->wes_tex.addr = mlx_get_data_addr(map->wes_tex.img,
-			&map->wes_tex.bpp, &map->wes_tex.len, &map->wes_tex.endian);
-	return (true);
-}
 
 static void	cub_init(t_cub *cub)
 {
@@ -64,6 +35,8 @@ static void	cub_init(t_cub *cub)
 	if (!cub->win)
 		stop_error(1, cub, "Window creation failed");
 	cub->player.spd = 2;
+	if (MOUSE_HIDE)
+		mlx_mouse_hide(cub->mlx, cub->win);
 	init_info(&cub->info);
 }
 
@@ -84,6 +57,7 @@ static void	init_hooks(t_cub *cub)
 	mlx_hook(cub->win, 2, 1L << 0, key_pressed_hook, cub);
 	mlx_hook(cub->win, 3, 1L << 1, key_released_hook, cub);
 	mlx_hook(cub->win, 17, 0L, clean_exit_hook, cub);
+	mlx_hook(cub->win, 6, 1L << 6, &mouse_event_hook, cub);
 	mlx_loop_hook(cub->mlx, update, cub);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:46:27 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/10 00:29:10 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:21:24 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 static char	**get_name_ptr(t_cub *cub, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3))
-		return (&cub->map.nor_tex_name);
+		return (&cub->map.nor_tex.name);
 	if (!ft_strncmp(line, "SO ", 3))
-		return (&cub->map.sou_tex_name);
+		return (&cub->map.sou_tex.name);
 	if (!ft_strncmp(line, "WE ", 3))
-		return (&cub->map.wes_tex_name);
+		return (&cub->map.wes_tex.name);
 	if (!ft_strncmp(line, "EA ", 3))
-		return (&cub->map.eas_tex_name);
+		return (&cub->map.eas_tex.name);
 	if (!ft_strncmp(line, "C ", 2))
-		return (&cub->map.ceil_tex_name);
+		return (&cub->map.ceil_tex.name);
 	if (!ft_strncmp(line, "F ", 2))
-		return (&cub->map.floor_tex_name);
+		return (&cub->map.floor_tex.name);
 	if (!ft_strncmp(line, "DO ", 3))
-		return (&cub->map.door_tex_name);
+		return (&cub->map.door_tex.name);
 	if (!ft_strncmp(line, "OD ", 3))
-		return (&cub->map.opendoor_tex_name);
+		return (&cub->map.opendoor_tex.name);
 	return (NULL);
 }
 
