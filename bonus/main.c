@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/09 15:37:10 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/11 19:14:37 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	cub_init(t_cub *cub)
 int	update(t_cub *cub)
 {
 	inputs_handler(cub);
-	clear_image_bicolor(&cub->image, cub->map.col_ceil, cub->map.col_floor);
+	render_sky(cub);
+	clear_image_bicolor(&cub->image, 0xFF000000, cub->map.col_floor);
 	raycasting(cub);
 	draw_minimap(cub);
 	draw_image(&cub->image, &cub->minimap, 10, 10);
@@ -110,6 +111,9 @@ int	main(int argc, char **argv)
 	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
 	cub.map.torch_tex = tmp;
 	// cub.notex = create_notex(&cub);
+	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/skytex.xpm", &tmp.width, &tmp.height);
+	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
+	cub.map.sky_tex = tmp;
 	mlx_loop(cub.mlx);
 	return (0);
 }

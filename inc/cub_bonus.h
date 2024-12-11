@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/04 19:14:36 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/10 20:16:05 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 # define WHITE		0xFFFFFF
 # define DARKRED	0x802020
 # define MOUSE_LOCK 1
-# define MOUSE_HIDE 1
+# define MOUSE_HIDE 0
 
 // COMPATIBILITY
 int				mlx2_destroy_display(void *xvar);

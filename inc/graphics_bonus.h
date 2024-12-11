@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:31:32 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/04 09:31:51 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:31:03 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void			draw_column(t_cub *cub, int x, int h, t_ray ray);
 void			draw_column_layers(t_cub *cub, int x, t_ray ray, double focal);
 void			raycasting(t_cub *cub);
 void			floorcasting(t_cub *cub);
+void			render_sky(t_cub *cub);
 
 #endif
