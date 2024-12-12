@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/11 17:09:16 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/12 17:56:28 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ struct s_vec3
 struct s_player
 {
 	t_dvec3	pos;
+	t_dvec3	upos;
 	double	rot;
 	double	spd;
 };
@@ -134,7 +135,7 @@ struct s_hit
 	float		light;
 	int			flag;
 	double		x_wall;
-	char		type; //wall '1', close door 'D', open door 'O', light 'L', etc, special wall?
+	char		type;
 };
 
 struct s_ray
@@ -182,6 +183,7 @@ struct s_cub
 	t_image		image;
 	bool		inputs[258];
 	double		mouse_movement;
+	bool		mouse_lock;
 
 	t_player	player;
 	t_map		map;

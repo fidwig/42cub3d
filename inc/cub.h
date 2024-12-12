@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:58:12 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/06 18:36:11 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/12 21:24:45 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int				key_released_hook(int key, t_cub *cub);
 
 // INPUTS
 void			inputs_handler(t_cub *cub);
-
 // INFO
 int				init_info(t_info *info);
 int				update_info(t_info *info);

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:37:31 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/06 18:09:44 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/12 21:48:22 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,16 +159,17 @@ void	raycasting(t_cub *cub)
 	double		camera_x;
 	t_camera	cam;
 
-	cam.focal = tan(deg2rad(FOV / 2.0));
+	cam.focal = 1.0;
 	cam.plane = (t_dvec3){cos(cub->player.rot - M_PI / 2.0) * cam.focal,
 		sin(cub->player.rot - M_PI / 2.0) * cam.focal, 0};
 	x = -1;
 	while (++x < SW)
 	{
-		camera_x = 2.0 * (1 - x / ((double)SW)) - 1.0;
+		camera_x = 2.0 * (1 - x / ((double)SW)) - cam.focal;
 		ray_dir = (t_dvec3){cos(cub->player.rot) + cam.plane.x * camera_x,
 			sin(cub->player.rot) + cam.plane.y * camera_x, 0};
 		ray = cast_ray(cub->player.pos, ray_dir, cub->map);
+		floorcasting(cub, ray, x);
 		draw_column_layers(cub, x, ray, cam.focal);
 	}
 }

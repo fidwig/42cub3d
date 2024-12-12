@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/10 20:16:05 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/12 22:05:23 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,18 @@
 
 # define USEC 0
 # define MSEC 1
-# define DEBUG 0
+# define DEBUG 1
 // FIXED_FRAMERATE < 1 : unlimited
-# define FIXED_FRAMERATE 0
+# define FIXED_FRAMERATE 300
 
 # define SW	1280
 # define SH	720
+# define SKY_HEIGHT 360 //SH / 2 but this shit norm wont allow it
+
 # define BLACK		0x000000
 # define WHITE		0xFFFFFF
 # define DARKRED	0x802020
-# define MOUSE_LOCK 1
+# define MOUSE_LOCK 0
 # define MOUSE_HIDE 0
 
 // COMPATIBILITY
@@ -86,7 +88,8 @@ void			draw_minimap(t_cub *cub);
 // ANGLE MATH
 double			wrap_angle(double angle);
 double			deg2rad(int deg);
-
+double			dotp(t_dvec3 a, t_dvec3 b);
+t_dvec3			a2dv(double angle);
 // RACASTING
 void			set_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
 void			cast_init(t_cast_data *cast);
