@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/09 20:42:12 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:32:17 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 	double	light;
 	t_uicol	col;
 
-	light = pow((1.0 - (info.dist / 18)), 2);
+	light = cub->y_dist_lookup[SH - 1][1];
+	if (h < SH)
+		light = cub->y_dist_lookup[(SH + h) / 2][1];
 	tex = get_tex(cub, info.type, info.facing);
 	texcoord.x = (int)(info.x_wall * tex.width);
 	if (info.facing == EAST || info.facing == SOUTH)

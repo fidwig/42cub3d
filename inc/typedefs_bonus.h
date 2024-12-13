@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/12 17:56:28 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:14:52 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define LARR 256
 # define RARR 257
 # define RAY_DEPTH 15
+# define SW	1280
+# define SH	720
 
 # include <stdbool.h>
 
@@ -184,6 +186,8 @@ struct s_cub
 	bool		inputs[258];
 	double		mouse_movement;
 	bool		mouse_lock;
+
+	double		y_dist_lookup[SH][2];
 
 	t_player	player;
 	t_map		map;
