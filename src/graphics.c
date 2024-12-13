@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:54 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/13 19:05:44 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_image	get_tex(t_cub *cub, t_dir facing)
 void	draw_column(t_cub *cub, int x, int h, t_ray ray)
 {
 	int		j;
-	t_trgb	col;
+	t_uicol	col;
 	t_image	tex;
 	t_vec3	texcoord;
 
@@ -46,16 +46,18 @@ void	draw_column(t_cub *cub, int x, int h, t_ray ray)
 	texcoord.x = (int)(ray.info.x_wall * tex.width);
 	if (ray.info.facing == EAST || ray.info.facing == SOUTH)
 		texcoord.x = tex.width - texcoord.x - 1;
-	texcoord.z = -1;
+	texcoord.y = -1;
 	j = SH / 2 - h / 2;
 	if (j < 0)
 		j = -1;
 	while (++j < (SH / 2 + h / 2) && j <= SH)
 	{
+		if (j < 0)
+			continue ;
 		texcoord.y = (int)(tex.height * ((j - (SH / 2 - h / 2)) % h) / h);
 		if (texcoord.y != texcoord.z)
-			col = utorgb(pixel_get(tex, texcoord.x, texcoord.y));
+			col = pixel_get(tex, texcoord.x, texcoord.y);
 		texcoord.z = texcoord.y;
-		pixel_put(&cub->image, x, j, rgbtou(col));
+		pixel_put(&cub->image, x, j, col);
 	}
 }

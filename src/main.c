@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/11 20:18:29 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/04 19:29:22 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static void	cub_init(t_cub *cub)
 static int	update(t_cub *cub)
 {
 	inputs_handler(cub);
-	// clear_image_bicolor(&cub->image, cub->map.col_ceil, cub->map.col_floor);
-	// raycasting(cub);
+	clear_image_bicolor(&cub->image, cub->map.col_ceil, cub->map.col_floor);
+	raycasting(cub);
 	draw_minimap(cub);
 	draw_image(&cub->image, &cub->minimap, 10, 10);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->image.img, 0, 0);
