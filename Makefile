@@ -6,7 +6,7 @@
 #    By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2024/12/13 19:16:33 by jsommet          ###   ########.fr        #
+#    Updated: 2024/12/13 19:58:02 by jsommet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ BONUSDIR	:=	bonus
 BSRCS		:=	main.c raycasting.c graphics.c hooks.c			\
 				errors.c inputs.c runtime_info.c angles.c		\
 				floorcasting.c minimap.c act_ray.c wall_id.c	\
-				colors_utils.c image_utils.c sky.c
+				colors_utils.c image_utils.c sky.c				\
+				raycasting_utils.c
 BOBJS		:=	$(BSRCS:%.c=%.o)
 BSRCS		:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
 BOBJS		:=	$(addprefix $(BOBJDIR)/, $(BOBJS))

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/13 18:14:52 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:02:54 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ struct s_ray
 	t_dvec3	dir;
 	t_dvec3	origin;
 	double	length;
-	int		hit_count;
+	int		hits;
 	t_hit	info[RAY_DEPTH];
 };
 

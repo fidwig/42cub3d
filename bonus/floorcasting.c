@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:14:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 18:24:03 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:02:54 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	floorcasting(t_cub *cub, t_ray ray, int x)
 	double	h;
 
 	tex = cub->map.tex_floor;
-	info = ray.info[ray.hit_count - 1];
+	info = ray.info[ray.hits - 1];
 	if (info.facing == EAST)
 	{
 		wall_floor.x = info.pos.x;

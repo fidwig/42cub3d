@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/13 19:25:14 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:07:02 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void			set_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
 void			cast_init(t_cast_data *cast);
 void			dda(t_cast_data	*cast, t_map map);
 t_ray			cast_ray(t_dvec3 origin, t_dvec3 dir, t_map map);
+void			set_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
+void			add_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
 
 // ACTIONS
 void			act_ray(t_cub *cub);
