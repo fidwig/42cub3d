@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/13 18:07:52 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/13 19:25:14 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@
 
 # define USEC 0
 # define MSEC 1
-# define DEBUG 1
+# define DEBUG 0
 // FIXED_FRAMERATE < 1 : unlimited
-# define FIXED_FRAMERATE 300
+# define FIXED_FRAMERATE 0
 
 # define SKY_HEIGHT 360 //SH / 2 but this shit norm wont allow it
 

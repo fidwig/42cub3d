@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 18:57:13 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/13 19:24:24 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	update(t_cub *cub)
 	draw_image(&cub->image, &cub->minimap, 10, 10);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->image.img, 0, 0);
 	update_info(&cub->info);
+	mlx_string_put(cub->mlx, cub->win, 15, 25, 0x00FF00, ft_itoa(cub->info.framerate));
 	return (0);
 }
 
