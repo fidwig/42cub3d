@@ -44,7 +44,7 @@ int	mouse_event_hook(int x, int y, t_cub *cub)
 
 	(void)y;
 	if (cub->mouse_lock)
-		cub->mouse_movement = x - (SW - 100);
+		cub->mouse_movement = x - (SW / 2);
 	else
 	{
 		cub->mouse_movement = x - old_x;

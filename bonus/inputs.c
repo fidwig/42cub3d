@@ -69,6 +69,6 @@ void	inputs_handler(t_cub *cub)
 		rotate(cub, (float) cub->mouse_movement * 0.05);
 		cub->mouse_movement = 0;
 		if (cub->mouse_lock)
-			mlx_mouse_move(cub->mlx, cub->win, SW - 100, SH - 100);
+			mlx_mouse_move(cub->mlx, cub->win, SW / 2, SH / 2);
 	}
 }
