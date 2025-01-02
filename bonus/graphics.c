@@ -88,6 +88,7 @@ void	draw_column_layers(t_cub *cub, int x, t_ray ray, double focal)
 			h = SH;
 		draw_layer(cub, x, h, ray.info[i]);
 	}
+	cub->z_buffer[x] = ray.info[0].dist;
 }
 
 // void	draw_column(t_cub *cub, int x, int h, t_ray ray)

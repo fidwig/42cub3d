@@ -188,6 +188,7 @@ struct s_cub
 	bool		mouse_lock;
 
 	double		y_dist_lookup[SH][2];
+	double		z_buffer[SW];
 
 	t_player	player;
 	t_map		map;

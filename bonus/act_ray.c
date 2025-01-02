@@ -12,18 +12,6 @@
 
 #include "cub_bonus.h"
 
-	// t_ray		ray;
-	// t_dvec3		ray_dir;
-
-	// ray_dir = (t_dvec3){cos(cub->player.rot), sin(cub->player.rot), 0};
-	// ray = cast_ray(cub->player.pos, ray_dir, cub->map);
-	// if (ray.length > 1)
-		// return ;
-	// printf("%d %d %c\n", ray.info.pos.x, ray.info.pos.y, ray.info.type);
-	// if (ray.info.type == 'D')
-		// cub->map.raw[ray.info.pos.y][ray.info.pos.x] = 'O';
-	// if (ray.info.type == 'O')
-		// cub->map.raw[ray.info.pos.y][ray.info.pos.x] = 'D';
 void	act_ray(t_cub *cub)
 {
 	int						x;

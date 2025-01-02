@@ -48,7 +48,7 @@ BSRCS		:=	main.c raycasting.c graphics.c hooks.c			\
 				errors.c inputs.c runtime_info.c angles.c		\
 				floorcasting.c minimap.c act_ray.c wall_id.c	\
 				colors_utils.c image_utils.c sky.c				\
-				raycasting_utils.c
+				raycasting_utils.c sprites.c
 BOBJS		:=	$(BSRCS:%.c=%.o)
 BSRCS		:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
 BOBJS		:=	$(addprefix $(BOBJDIR)/, $(BOBJS))
@@ -56,7 +56,7 @@ BDEPS		:=	$(BOBJS:.o=.d)
 
 RM			:=	rm -rf
 CC			:=	cc
-CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -O3 -ffast-math -fno-builtin
+CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -O2 -ffast-math -fno-builtin
 
 all: $(NAME)
 

@@ -57,6 +57,7 @@ int	update(t_cub *cub)
 	// clear_image_bicolor(&cub->image, 0xFF000000, cub->map.col_floor);
 	raycasting(cub);
 	draw_minimap(cub);
+	draw_sprites(cub);
 	draw_image(&cub->image, &cub->minimap, 10, 10);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->image.img, 0, 0);
 	update_info(&cub->info);
