@@ -1,14 +1,14 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
+#    By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2025/01/07 13:21:48 by bazaluga         ###   ########.fr        #
+#    Updated: 2025/01/07 20:35:03 by bazaluga         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 NAME		:=	cub3D
 NAMETMP		:=	.mandatory_tmp
@@ -33,9 +33,10 @@ MLX			:=	$(MLXDIR)/libmlx.a
 LIBFT		:=	$(LIBFTDIR)/libft.a
 OBJDIR		:=	.obj
 HEADERS		:=	cub.h graphics.h typedefs.h
-SRCS		+=	angles.c errors.c graphics.c graphics_utils.c hooks.c inputs.c \
-				lst_get_maxstr.c main.c minimap.c parsing.c parsing_infos.c \
-				parsing_map.c parsing_utils.c raycasting.c runtime_info.c
+SRCS		+=	angles.c colors_utils.c errors.c graphics.c graphics_utils.c	\
+				hooks.c image_utils.c inputs.c	lst_get_maxstr.c main.c			\
+				minimap.c parsing.c parsing_infos.c parsing_map.c				\
+				parsing_utils.c raycasting.c runtime_info.c						\
 OBJS		:=	$(SRCS:.c=.o)
 HEADERS		:=	$(addprefix $(INCDIR)/, $(HEADERS))
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))
@@ -43,13 +44,15 @@ OBJS		:=	$(addprefix $(OBJDIR)/, $(OBJS))
 DEPS		:=	$(OBJS:.o=.d)
 
 ############## BONUS ################
+
 BOBJDIR		:=	.bobj
-BHEADERS	:=	cub_bonus.h graphics_bonus.h typedefs_bonus.h
 BONUSDIR	:=	bonus
-BSRCS		+=	act_ray.c angles.c colors_utils.c errors.c graphics.c hooks.c \
-				image_utils.c inputs.c lst_get_maxstr.c main.c main_utils.c minimap.c \
-				parsing.c parsing_infos.c parsing_map.c parsing_tex.c parsing_utils.c \
-				raycasting.c runtime_info.c wall_id.c
+BSRCS		:=	act_ray.c angles.c colors_utils.c errors.c floorcasting.c		\
+				graphics.c graphics_utils.c hooks.c image_utils.c inputs.c		\
+				lst_get_maxstr.c main.c main_utils.c minimap.c parsing.c		\
+				parsing_infos.c parsing_map.c parsing_tex.c parsing_utils.c		\
+				raycasting.c raycasting_utils.c	runtime_info.c sky.c sprites.c	\
+				minimap.c  wall_id.c
 BOBJS		:=	$(BSRCS:%.c=%.o)
 BSRCS		:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
 BOBJS		:=	$(addprefix $(BOBJDIR)/, $(BOBJS))
@@ -57,7 +60,7 @@ BDEPS		:=	$(BOBJS:.o=.d)
 
 RM			:=	rm -rf
 CC			:=	cc
-CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -g3
+CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -O2 -ffast-math -fno-builtin
 
 all: $(NAME)
 
@@ -88,7 +91,7 @@ $(NAMETMP):	$(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
 
 $(NAME):	$(NAMETMP)
 
-$(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS) Makefile
+$(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS)
 		@rm -f $(NAMETMP)
 		$(CC) $(CFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME) $(LFLAGS)
 		@touch $(NAMEB)

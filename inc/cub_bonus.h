@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/07 13:43:29 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/07 20:40:32 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@
 // FIXED_FRAMERATE < 1 : unlimited
 # define FIXED_FRAMERATE 0
 
-# define SW	1280
-# define SH	720
+# define SKY_HEIGHT 360 //SH / 2 but this shit norm wont allow it
+
 # define BLACK		0x000000
 # define WHITE		0xFFFFFF
 # define DARKRED	0x802020
-# define MOUSE_LOCK 1
+# define MOUSE_LOCK 0
 # define MOUSE_HIDE 0
 # define FOV		100
 
@@ -85,12 +85,16 @@ void			draw_minimap(t_cub *cub);
 // ANGLE MATH
 double			wrap_angle(double angle);
 double			deg2rad(int deg);
+double			dotp(t_dvec3 a, t_dvec3 b);
+t_dvec3			a2dv(double angle);
 
 // RACASTING
 void			set_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
 void			cast_init(t_cast_data *cast);
 void			dda(t_cast_data	*cast, t_map map);
 t_ray			cast_ray(t_dvec3 origin, t_dvec3 dir, t_map map);
+void			set_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
+void			add_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
 
 // ACTIONS
 void			act_ray(t_cub *cub);

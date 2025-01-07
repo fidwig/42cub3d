@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/10 15:19:58 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/07 20:46:56 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define LARR 256
 # define RARR 257
 # define RAY_DEPTH 15
+# define SW	1280
+# define SH	720
 
 # include <stdbool.h>
 
@@ -93,6 +95,7 @@ struct s_vec3
 struct s_player
 {
 	t_dvec3	pos;
+	t_dvec3	upos;
 	double	rot;
 	double	spd;
 };
@@ -109,24 +112,16 @@ struct s_map
 	t_uicol		wes_col;
 	t_uicol		ceil_col;
 	t_uicol		floor_col;
-	/* char		*nor_tex_name; */
 	t_image		nor_tex;
-	/* char		*sou_tex_name; */
 	t_image		sou_tex;
-	/* char		*eas_tex_name; */
 	t_image		eas_tex;
-	/* char		*wes_tex_name; */
 	t_image		wes_tex;
-	/* char		*ceil_tex_name; */
 	t_image		ceil_tex;
-	/* char		*floor_tex_name; */
 	t_image		floor_tex;
-	/* char		*door_tex_name; */
 	t_image		door_tex;
-	/* char		*opendoor_tex_name; */
 	t_image		opendoor_tex;
-	/* char		*torch_tex_name; */
 	t_image		torch_tex;
+	t_image		sky;
 };
 
 enum e_dir
@@ -145,7 +140,7 @@ struct s_hit
 	float		light;
 	int			flag;
 	double		x_wall;
-	char		type; //wall '1', close door 'D', open door 'O', light 'L', etc, special wall?
+	char		type;
 };
 
 struct s_ray
@@ -153,7 +148,7 @@ struct s_ray
 	t_dvec3	dir;
 	t_dvec3	origin;
 	double	length;
-	int		hit_count;
+	int		hits;
 	t_hit	info[RAY_DEPTH];
 };
 
@@ -193,6 +188,10 @@ struct s_cub
 	t_image		image;
 	bool		inputs[258];
 	double		mouse_movement;
+	bool		mouse_lock;
+
+	double		y_dist_lookup[SH][2];
+	double		z_buffer[SW];
 
 	t_player	player;
 	t_map		map;

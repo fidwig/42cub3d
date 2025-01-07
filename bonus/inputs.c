@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/09 15:35:07 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:55:16 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ void	move(t_cub *cub, int x, int y)
 	t_dvec3	npos;
 	double	mangle;
 
+	cub->player.upos.x = (cub->map.width / 2 - floor(cub->player.pos.x))
+		/ (cub->map.width / 2);
+	cub->player.upos.y = (cub->map.height / 2 - floor(cub->player.pos.z))
+		/ (cub->map.height / 2);
 	if (x == 0 && y == 0)
 		return ;
 	mangle = wrap_angle(cub->player.rot + atan2(x, y));
@@ -64,7 +68,7 @@ void	inputs_handler(t_cub *cub)
 	{
 		rotate(cub, (float) cub->mouse_movement * 0.05);
 		cub->mouse_movement = 0;
-		if (MOUSE_LOCK)
+		if (cub->mouse_lock)
 			mlx_mouse_move(cub->mlx, cub->win, SW / 2, SH / 2);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/09 23:36:50 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:02:54 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ double	clamp(double n, double mini, double maxi)
 t_image	get_wall_tex(t_cub *cub, t_dir facing)
 {
 	if (facing == NORTH)
-		return (cub->map.nor_tex);
+		return (cub->map.tex_nor);
 	else if (facing == EAST)
-		return (cub->map.eas_tex);
+		return (cub->map.tex_eas);
 	else if (facing == SOUTH)
-		return (cub->map.sou_tex);
+		return (cub->map.tex_sou);
 	else
-		return (cub->map.wes_tex);
+		return (cub->map.tex_wes);
 }
 
 t_image	get_tex(t_cub *cub, char type, t_dir facing)
@@ -43,8 +43,8 @@ t_image	get_tex(t_cub *cub, char type, t_dir facing)
 		return (cub->map.opendoor_tex);
 	else
 		return (get_wall_tex(cub, facing));
-	// return (cub->notex);
 }
+	// return (cub->notex);
 
 void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 {
@@ -54,7 +54,7 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 	double	light;
 	t_uicol	col;
 
-	light = pow((1.0 - (info.dist / 18)), 2);
+	light = cub->y_dist_lookup[(int)clamp((SH + h) / 2, 0, SH - 1)][1];
 	tex = get_tex(cub, info.type, info.facing);
 	texcoord.x = (int)(info.x_wall * tex.width);
 	if (info.facing == EAST || info.facing == SOUTH)
@@ -80,7 +80,7 @@ void	draw_column_layers(t_cub *cub, int x, t_ray ray, double focal)
 	int	h;
 	int	i;
 
-	i = ray.hit_count;
+	i = ray.hits;
 	while (--i >= 0)
 	{
 		h = (int)(SH / (ray.info[i].dist * focal));
@@ -88,6 +88,7 @@ void	draw_column_layers(t_cub *cub, int x, t_ray ray, double focal)
 			h = SH;
 		draw_layer(cub, x, h, ray.info[i]);
 	}
+	cub->z_buffer[x] = ray.info[0].dist;
 }
 
 // void	draw_column(t_cub *cub, int x, int h, t_ray ray)

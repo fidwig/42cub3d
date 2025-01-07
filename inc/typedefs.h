@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/09 22:45:52 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/07 20:42:38 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ typedef struct s_info		t_info;
 typedef struct s_camera		t_camera;
 typedef struct s_cub		t_cub;
 typedef enum e_dir			t_dir;
+typedef unsigned int		t_uicol;
 
 # define MAPCHARS "10NSEW "
-
-typedef unsigned int	t_uicol;
 
 enum e_mapchars
 {
@@ -124,7 +123,7 @@ struct s_hit
 	float		light;
 	int			flag;
 	double		x_wall;
-	char		type; //wall '1', close door 'D', open door 'O', etc, special wall?
+	char		type;
 };
 
 struct s_ray
@@ -132,7 +131,6 @@ struct s_ray
 	t_dvec3	dir;
 	t_dvec3	origin;
 	double	length;
-	int		hit_count;
 	t_hit	info;
 };
 
@@ -196,4 +194,4 @@ enum e_key
 
 # endif
 
-#endif // !TYPEDEFS_H
+#endif

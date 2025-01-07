@@ -6,22 +6,30 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/10 15:00:33 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/07 20:50:31 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
 
+static void	init_y_dist_lookup_table(t_cub *cub)
+{
+	int		y;
+	double	dist;
+
+	y = 0;
+	while (++y < SH)
+	{
+		dist = SH / (2.0 * y - SH);
+		cub->y_dist_lookup[y][0] = dist;
+		cub->y_dist_lookup[y][1] = pow((1.0 - (dist / 18)), 2);
+	}
+}
+
 static void	cub_init(t_cub *cub)
 {
 	cub->mlx = mlx_init();
-	if (!cub->mlx)
-		stop_error(1, cub, "Mlx init failed");
-	if (!get_tex_imgs(cub->mlx, &cub->map))
-		stop_error(1, cub, "Openning textures failed");
 	cub->image.img = mlx_new_image(cub->mlx, SW, SH);
-	if (!cub->image.img)
-		stop_error(1, cub, "Image creation failed");
 	cub->image.addr = mlx_get_data_addr(cub->image.img,
 			&cub->image.bpp, &cub->image.len, &cub->image.endian);
 	cub->image.width = SW;
@@ -34,7 +42,11 @@ static void	cub_init(t_cub *cub)
 	cub->win = mlx_new_window(cub->mlx, SW, SH, "cub3d");
 	if (!cub->win)
 		stop_error(1, cub, "Window creation failed");
-	cub->player.spd = 2;
+	cub->player.spd = 3;
+	cub->player.pos = (t_dvec3){3.5, 0, 2.5};
+	cub->player.rot = 0;
+	cub->mouse_lock = MOUSE_LOCK;
+	init_y_dist_lookup_table(cub);
 	if (MOUSE_HIDE)
 		mlx_mouse_hide(cub->mlx, cub->win);
 	init_info(&cub->info);
@@ -43,12 +55,15 @@ static void	cub_init(t_cub *cub)
 static int	update(t_cub *cub)
 {
 	inputs_handler(cub);
-	clear_image_bicolor(&cub->image, cub->map.ceil_col, cub->map.floor_col);
+	render_sky(cub);
+	// clear_image_bicolor(&cub->image, 0xFF000000, cub->map.col_floor);
 	raycasting(cub);
 	draw_minimap(cub);
+	draw_sprites(cub);
 	draw_image(&cub->image, &cub->minimap, 10, 10);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->image.img, 0, 0);
 	update_info(&cub->info);
+	mlx_string_put(cub->mlx, cub->win, 15, 25, 0x00FF00, ft_itoa(cub->info.framerate));
 	return (0);
 }
 

@@ -6,11 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:56:18 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/12 20:01:06 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/10 19:16:25 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub_bonus.h"
+#include "cub.h"
 
 void	clear_image(t_image *image, t_uicol color)
 {
@@ -80,20 +80,12 @@ void	pixel_put(t_image *image, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-	// if (x < 0 || x > image.width || y < 0 || y > image.height)
-	// 	return (0x0);
 unsigned int	pixel_get(t_image image, int x, int y)
 {
 	char	*dst;
 
-	if (x >= image.width)
-		x -= image.width;
-	else if (x < 0)
-		x += image.width;
-	if (y >= image.height)
-		y -= image.height;
-	else if (y < 0)
-		y += image.height;
+	if (x < 0 || x > image.width || y < 0 || y > image.height)
+		return (0x0);
 	dst = image.addr + (y * image.len + x * (image.bpp / 8));
 	return (*(unsigned int *)dst);
 }

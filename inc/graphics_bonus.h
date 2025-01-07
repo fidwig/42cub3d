@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:31:32 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/04 09:31:51 by bazaluga         ###   ########.fr       */
+/*   Updated: 2024/12/12 21:41:59 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ double			clamp(double n, double mini, double maxi);
 void			draw_column(t_cub *cub, int x, int h, t_ray ray);
 void			draw_column_layers(t_cub *cub, int x, t_ray ray, double focal);
 void			raycasting(t_cub *cub);
-void			floorcasting(t_cub *cub);
+void			floorcasting(t_cub *cub, t_ray ray, int x);
+void			render_sky(t_cub *cub);
+void			draw_square(t_image *img, t_vec3 pos, int s, unsigned int color);
+void			draw_sprites(t_cub *cub);
 
 #endif

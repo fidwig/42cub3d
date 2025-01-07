@@ -6,11 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:57:33 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/12 21:04:28 by jsommet          ###   ########.fr       */
+/*   Updated: 2024/12/10 19:16:32 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub_bonus.h"
+#include "cub.h"
 
 t_trgb	utorgb(unsigned int color)
 {
@@ -35,10 +35,6 @@ t_uicol	dim_color(t_uicol col, double light)
 {
 	t_trgb	rgb;
 
-	if (light == 1.0)
-		return (col);
-	if (light == 0.0)
-		return (0x0);
 	rgb = utorgb(col);
 	rgb.r = clamp(rgb.r * light, 0, 255);
 	rgb.g = clamp(rgb.g * light, 0, 255);
