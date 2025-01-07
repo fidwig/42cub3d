@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/06 12:35:49 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/07 13:43:29 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 # define WHITE		0xFFFFFF
 # define DARKRED	0x802020
 # define MOUSE_LOCK 1
-# define MOUSE_HIDE 1
+# define MOUSE_HIDE 0
 # define FOV		100
 
 // COMPATIBILITY

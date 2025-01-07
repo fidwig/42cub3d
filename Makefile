@@ -6,7 +6,7 @@
 #    By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2025/01/06 12:55:59 by bazaluga         ###   ########.fr        #
+#    Updated: 2025/01/07 13:21:48 by bazaluga         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -83,14 +83,14 @@ $(BOBJDIR)/%.o: $(BONUSDIR)/%.c
 
 $(NAMETMP):	$(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
 		@rm -f $(NAMEB)
-		$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME) $(LFLAGS)
 		@touch $(NAMETMP)
 
 $(NAME):	$(NAMETMP)
 
 $(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS) Makefile
 		@rm -f $(NAMETMP)
-		$(CC) $(CFLAGS) $(LFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME)
+		$(CC) $(CFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME) $(LFLAGS)
 		@touch $(NAMEB)
 
 clean:
