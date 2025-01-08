@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/08 14:31:36 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/09 00:31:17 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,31 +65,48 @@ static bool	get_colour(t_cub *cub, char *line, char part)
 	return (true);
 }
 
+static int	infos_handle_line(t_cub *cub, char *line)
+{
+	int	got_tex;
+
+	got_tex = get_texture(cub, line);
+	if (got_tex == 1)
+		return (0);
+	if (!got_tex)
+		return (4);
+	if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
+	{
+		if (!get_colour(cub, (line) + 2, (line)[0]))
+			return (3);
+		return (0);
+	}
+	if (got_tex == -1)
+		return (2);
+	return (0);
+}
+
 int	get_infos(t_cub *cub, int fd, int *infos_count)
 {
 	char	*line;
 	int		got_tex;
+	int		res;
 
 	*infos_count = 0;
 	line = ft_strtrim_free(get_next_line(fd), " \n");
-	while (line && *infos_count < 8)
+	while (line && *infos_count < 9)
 	{
-		got_tex = get_texture(cub, line);
-		if (!got_tex && !empty_line(line))
-			return (close(fd), free(line), 4);
-		else if (got_tex == -1
-			&& (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2)))
+		if (empty_line(line))
 		{
-			if (!get_colour(cub, (line) + 2, (line)[0]))
-				return (close(fd), free(line), 3);
-			(*infos_count)++;
+			free(line);
+			line = ft_strtrim_free(get_next_line(fd), " \n");
+			continue ;
 		}
-		else if (got_tex == -1)
-			return (close(fd), free(line), 2);
-		else if (got_tex)
-			(*infos_count)++;
+		res = infos_handle_line(cub, line);
+		if (res)
+			return (close(fd), free(line), res);
+		(*infos_count)++;
 		free(line);
 		line = ft_strtrim_free(get_next_line(fd), " \n");
 	}
-	return (free(line), !(*infos_count == 8));
+	return (free(line), 0);
 }

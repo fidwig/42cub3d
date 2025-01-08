@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:46:27 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/08 14:37:06 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/09 00:05:45 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static char	**get_name_ptr(t_cub *cub, char *line)
 		return (&cub->map.tex_door.name);
 	if (!ft_strncmp(line, "OD ", 3))
 		return (&cub->map.tex_opendoor.name);
+	if (!ft_strncmp(line, "SK ", 3))
+		return (&cub->map.tex_sky.name);
 	return (NULL);
 }
 

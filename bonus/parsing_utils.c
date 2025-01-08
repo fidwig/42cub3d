@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 22:59:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/04 10:38:09 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/09 00:27:40 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,9 @@ char	*ft_strtrim_free(const char *str, const char *charset)
 	new = ft_strtrim(str, charset);
 	free((char *)str);
 	return (new);
+}
+
+int	check_infos(t_cub *cub)
+{
+
 }

@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/08 23:53:58 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/09 00:57:53 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,12 @@ int	parse_scene(t_cub *cub, char *map_name)
 	int		fd;
 	int		res;
 	int		infos_count;
+	char	*line;//I need to keep the line in case I find start of map in
+				  //get_infos so I can process the map (if all needed infos
+				  //are saved). => check in handle_line if it's a correct
+				  //map line & create a corresponding error code
 
+	line = NULL;
 	if (!check_name(map_name))
 		stop_error(1, cub, "Bad scene file extension");
 	fd = open(map_name, O_RDONLY);
@@ -102,9 +107,10 @@ int	parse_scene(t_cub *cub, char *map_name)
 	res = get_infos(cub, fd, &infos_count);
 	if (res)
 		stop_error(1, cub, err_txt(0, res));
+	res = check_infos(cub);
 	res = get_map(cub, fd);
 	if (res)
-		stop_error(1, cub, err_txt(1, res));
+		stop_error(1, cub, err_txt(2, res));
 	close(fd);
 	if (!check_map(cub->map.raw, &cub->player))
 		stop_error(1, cub, "Incorrect map");
