@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/08 14:34:48 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:32:32 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ typedef struct s_info		t_info;
 typedef struct s_camera		t_camera;
 typedef struct s_cub		t_cub;
 typedef enum e_dir			t_dir;
-
-# define ERRORS_TXT = {"", "Missing texture(s) and/or colour(s)", \
-		"Problem getting textures", "Problem getting floor/ceil colours", \
-		"Unexpected line while getting textures & colours",				\
-		"Problem getting the map"}
 
 # define MAPCHARS "10NSEWDO "
 

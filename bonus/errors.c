@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/08 14:35:47 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 23:50:44 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,28 @@ int	clean_exit_hook(t_cub *cub)
 	return (0);
 }
 
-void	stop_error(int exit_code, t_cub *cub, const char *msg)
+const char	*err_txt(int phase, int err_n)
+{
+	static const char	*infos[] = {"", "Missing texture(s) and/or \
+colour(s)", "Problem getting textures", "Problem getting floor/ceil colours", \
+"Unexpected line while getting textures & colours", "Problem getting the map"};
+	static const char	*getmap[] = {"", "get_map: No initial player position \
+set", "get_map: mem allocation error", "get_map: bad map format: forbidden \
+newlines", "get_map: problem creating raw map"};
+
+	if (phase == 0)
+		return (infos[err_n]);
+	if (phase == 1)
+		return (getmap[err_n]);
+	return (NULL);
+}
+
+int	stop_error(int exit_code, t_cub *cub, const char *msg)
 {
 	ft_putstr_fd("Error\n", STDERR_FILENO);
 	ft_putstr_fd((char *)msg, STDERR_FILENO);
 	ft_putchar_fd('\n', STDERR_FILENO);
-	clean_exit(exit_code, cub);
-}
-
-void	usage_error(void)
-{
-	ft_putstr_fd("usage error: ./cub3D <path_to_map>\n", 2);
+	if (cub)
+		clean_exit(exit_code, cub);
+	return (exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/06 12:50:03 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 23:53:58 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,11 @@ int	parse_scene(t_cub *cub, char *map_name)
 	if (fd == -1)
 		stop_error(1, cub, "Can't open map file");
 	res = get_infos(cub, fd, &infos_count);
-	if (res == 1)
-		stop_error(1, cub, "Missing texture(s) and/or colour(s)");
-	if (res == 2)
-		stop_error(1, cub, "Problem getting textures");
-	if (res == 3)
-		stop_error(1, cub, "Problem getting floor/ceil colours");
-	if (res == 4)
-		stop_error(1, cub, "Unexpected line while getting textures & colours");
-	if (!get_map(cub, fd))
-		stop_error(1, cub, "Problem getting the map");
+	if (res)
+		stop_error(1, cub, err_txt(0, res));
+	res = get_map(cub, fd);
+	if (res)
+		stop_error(1, cub, err_txt(1, res));
 	close(fd);
 	if (!check_map(cub->map.raw, &cub->player))
 		stop_error(1, cub, "Incorrect map");

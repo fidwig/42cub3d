@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/08 14:29:23 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 23:39:41 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int				mlx2_mouse_hide(void *mlx_ptr, void *win_ptr);
 // ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);
 int				clean_exit_hook(t_cub *cub);
-void			usage_error(void);
-void			stop_error(int exit_code, t_cub *cub, const char *msg);
+int				stop_error(int exit_code, t_cub *cub, const char *msg);
+const char		*err_txt(int phase, int err_n);
 
 // HOOKS
 int				key_pressed_hook(int key, t_cub *cub);
@@ -112,7 +112,8 @@ int				is_visible(char c);
 bool			empty_line(char *line);
 char			*ft_strtrim_free(const char *str, const char *charset);
 int				get_infos(t_cub *cub, int fd, int *infos_count);
-bool			get_map(t_cub *cub, int fd);
+int				lst_to_map(t_cub *cub, t_list *lines, int size);
+int				get_map(t_cub *cub, int fd);
 int				parse_scene(t_cub *cub, char *map_name);
 int				get_texture(t_cub *cub, char *line);
 

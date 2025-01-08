@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/08 15:21:41 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:57:10 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,9 @@ int	main(int argc, char **argv)
 	t_cub	cub;
 
 	if (argc != 2)
-		return (usage_error(), 1);
+		return (stop_error(1, NULL, "usage error: ./cub3D <path_to_map>"));
 	cub = (t_cub){0};
-	if (!parse_scene(&cub, argv[1]))
-		stop_error(1, &cub, "Scene parsing");
+	parse_scene(&cub, argv[1]);
 	cub_init(&cub);
 	init_hooks(&cub);
 	mlx_loop(cub.mlx);
