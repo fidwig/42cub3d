@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/07 20:40:32 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:29:23 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@
 
 // COMPATIBILITY
 int				mlx2_destroy_display(void *xvar);
+int				mlx2_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
+int				mlx2_mouse_hide(void *mlx_ptr, void *win_ptr);
 
 // ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);

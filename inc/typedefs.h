@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/07 20:42:38 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:18:57 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ enum e_mapchars
 
 struct s_image
 {
+	char	*name;
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -95,16 +96,12 @@ struct s_map
 	int			width;
 	int			height;
 
-	char		*nor_tex_name;
-	t_image		nor_tex;
-	char		*sou_tex_name;
-	t_image		sou_tex;
-	char		*eas_tex_name;
-	t_image		eas_tex;
-	char		*wes_tex_name;
-	t_image		wes_tex;
-	t_uicol		ceil_col;
-	t_uicol		floor_col;
+	t_image		tex_nor;
+	t_image		tex_sou;
+	t_image		tex_eas;
+	t_image		tex_wes;
+	t_uicol		col_ceil;
+	t_uicol		col_floor;
 };
 
 enum e_dir
@@ -189,7 +186,8 @@ enum e_key
 	XK_a = 0,
 	XK_d = 2,
 	XK_w = 13,
-	XK_s = 1
+	XK_s = 1,
+	XK_l = 37
 };
 
 # endif

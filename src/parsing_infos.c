@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/09 23:35:38 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:10:20 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static bool	get_colour(t_cub *cub, char *line, char part)
 	if (!line)
 		return (false);
 	if (part == 'C')
-		cub->map.ceil_col = rgbtou(rgb);
+		cub->map.col_ceil = rgbtou(rgb);
 	else if (part == 'F')
-		cub->map.floor_col = rgbtou(rgb);
+		cub->map.col_floor = rgbtou(rgb);
 	return (true);
 }
 
@@ -74,13 +74,13 @@ static bool	get_texture(t_cub *cub, char *line)
 	while (line[i] && line[i] == ' ')
 		i++;
 	if (!ft_strncmp(line, "NO ", 3))
-		name = &cub->map.nor_tex_name;
+		name = &cub->map.tex_nor.name;
 	else if (!ft_strncmp(line, "SO ", 3))
-		name = &cub->map.sou_tex_name;
+		name = &cub->map.tex_sou.name;
 	else if (!ft_strncmp(line, "WE ", 3))
-		name = &cub->map.wes_tex_name;
+		name = &cub->map.tex_wes.name;
 	else if (!ft_strncmp(line, "EA ", 3))
-		name = &cub->map.eas_tex_name;
+		name = &cub->map.tex_eas.name;
 	if (*name)
 		return (false);
 	*name = gc_strtrim(&line[i], " \n");

@@ -6,7 +6,7 @@
 #    By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2025/01/07 20:35:03 by bazaluga         ###   ########.fr        #
+#    Updated: 2025/01/08 14:40:37 by bazaluga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ else
 	MLXDIR	:=	mlx_macos
 	LFLAGS	:=	-framework OpenGL -framework AppKit -lm
 	SRCS	:=	mlx_compat_macos.c
-	BSRCS	:=	mlx_compat_macos.c
+	BSRCS	:=	mlx_compat_macos.c mlx_compat_macos2.c
 endif
 
 LIBFTDIR	:=	libft
@@ -33,10 +33,10 @@ MLX			:=	$(MLXDIR)/libmlx.a
 LIBFT		:=	$(LIBFTDIR)/libft.a
 OBJDIR		:=	.obj
 HEADERS		:=	cub.h graphics.h typedefs.h
-SRCS		+=	angles.c colors_utils.c errors.c graphics.c graphics_utils.c	\
-				hooks.c image_utils.c inputs.c	lst_get_maxstr.c main.c			\
-				minimap.c parsing.c parsing_infos.c parsing_map.c				\
-				parsing_utils.c raycasting.c runtime_info.c						\
+SRCS		+=	angles.c colors_utils.c errors.c graphics.c	hooks.c				\
+				image_utils.c inputs.c lst_get_maxstr.c main.c minimap.c		\
+				parsing.c parsing_infos.c parsing_map.c parsing_utils.c			\
+				raycasting.c runtime_info.c
 OBJS		:=	$(SRCS:.c=.o)
 HEADERS		:=	$(addprefix $(INCDIR)/, $(HEADERS))
 SRCS		:=	$(addprefix $(SRCDIR)/, $(SRCS))
@@ -47,12 +47,12 @@ DEPS		:=	$(OBJS:.o=.d)
 
 BOBJDIR		:=	.bobj
 BONUSDIR	:=	bonus
-BSRCS		:=	act_ray.c angles.c colors_utils.c errors.c floorcasting.c		\
+BSRCS		+=	act_ray.c angles.c colors_utils.c errors.c floorcasting.c		\
 				graphics.c graphics_utils.c hooks.c image_utils.c inputs.c		\
 				lst_get_maxstr.c main.c main_utils.c minimap.c parsing.c		\
 				parsing_infos.c parsing_map.c parsing_tex.c parsing_utils.c		\
 				raycasting.c raycasting_utils.c	runtime_info.c sky.c sprites.c	\
-				minimap.c  wall_id.c
+				wall_id.c
 BOBJS		:=	$(BSRCS:%.c=%.o)
 BSRCS		:=	$(addprefix $(BONUSDIR)/, $(BSRCS))
 BOBJS		:=	$(addprefix $(BOBJDIR)/, $(BOBJS))
@@ -60,7 +60,7 @@ BDEPS		:=	$(BOBJS:.o=.d)
 
 RM			:=	rm -rf
 CC			:=	cc
-CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -O2 -ffast-math -fno-builtin
+CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -O2 -ffast-math -fno-builtin -g3
 
 all: $(NAME)
 
@@ -86,14 +86,14 @@ $(BOBJDIR)/%.o: $(BONUSDIR)/%.c
 
 $(NAMETMP):	$(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
 		@rm -f $(NAMEB)
-		$(CC) $(CFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME) $(LFLAGS)
+		$(CC) $(CFLAGS) $(MLX) $(LIBFT) $(OBJS) -o $(NAME) $(LFLAGS)
 		@touch $(NAMETMP)
 
 $(NAME):	$(NAMETMP)
 
 $(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS)
 		@rm -f $(NAMETMP)
-		$(CC) $(CFLAGS) $(BOBJS) $(MLX) $(LIBFT) -o $(NAME) $(LFLAGS)
+		$(CC) $(CFLAGS) $(MLX) $(LIBFT) $(BOBJS) -o $(NAME) $(LFLAGS)
 		@touch $(NAMEB)
 
 clean:

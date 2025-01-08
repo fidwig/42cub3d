@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/06 14:40:36 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:35:47 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ static void	clean_imgs_tex(t_cub *cub)
 {
 	if (cub->image.img)
 		mlx_destroy_image(cub->mlx, cub->image.img);
-	if (cub->map.nor_tex.img)
-		mlx_destroy_image(cub->mlx, cub->map.nor_tex.img);
-	if (cub->map.sou_tex.img)
-		mlx_destroy_image(cub->mlx, cub->map.sou_tex.img);
-	if (cub->map.eas_tex.img)
-		mlx_destroy_image(cub->mlx, cub->map.eas_tex.img);
-	if (cub->map.wes_tex.img)
-		mlx_destroy_image(cub->mlx, cub->map.wes_tex.img);
-	if (cub->map.door_tex.img)
-		mlx_destroy_image(cub->mlx, cub->map.door_tex.img);
-	if (cub->map.opendoor_tex.img)
-		mlx_destroy_image(cub->mlx, cub->map.opendoor_tex.img);
-	if (cub->map.ceil_tex.img)
-		mlx_destroy_image(cub->mlx, cub->map.ceil_tex.img);
-	if (cub->map.floor_tex.img)
-		mlx_destroy_image(cub->mlx, cub->map.floor_tex.img);
+	if (cub->map.tex_nor.img)
+		mlx_destroy_image(cub->mlx, cub->map.tex_nor.img);
+	if (cub->map.tex_sou.img)
+		mlx_destroy_image(cub->mlx, cub->map.tex_sou.img);
+	if (cub->map.tex_eas.img)
+		mlx_destroy_image(cub->mlx, cub->map.tex_eas.img);
+	if (cub->map.tex_wes.img)
+		mlx_destroy_image(cub->mlx, cub->map.tex_wes.img);
+	if (cub->map.tex_door.img)
+		mlx_destroy_image(cub->mlx, cub->map.tex_door.img);
+	if (cub->map.tex_opendoor.img)
+		mlx_destroy_image(cub->mlx, cub->map.tex_opendoor.img);
+	if (cub->map.tex_ceil.img)
+		mlx_destroy_image(cub->mlx, cub->map.tex_ceil.img);
+	if (cub->map.tex_floor.img)
+		mlx_destroy_image(cub->mlx, cub->map.tex_floor.img);
 	if (cub->minimap.img)
 		mlx_destroy_image(cub->mlx, cub->minimap.img);
 }

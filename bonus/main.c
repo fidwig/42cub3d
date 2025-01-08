@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/07 20:50:31 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:21:41 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	init_y_dist_lookup_table(t_cub *cub)
 static void	cub_init(t_cub *cub)
 {
 	cub->mlx = mlx_init();
+	if (!get_tex_imgs(cub->mlx, &cub->map))
+		stop_error(1, cub, "Getting textures failed");
 	cub->image.img = mlx_new_image(cub->mlx, SW, SH);
 	cub->image.addr = mlx_get_data_addr(cub->image.img,
 			&cub->image.bpp, &cub->image.len, &cub->image.endian);
@@ -48,18 +50,19 @@ static void	cub_init(t_cub *cub)
 	cub->mouse_lock = MOUSE_LOCK;
 	init_y_dist_lookup_table(cub);
 	if (MOUSE_HIDE)
-		mlx_mouse_hide(cub->mlx, cub->win);
+		mlx2_mouse_hide(cub->mlx, cub->win);
 	init_info(&cub->info);
 }
 
 static int	update(t_cub *cub)
 {
 	inputs_handler(cub);
-	render_sky(cub);
-	// clear_image_bicolor(&cub->image, 0xFF000000, cub->map.col_floor);
+	if (cub->map.tex_sky.name)
+		render_sky(cub);
+	clear_image_bicolor(&cub->image, cub->map.col_ceil, cub->map.col_floor);
 	raycasting(cub);
 	draw_minimap(cub);
-	draw_sprites(cub);
+	/* draw_sprites(cub); */
 	draw_image(&cub->image, &cub->minimap, 10, 10);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->image.img, 0, 0);
 	update_info(&cub->info);

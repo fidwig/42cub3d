@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/06 14:25:45 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:31:36 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static bool	get_colour(t_cub *cub, char *line, char part)
 	if (!line)
 		return (false);
 	if (part == 'C')
-		cub->map.ceil_col = rgbtou(rgb);
+		cub->map.col_ceil = rgbtou(rgb);
 	else if (part == 'F')
-		cub->map.floor_col = rgbtou(rgb);
+		cub->map.col_floor = rgbtou(rgb);
 	else
 		return (false);
 	return (true);

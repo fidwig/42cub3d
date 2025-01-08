@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/07 20:46:56 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:34:48 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,18 +110,18 @@ struct s_map
 	t_uicol		sou_col;
 	t_uicol		eas_col;
 	t_uicol		wes_col;
-	t_uicol		ceil_col;
-	t_uicol		floor_col;
-	t_image		nor_tex;
-	t_image		sou_tex;
-	t_image		eas_tex;
-	t_image		wes_tex;
-	t_image		ceil_tex;
-	t_image		floor_tex;
-	t_image		door_tex;
-	t_image		opendoor_tex;
-	t_image		torch_tex;
-	t_image		sky;
+	t_uicol		col_ceil;
+	t_uicol		col_floor;
+	t_image		tex_nor;
+	t_image		tex_sou;
+	t_image		tex_eas;
+	t_image		tex_wes;
+	t_image		tex_ceil;
+	t_image		tex_floor;
+	t_image		tex_door;
+	t_image		tex_opendoor;
+	t_image		tex_torch;
+	t_image		tex_sky;
 };
 
 enum e_dir
@@ -206,6 +206,7 @@ struct s_cub
 enum e_key
 {
 	XK_Escape = 53,
+	XK_space = 49,
 	XK_Left = 123,
 	XK_Right = 124,
 	XK_Up = 126,
@@ -213,7 +214,8 @@ enum e_key
 	XK_a = 0,
 	XK_d = 2,
 	XK_w = 13,
-	XK_s = 1
+	XK_s = 1,
+	XK_l = 37
 };
 
 # endif

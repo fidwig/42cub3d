@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 20:55:16 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/08 14:26:43 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ void	inputs_handler(t_cub *cub)
 		rotate(cub, (float) cub->mouse_movement * 0.05);
 		cub->mouse_movement = 0;
 		if (cub->mouse_lock)
-			mlx_mouse_move(cub->mlx, cub->win, SW / 2, SH / 2);
+			mlx2_mouse_move(cub->mlx, cub->win, SW / 2, SH / 2);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/10 00:09:44 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:09:30 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 static bool	get_tex_imgs(void *mlx, t_map *map)
 {
-	map->nor_tex.img = mlx_xpm_file_to_image(mlx, map->nor_tex_name,
-			&map->nor_tex.width, &map->nor_tex.height);
-	if (!map->nor_tex.img)
+	map->tex_nor.img = mlx_xpm_file_to_image(mlx, map->tex_nor.name,
+			&map->tex_nor.width, &map->tex_nor.height);
+	if (!map->tex_nor.img)
 		return (false);
-	map->nor_tex.addr = mlx_get_data_addr(map->nor_tex.img,
-			&map->nor_tex.bpp, &map->nor_tex.len, &map->nor_tex.endian);
-	map->sou_tex.img = mlx_xpm_file_to_image(mlx, map->sou_tex_name,
-			&map->sou_tex.width, &map->sou_tex.height);
-	if (!map->sou_tex.img)
+	map->tex_nor.addr = mlx_get_data_addr(map->tex_nor.img,
+			&map->tex_nor.bpp, &map->tex_nor.len, &map->tex_nor.endian);
+	map->tex_sou.img = mlx_xpm_file_to_image(mlx, map->tex_sou.name,
+			&map->tex_sou.width, &map->tex_sou.height);
+	if (!map->tex_sou.img)
 		return (false);
-	map->sou_tex.addr = mlx_get_data_addr(map->sou_tex.img,
-			&map->sou_tex.bpp, &map->sou_tex.len, &map->sou_tex.endian);
-	map->eas_tex.img = mlx_xpm_file_to_image(mlx, map->eas_tex_name,
-			&map->eas_tex.width, &map->eas_tex.height);
-	if (!map->eas_tex.img)
+	map->tex_sou.addr = mlx_get_data_addr(map->tex_sou.img,
+			&map->tex_sou.bpp, &map->tex_sou.len, &map->tex_sou.endian);
+	map->tex_eas.img = mlx_xpm_file_to_image(mlx, map->tex_eas.name,
+			&map->tex_eas.width, &map->tex_eas.height);
+	if (!map->tex_eas.img)
 		return (false);
-	map->eas_tex.addr = mlx_get_data_addr(map->eas_tex.img,
-			&map->eas_tex.bpp, &map->eas_tex.len, &map->eas_tex.endian);
-	map->wes_tex.img = mlx_xpm_file_to_image(mlx, map->wes_tex_name,
-			&map->wes_tex.width, &map->wes_tex.height);
-	if (!map->wes_tex.img)
+	map->tex_eas.addr = mlx_get_data_addr(map->tex_eas.img,
+			&map->tex_eas.bpp, &map->tex_eas.len, &map->tex_eas.endian);
+	map->tex_wes.img = mlx_xpm_file_to_image(mlx, map->tex_wes.name,
+			&map->tex_wes.width, &map->tex_wes.height);
+	if (!map->tex_wes.img)
 		return (false);
-	map->wes_tex.addr = mlx_get_data_addr(map->wes_tex.img,
-			&map->wes_tex.bpp, &map->wes_tex.len, &map->wes_tex.endian);
+	map->tex_wes.addr = mlx_get_data_addr(map->tex_wes.img,
+			&map->tex_wes.bpp, &map->tex_wes.len, &map->tex_wes.endian);
 	return (true);
 }
 
@@ -70,7 +70,7 @@ static void	cub_init(t_cub *cub)
 static int	update(t_cub *cub)
 {
 	inputs_handler(cub);
-	clear_image_bicolor(&cub->image, cub->map.ceil_col, cub->map.floor_col);
+	clear_image_bicolor(&cub->image, cub->map.col_ceil, cub->map.col_floor);
 	raycasting(cub);
 	draw_minimap(cub);
 	draw_image(&cub->image, &cub->minimap, 10, 10);

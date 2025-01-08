@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 20:02:54 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/08 14:36:12 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ t_image	get_tex(t_cub *cub, char type, t_dir facing)
 	if (type == '1')
 		return (get_wall_tex(cub, facing));
 	else if (type == 'D')
-		return (cub->map.door_tex);
+		return (cub->map.tex_door);
 	else if (type == 'O')
-		return (cub->map.opendoor_tex);
+		return (cub->map.tex_opendoor);
 	else
 		return (get_wall_tex(cub, facing));
 }
