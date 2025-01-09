@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/09 00:57:53 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:18:42 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	parse_scene(t_cub *cub, char *map_name)
 {
 	int		fd;
 	int		res;
-	int		infos_count;
+	/* int		infos_count; */
 	char	*line;//I need to keep the line in case I find start of map in
 				  //get_infos so I can process the map (if all needed infos
 				  //are saved). => check in handle_line if it's a correct
@@ -104,11 +104,13 @@ int	parse_scene(t_cub *cub, char *map_name)
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		stop_error(1, cub, "Can't open map file");
-	res = get_infos(cub, fd, &infos_count);
-	if (res)
+	res = get_infos(cub, fd, &line);
+	if (res && res < 5)
 		stop_error(1, cub, err_txt(0, res));
+	else if (!res)
+		line = NULL;
 	res = check_infos(cub);
-	res = get_map(cub, fd);
+	res = get_map(cub, fd);//add line to begin with the first line if get_infos reached it
 	if (res)
 		stop_error(1, cub, err_txt(2, res));
 	close(fd);

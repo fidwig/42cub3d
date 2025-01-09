@@ -6,11 +6,12 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/09 00:31:17 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:12:43 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
+#include "typedefs_bonus.h"
 #include <fcntl.h>
 
 static void	get_next_num(char **line, bool last)
@@ -70,43 +71,56 @@ static int	infos_handle_line(t_cub *cub, char *line)
 	int	got_tex;
 
 	got_tex = get_texture(cub, line);
-	if (got_tex == 1)
-		return (0);
+
 	if (!got_tex)
-		return (4);
+		return (0);
+	if (got_tex > 0 && got_tex <= 3)
+		return (got_tex);
+	/* if (got_tex == 1) */
+	/* 	return (3); */
+	/* if (got_tex == 2) */
+	/* 	return (4); */
+	/* if (got_tex == 3) */
+	/* 	return (5); */
 	if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
 	{
 		if (!get_colour(cub, (line) + 2, (line)[0]))
-			return (3);
+			return (4);
 		return (0);
 	}
-	if (got_tex == -1)
-		return (2);
-	return (0);
+	while (*line && *line != '\n')
+	{
+		if (!ft_strchr(MAPCHARS, *line))
+			return (1);
+		line++;
+	}
+	return (5);
 }
 
-int	get_infos(t_cub *cub, int fd, int *infos_count)
+int	get_infos(t_cub *cub, int fd, char **line)
 {
-	char	*line;
+	int		infos_count;
 	int		got_tex;
 	int		res;
 
-	*infos_count = 0;
-	line = ft_strtrim_free(get_next_line(fd), " \n");
-	while (line && *infos_count < 9)
+	infos_count = 0;
+	*line = ft_strtrim_free(get_next_line(fd), " \n");
+	while (*line && infos_count < 9)
 	{
-		if (empty_line(line))
+		if (empty_line(*line))
 		{
-			free(line);
-			line = ft_strtrim_free(get_next_line(fd), " \n");
+			free(*line);
+			*line = ft_strtrim_free(get_next_line(fd), " \n");
 			continue ;
 		}
-		res = infos_handle_line(cub, line);
-		if (res)
-			return (close(fd), free(line), res);
-		(*infos_count)++;
-		free(line);
-		line = ft_strtrim_free(get_next_line(fd), " \n");
+		res = infos_handle_line(cub, *line);
+		if (res && res < 5)
+			return (close(fd), free(*line), res);
+		else if (res && res == 5)
+			return (res);
+		infos_count++;
+		free(*line);
+		*line = ft_strtrim_free(get_next_line(fd), " \n");
 	}
-	return (free(line), 0);
+	return (free(*line), 0);
 }
