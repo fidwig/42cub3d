@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/09 14:10:52 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:56:38 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,30 @@ int	clean_exit_hook(t_cub *cub)
 
 const char	*err_txt(int phase, int err_n)
 {
-/* 	static const char	*infos[] = {"", "Problem getting textures", "Problem \ */
-/* getting floor/ceil colours", "Unexpected line while getting textures & colours", "Duplicate texture or colour", "Unable to open texture file"}; */
 	static const char	*infos[] = {"",
 		"Unexpected line while getting textures & colours",
 		"Duplicate texture or colour",
 		"Unable to open texture file",
 		"Problem getting floor/ceil colours"};
-	static const char	*checkinfos[] = {"", "Missing texture(s) and/or \
-colour(s)"};
+	static const char	*checkinfos[] = {"",
+		"Missing wall texture",
+		"Duplicate ceil: found colour + texture",
+		"Duplicate floor: found colour + texture",
+		"Missing ceil or sky texture/colour",
+		"Missing floor texture/colour",
+		"Use of sky & ceil textures at the same time forbidden",
+		"Door texture set but no open door",
+		"Open door texture set but no door"};
 	static const char	*getmap[] = {"", "get_map: No initial player position \
 set", "get_map: mem allocation error", "get_map: bad map format: forbidden \
 newlines", "get_map: problem creating raw map"};
 
-	if ((unsigned long)err_n < sizeof(infos))
-	{
-		if (phase == 0)
-			return (infos[err_n]);
-		if (phase == 3)
-			return(checkinfos[err_n]);
-		if (phase == 2)
-			return (getmap[err_n]);
-	}
+	if (phase == 0 && (unsigned long)err_n < sizeof(infos))
+		return (infos[err_n]);
+	if (phase == 1 && (unsigned long)err_n < sizeof(checkinfos))
+		return (checkinfos[err_n]);
+	if (phase == 2 && (unsigned long)err_n < sizeof(getmap))
+		return (getmap[err_n]);
 	return (NULL);
 }
 

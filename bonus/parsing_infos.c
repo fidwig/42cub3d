@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/09 14:53:56 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:43:49 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,43 +42,28 @@ static bool	get_colour(t_cub *cub, char *line, char part)
 	t_trgb			rgb;
 	unsigned char	*ptr;
 
+	if ((part == 'C' && cub->map.ceil_set)
+		|| (part == 'F' && cub->map.floor_set))
+		return (false);
 	rgb = (t_trgb){0};
 	ptr = &rgb.r;
-	while (ptr >= &rgb.b) //TEST THIS BC I DID IT VITEUF
+	while (ptr >= &rgb.b)
 	{
 		if (!get_colour_component(&line, ptr))
 			return (false);
-		get_next_num(&line, false);
+		get_next_num(&line, (ptr == &rgb.b));
 		if (!line)
 			return (false);
 		ptr -= sizeof(unsigned char);
 	}
-	/* if (!get_colour_component(&line, &rgb.r)) */
-	/* 	return (false); */
-	/* get_next_num(&line, false); */
-	/* if (!line) */
-	/* 	return (false); */
-	/* if (!get_colour_component(&line, &rgb.g)) */
-	/* 	return (false); */
-	/* get_next_num(&line, false); */
-	/* if (!line) */
-	/* 	return (false); */
-	/* if (!get_colour_component(&line, &rgb.b)) */
-	/* 	return (false); */
-	/* get_next_num(&line, true); */
-	/* if (!line) */
-	/* 	return (false); */
-	//check if correct condition (missing parenthesis to win a line)
-	if ((part == 'C' && cub->map.ceil_set) || part == 'F' && cub->map.floor_set)
-		return (false);
 	if (part == 'C')
 	{
-		cub->map.col_ceil = rgbtou(rgb);
-		cub->map.ceil_set = true;
+		cub->map.ceil_set = (cub->map.col_ceil = rgbtou(rgb));
+		/* cub->map.ceil_set = true; */
 		return (true);
 	}
-	cub->map.col_floor = rgbtou(rgb);
-	cub->map.floor_set = true;
+	cub->map.floor_set = (cub->map.col_floor = rgbtou(rgb));
+	 /* = true; */
 	return (true);
 }
 
@@ -90,7 +75,7 @@ static int	infos_handle_line(t_cub *cub, char *line)
 
 	if (!got_tex)
 		return (0);
-	if (got_tex > 0 && got_tex <= 3)
+	if (got_tex > 1 && got_tex <= 3)
 		return (got_tex);
 	/* if (got_tex == 1) */
 	/* 	return (3); */
@@ -116,7 +101,6 @@ static int	infos_handle_line(t_cub *cub, char *line)
 int	get_infos(t_cub *cub, int fd, char **line)
 {
 	int		infos_count;
-	int		got_tex;
 	int		res;
 
 	infos_count = 0;
