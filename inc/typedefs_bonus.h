@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/08 22:32:32 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:56:25 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,10 @@ struct s_map
 	t_image		tex_floor;
 	t_image		tex_door;
 	t_image		tex_opendoor;
-	t_image		tex_torch;
 	t_image		tex_sky;
+	bool		ceil_set;
+	bool		floor_set;
+	bool		sky_set;
 };
 
 enum e_dir

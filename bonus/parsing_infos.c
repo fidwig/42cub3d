@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/09 14:12:43 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:53:56 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,46 @@ static bool	get_colour_component(char **line, unsigned char *c)
 
 static bool	get_colour(t_cub *cub, char *line, char part)
 {
-	t_trgb		rgb;
+	t_trgb			rgb;
+	unsigned char	*ptr;
 
 	rgb = (t_trgb){0};
-	if (!get_colour_component(&line, &rgb.r))
-		return (false);
-	get_next_num(&line, false);
-	if (!line)
-		return (false);
-	if (!get_colour_component(&line, &rgb.g))
-		return (false);
-	get_next_num(&line, false);
-	if (!line)
-		return (false);
-	if (!get_colour_component(&line, &rgb.b))
-		return (false);
-	get_next_num(&line, true);
-	if (!line)
+	ptr = &rgb.r;
+	while (ptr >= &rgb.b) //TEST THIS BC I DID IT VITEUF
+	{
+		if (!get_colour_component(&line, ptr))
+			return (false);
+		get_next_num(&line, false);
+		if (!line)
+			return (false);
+		ptr -= sizeof(unsigned char);
+	}
+	/* if (!get_colour_component(&line, &rgb.r)) */
+	/* 	return (false); */
+	/* get_next_num(&line, false); */
+	/* if (!line) */
+	/* 	return (false); */
+	/* if (!get_colour_component(&line, &rgb.g)) */
+	/* 	return (false); */
+	/* get_next_num(&line, false); */
+	/* if (!line) */
+	/* 	return (false); */
+	/* if (!get_colour_component(&line, &rgb.b)) */
+	/* 	return (false); */
+	/* get_next_num(&line, true); */
+	/* if (!line) */
+	/* 	return (false); */
+	//check if correct condition (missing parenthesis to win a line)
+	if ((part == 'C' && cub->map.ceil_set) || part == 'F' && cub->map.floor_set)
 		return (false);
 	if (part == 'C')
+	{
 		cub->map.col_ceil = rgbtou(rgb);
-	else if (part == 'F')
-		cub->map.col_floor = rgbtou(rgb);
-	else
-		return (false);
+		cub->map.ceil_set = true;
+		return (true);
+	}
+	cub->map.col_floor = rgbtou(rgb);
+	cub->map.floor_set = true;
 	return (true);
 }
 
