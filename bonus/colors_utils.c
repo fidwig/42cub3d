@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   colors_utils.c                                     :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:57:33 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/12 21:04:28 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/11 00:01:01 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub_bonus.h"
 
@@ -63,8 +63,8 @@ t_uicol	apply_light(t_uicol col, t_uicol tint, double light)
 		return (0x0);
 	rgb = utorgb(col);
 	rtint = invert_rgb(utorgb(tint));
-	rgb.r = clamp(rgb.r * light - rtint.r * light, 0, 255);
-	rgb.g = clamp(rgb.g * light - rtint.g * light, 0, 255);
-	rgb.b = clamp(rgb.b * light - rtint.b * light, 0, 255);
+	rgb.r = clamp(rgb.r * light - rtint.r * light * 0.1, 0, 255);
+	rgb.g = clamp(rgb.g * light - rtint.g * light * 0.1, 0, 255);
+	rgb.b = clamp(rgb.b * light - rtint.b * light * 0.1, 0, 255);
 	return (rgbtou(rgb));
 }

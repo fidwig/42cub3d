@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   floorcasting.c                                     :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:14:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 20:02:54 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/11 00:24:40 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub_bonus.h"
 
@@ -56,17 +56,20 @@ void	floorcasting(t_cub *cub, t_ray ray, int x)
 		fc.w = cub->y_dist_lookup[y][0] / fc.info.dist;
 		fc.cfloor.x = fc.w * fc.sfloor.x + (1.0 - fc.w) * ray.origin.x;
 		fc.cfloor.y = fc.w * fc.sfloor.y + (1.0 - fc.w) * ray.origin.z;
-		
-		double light = LIGHT_STRENGTH / (0.3 + dist(fc.cfloor, (t_dvec3){3.2, 4.5, 0}));
-		if(cub->y_dist_lookup[y][1] > light)
-			light = cub->y_dist_lookup[y][1];
-		
+
+		double d = dist(fc.cfloor, (t_dvec3){3.2, 4.5, 0.2});
+		double light = cub->y_dist_lookup[y][1];
+		if (d < LIGHT_RANGE)
+		{
+			light = LIGHT_STRENGTH / (0.3 + d);
+			if(cub->y_dist_lookup[y][1] > light)
+				light = cub->y_dist_lookup[y][1];
+		}
 		texcoord.x = (int)(fc.cfloor.x * tex.width) % tex.width;
 		texcoord.y = (int)(fc.cfloor.y * tex.height) % tex.height;
 		pixel_put(&cub->image, x + cub->headbob.x, y + cub->headbob.y,
 			dim_color(pixel_get(tex, texcoord.x, texcoord.y),
 				light));
-				// cub->y_dist_lookup[y][1]));
 		y++;
 	}
 }

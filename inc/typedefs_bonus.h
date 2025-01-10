@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   typedefs_bonus.h                                   :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/12/13 20:02:54 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/10 23:57:01 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef TYPEDEFS_BONUS_H
 # define TYPEDEFS_BONUS_H
@@ -34,8 +34,9 @@ typedef struct s_player		t_player;
 typedef struct s_map		t_map;
 typedef struct s_info		t_info;
 typedef struct s_camera		t_camera;
-typedef struct s_cub		t_cub;
 typedef struct s_fcdat		t_fcdat;
+typedef struct s_sprite		t_sprite;
+typedef struct s_cub		t_cub;
 typedef enum e_dir			t_dir;
 
 # define MAPCHARS "10NSEWDO "
@@ -189,6 +190,15 @@ struct s_camera
 	t_dvec3	plane;
 };
 
+// t_uicol	light_tint;
+// double	light_intensity;
+struct s_sprite
+{
+	t_dvec3	pos;
+	t_image	tex;
+	bool	light;
+};
+
 struct s_cub
 {
 	void		*mlx;
@@ -205,6 +215,9 @@ struct s_cub
 	t_player	player;
 	t_map		map;
 	t_image		minimap;
+
+	t_sprite	*sprites;
+	int			sprite_count;
 
 	t_image		notex;
 	t_info		info;
