@@ -39,7 +39,9 @@ void	move(t_cub *cub, int x, int y)
 	cub->player.upos.y = (cub->map.height / 2 - floor(cub->player.pos.z))
 		/ (cub->map.height / 2);
 	if (x == 0 && y == 0)
-		return ;
+		return (cub->headbob = (t_dvec3){0}, (void)0);
+	cub->headbob.y = fabs(sin(cub->info.frame_count / 10.0)) * -HB_STRENGTH;
+	cub->headbob.x = cos(cub->info.frame_count / 10.0) * (HB_STRENGTH / 2);
 	mangle = wrap_angle(cub->player.rot + atan2(x, y));
 	move.x = cos(mangle) * cub->player.spd * (cub->info.delta / 1000.0);
 	move.z = sin(mangle) * cub->player.spd * (cub->info.delta / 1000.0);

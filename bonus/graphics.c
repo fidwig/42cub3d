@@ -61,6 +61,16 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 		texcoord.x = tex.width - texcoord.x - 1;
 	texcoord.z = -1;
 	j = SH / 2 - h / 2 + 1;
+
+	/*FC TEST*/
+	t_fcdat fc;
+	fc.info = info;
+	init_fcdat(&fc);
+	fc.w = cub->y_dist_lookup[(int)clamp((SH + h) / 2, 0, SH - 1)][0] / fc.info.dist;
+	fc.cfloor.x = fc.w * fc.sfloor.x + (1.0 - fc.w) * cub->player.pos.x;
+	fc.cfloor.y = fc.w * fc.sfloor.y + (1.0 - fc.w) * cub->player.pos.z;
+	/*FC TEST*/
+	
 	if (j < 0)
 		j = -1;
 	while (++j < (SH / 2 + h / 2))
@@ -68,10 +78,19 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 		if (j > SH)
 			break ;
 		texcoord.y = (int)(tex.height * ((j - (SH / 2 - h / 2)) % h) / h);
+
+		/*FC TEST*/
+		double d = dist(fc.cfloor, (t_dvec3){3.2, 4.5, 0});
+		d = sqrt(pow(d, 2) + pow(1 - (double)(j - (SH / 2 - h / 2)) / h, 2));
+		double light2 = LIGHT_STRENGTH / (0.3 + d);
+		if(light2 > light)
+			light = light2;
+		/*FC TEST*/
+
 		if (texcoord.y != texcoord.z)
 			col = dim_color(pixel_get(tex, texcoord.x, texcoord.y), light);
 		texcoord.z = texcoord.y;
-		pixel_put(&cub->image, x, j, col);
+		pixel_put(&cub->image, x + cub->headbob.x, j + cub->headbob.y, col);
 	}
 }
 
@@ -80,15 +99,17 @@ void	draw_column_layers(t_cub *cub, int x, t_ray ray, double focal)
 	int	h;
 	int	i;
 
+	cub->z_buffer[x] = ray.info[ray.hits - 1].dist;
 	i = ray.hits;
 	while (--i >= 0)
 	{
+		if (ray.info[i].type == 'O' && (ray.info[i].x_wall < 0.125 || ray.info[i].x_wall > 0.875))
+			cub->z_buffer[x] = ray.info[i].dist;
 		h = (int)(SH / (ray.info[i].dist * focal));
 		if (h < 0)
 			h = SH;
 		draw_layer(cub, x, h, ray.info[i]);
 	}
-	cub->z_buffer[x] = ray.info[0].dist;
 }
 
 // void	draw_column(t_cub *cub, int x, int h, t_ray ray)

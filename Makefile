@@ -56,7 +56,7 @@ BDEPS		:=	$(BOBJS:.o=.d)
 
 RM			:=	rm -rf
 CC			:=	cc
-CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -O2 -ffast-math -fno-builtin
+CFLAGS		:=	-Wall -Werror -Wextra -I$(INCDIR) -I$(MLXDIR) -I$(LIBFTDIR) -O2 -ffast-math -fno-builtin -g3
 
 all: $(NAME)
 

@@ -38,7 +38,7 @@ void	render_sky(t_cub *cub)
 			if (texcoord.x > tex.width)
 				texcoord.x -= tex.width;
 			texcoord.y = (1 - scr.y / (distortion * SKY_HEIGHT)) * tex.height;
-			pixel_put(&cub->image, scr.x, SKY_HEIGHT - scr.y,
+			pixel_put(&cub->image, scr.x + cub->headbob.x, SKY_HEIGHT - scr.y + cub->headbob.y,
 				pixel_get(tex, texcoord.x, texcoord.y));
 		}
 	}

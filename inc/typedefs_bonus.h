@@ -35,11 +35,13 @@ typedef struct s_map		t_map;
 typedef struct s_info		t_info;
 typedef struct s_camera		t_camera;
 typedef struct s_cub		t_cub;
+typedef struct s_fcdat		t_fcdat;
 typedef enum e_dir			t_dir;
 
 # define MAPCHARS "10NSEWDO "
 
 typedef unsigned int	t_uicol;
+
 
 enum e_mapchars
 {
@@ -140,6 +142,15 @@ struct s_hit
 	char		type;
 };
 
+struct s_fcdat
+{
+	t_dvec3	sfloor;
+	t_dvec3	cfloor;
+	t_hit	info;
+	double	w;
+
+};
+
 struct s_ray
 {
 	t_dvec3	dir;
@@ -190,6 +201,7 @@ struct s_cub
 	double		y_dist_lookup[SH][2];
 	double		z_buffer[SW];
 
+	t_dvec3		headbob;
 	t_player	player;
 	t_map		map;
 	t_image		minimap;

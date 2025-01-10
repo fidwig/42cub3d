@@ -59,7 +59,7 @@
 // COMPATIBILITY
 int	mlx2_destroy_display(void *xvar);
 
-# define FOV		100
+# define FOV		90
 
 // ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);

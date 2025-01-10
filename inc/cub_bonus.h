@@ -56,13 +56,17 @@
 # define BLACK		0x000000
 # define WHITE		0xFFFFFF
 # define DARKRED	0x802020
-# define MOUSE_LOCK 0
-# define MOUSE_HIDE 0
+# define MOUSE_LOCK	0
+# define MOUSE_HIDE	0
 
 // COMPATIBILITY
 int				mlx2_destroy_display(void *xvar);
 
-# define FOV		100
+# define FOV			90
+# define HB_STRENGTH	5
+# define LIGHT_STRENGTH	5
+# define LIGHT_TINT	0x0000FF
+// # define LIGHT_TINT	0xffbc90
 
 // ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);
@@ -99,6 +103,10 @@ t_ray			cast_ray(t_dvec3 origin, t_dvec3 dir, t_map map);
 void			set_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
 void			add_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
 
+
+double          dist(t_dvec3 a, t_dvec3 b);
+
+void            init_fcdat(t_fcdat *fc);
 // ACTIONS
 void			act_ray(t_cub *cub);
 
