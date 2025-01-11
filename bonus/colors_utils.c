@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:57:33 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/11 00:01:01 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/11 20:35:30 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -47,24 +47,27 @@ t_uicol	dim_color(t_uicol col, double light)
 	if (light == 0.0)
 		return (0x0);
 	rgb = utorgb(col);
-	tint = invert_rgb(utorgb(LIGHT_TINT));
-	rgb.r = clamp(rgb.r * light - tint.r * light * 0.1, 0, 255);
-	rgb.b = clamp(rgb.b * light - tint.b * light * 0.1, 0, 255);
-	rgb.g = clamp(rgb.g * light - tint.g * light * 0.1, 0, 255);
+	tint = utorgb(LIGHT_TINT);
+	rgb.r = clamp(((rgb.r * tint.r) / 255) * light, 0, 255);
+	rgb.g = clamp(((rgb.g * tint.g) / 255) * light, 0, 255);
+	rgb.b = clamp(((rgb.b * tint.b) / 255) * light, 0, 255);
 	return (rgbtou(rgb));
 }
+// rgb.r = clamp(rgb.r * light * 0.7 + tint.r * light * 0.3 - rtint.r * light * 0.1, 0, 255);
+// rgb.g = clamp(rgb.g * light * 0.7 + tint.g * light * 0.3 - rtint.g * light * 0.1, 0, 255);
+// rgb.b = clamp(rgb.b * light * 0.7 + tint.b * light * 0.3 - rtint.b * light * 0.1, 0, 255);
 
 t_uicol	apply_light(t_uicol col, t_uicol tint, double light)
 {
 	t_trgb	rgb;
-	t_trgb	rtint;
+	t_trgb	rgb_tint;
 
 	if (light == 0.0)
 		return (0x0);
 	rgb = utorgb(col);
-	rtint = invert_rgb(utorgb(tint));
-	rgb.r = clamp(rgb.r * light - rtint.r * light * 0.1, 0, 255);
-	rgb.g = clamp(rgb.g * light - rtint.g * light * 0.1, 0, 255);
-	rgb.b = clamp(rgb.b * light - rtint.b * light * 0.1, 0, 255);
+	rgb_tint = utorgb(tint);
+	rgb.r = clamp(((rgb.r * rgb_tint.r) / 255) * light, 0, 255);
+	rgb.g = clamp(((rgb.g * rgb_tint.g) / 255) * light, 0, 255);
+	rgb.b = clamp(((rgb.b * rgb_tint.b) / 255) * light, 0, 255);
 	return (rgbtou(rgb));
 }

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/10 23:57:01 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/11 20:34:30 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -197,6 +197,9 @@ struct s_sprite
 	t_dvec3	pos;
 	t_image	tex;
 	bool	light;
+	// t_uicol	tint;
+
+	double	dist;
 };
 
 struct s_cub
@@ -208,6 +211,7 @@ struct s_cub
 	double		mouse_movement;
 	bool		mouse_lock;
 
+	double		light_lookup[1000];
 	double		y_dist_lookup[SH][2];
 	double		z_buffer[SW];
 

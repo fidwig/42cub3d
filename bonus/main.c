@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 19:24:24 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/11 22:11:32 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub_bonus.h"
 
@@ -140,6 +140,14 @@ int	main(int argc, char **argv)
 	tmp.img = mlx_xpm_file_to_image(cub.mlx, "./resources/xpm/skytex.xpm", &tmp.width, &tmp.height);
 	tmp.addr = mlx_get_data_addr(tmp.img, &tmp.bpp, &tmp.len, &tmp.endian);
 	cub.map.sky_tex = tmp;
+	cub.sprite_count = 3;
+	cub.sprites = malloc(sizeof(t_sprite) * cub.sprite_count);
+	cub.sprites[0] = (t_sprite){(t_dvec3){4, 4, 0}, cub.map.torch_tex, 1, -1};
+	cub.sprites[1] = (t_sprite){(t_dvec3){4, 4.5, 0}, cub.map.torch_tex, 1, -1};
+	cub.sprites[2] = (t_sprite){(t_dvec3){4, 3.5, 0}, cub.map.torch_tex, 1, -1};
+	// cub.sprites[3] = (t_sprite){(t_dvec3){4, 3, 0}, cub.map.torch_tex, 1, -1};
+	// cub.sprites[4] = (t_sprite){(t_dvec3){8, 8, 0}, cub.map.torch_tex, 1, -1};
+	// cub.sprites[5] = (t_sprite){(t_dvec3){15, 15, 0}, cub.map.torch_tex, 1, -1};
 	mlx_loop(cub.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:43:37 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/11 00:24:18 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/11 21:40:25 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -14,13 +14,29 @@
 
 double	dist(t_dvec3 a, t_dvec3 b)
 {
-	return (sqrt(pow(a.x - b.x, 2.0) + pow(a.y - b.y, 2.0) + pow(a.z - b.z, 2.0)));
+	return (sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y)
+			* (a.y - b.y) + (a.z - b.z) * (a.z - b.z)));
 }
 
-// t_sprite	*get_next_sprite(double	dist)
-// {
-	
-// }
+t_sprite	*get_next_sprite(t_cub *cub)
+{
+	static t_sprite		*next;
+	double				d;
+	int					i;
+
+	i = -1;
+	if (next)
+		d = next->dist;
+	else
+		d = 1e4;
+	next = NULL;
+	while (++i < cub->sprite_count)
+	{
+		if (cub->sprites[i].dist < d && (!next || cub->sprites[i].dist > next->dist))
+			next = &cub->sprites[i];
+	}
+	return (next);
+}
 
 void	draw_sprite(t_cub *cub, t_image tex, double d, t_vec3 screen_pos)
 {
@@ -55,36 +71,32 @@ void	draw_sprite(t_cub *cub, t_image tex, double d, t_vec3 screen_pos)
 	*/
 void	draw_sprites(t_cub *cub)
 {
-	t_dvec3	spos[4] = {(t_dvec3) {3.2, 4.5, 0}, (t_dvec3) {8, 3, 0}};
-	t_image tex = cub->map.torch_tex;
 	// t_sprite *sprite;
-	
 	t_dvec3	transform;
 	t_dvec3	diff;
 	t_vec3	screen_pos;
 	t_camera cam;
 	double	inv_det;
-	int	i;
 
 	cam.focal = 1.0;
 	cam.plane = (t_dvec3){cos(cub->player.rot - M_PI / 2.0) * cam.focal,
 		sin(cub->player.rot - M_PI / 2.0) * cam.focal, 0};
 	inv_det = 1.0 / (cam.plane.x * sin(cub->player.rot) - cam.plane.y * cos(cub->player.rot));
-	i = -1;
-	// sprite = get_next_sprite(1e4);
+	// sprite = get_next_sprite(cub);
 	// while (sprite != NULL)
-	while (++i < 2)
+	int i = -1;
+	while (++i < cub->sprite_count)
 	{
-		diff.x = (spos[i].x - cub->player.pos.x);
-		diff.y = (spos[i].y - cub->player.pos.z);
+		diff.x = (cub->sprites[i].pos.x - cub->player.pos.x);
+		diff.y = (cub->sprites[i].pos.y - cub->player.pos.z);
 		transform.x = inv_det * (sin(cub->player.rot) * diff.x - cos(cub->player.rot) * diff.y);
 		transform.y = inv_det * (-cam.plane.y * diff.x + cam.plane.x * diff.y);
 		if (transform.y < 0.05)
 			continue ;
 		screen_pos.x = (int)((SW / 2) * (1 - transform.x / transform.y));
 		screen_pos.y = SH / 2;
-		draw_sprite(cub, tex, transform.y, screen_pos);
-		// sprite = get_next_sprite(d)
+		draw_sprite(cub, cub->sprites[i].tex, transform.y, screen_pos);
+		// sprite = get_next_sprite(cub);
 	}
 }
 // double	dngl = wrap_angle(atan2(diff.y, diff.x) - cub->player.rot);
