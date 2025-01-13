@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/09 21:04:55 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:20:37 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	parse_scene(t_cub *cub, char *map_name)
 	res = check_infos(cub);
 	if (res)
 		stop_error(1, cub, err_txt(1, res));
-	res = get_map(cub, fd);//add line to begin with the first line if get_infos reached it
+	res = get_map(cub, fd, line);
 	if (res)
 		stop_error(1, cub, err_txt(2, res));
 	close(fd);

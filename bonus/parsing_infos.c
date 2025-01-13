@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/09 20:43:49 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:28:19 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,9 @@ static bool	get_colour(t_cub *cub, char *line, char part)
 		ptr -= sizeof(unsigned char);
 	}
 	if (part == 'C')
-	{
-		cub->map.ceil_set = (cub->map.col_ceil = rgbtou(rgb));
-		/* cub->map.ceil_set = true; */
-		return (true);
-	}
-	cub->map.floor_set = (cub->map.col_floor = rgbtou(rgb));
-	 /* = true; */
+		cub->map.ceil_set = true || (cub->map.col_ceil = rgbtou(rgb));
+	else
+		cub->map.floor_set = true || (cub->map.col_floor = rgbtou(rgb));
 	return (true);
 }
 
@@ -77,12 +73,6 @@ static int	infos_handle_line(t_cub *cub, char *line)
 		return (0);
 	if (got_tex > 1 && got_tex <= 3)
 		return (got_tex);
-	/* if (got_tex == 1) */
-	/* 	return (3); */
-	/* if (got_tex == 2) */
-	/* 	return (4); */
-	/* if (got_tex == 3) */
-	/* 	return (5); */
 	if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
 	{
 		if (!get_colour(cub, (line) + 2, (line)[0]))

@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:37:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/08 23:54:56 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:19:24 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ static void	skip_empty_lines(int fd, char **line)
 	}
 }
 
-static int	get_lstmap(t_cub *cub, int fd, t_list **lines, int *size)
+static int	get_lstmap(t_cub *cub, int fd, t_list **lines, char *line)
 {
-	char	*line;
+	/* char	*line; */
 	int		i_end;
 
-	line = NULL;
-	skip_empty_lines(fd, &line);
+	if (!line)
+		skip_empty_lines(fd, &line);
 	while (line)
 	{
-		i_end = check_map_line(cub, line, *size);
+		i_end = check_map_line(cub, line, cub->map.height);
 		if (!i_end)
 			break ;
 		line[i_end] = 0;
@@ -69,7 +69,7 @@ static int	get_lstmap(t_cub *cub, int fd, t_list **lines, int *size)
 		if (!ft_lstadd_back(lines, gc_lstnew(line)))
 			return (close(fd), 2);
 		line = get_next_line(fd);
-		(*size)++;
+		cub->map.height++;
 	}
 	skip_empty_lines(fd, &line);
 	if (line)
@@ -77,16 +77,14 @@ static int	get_lstmap(t_cub *cub, int fd, t_list **lines, int *size)
 	return (cub->player.spd == 0);
 }
 
-int	get_map(t_cub *cub, int fd)
+int	get_map(t_cub *cub, int fd, char *line)
 {
 	t_list	*lines;
-	int		size;
 	int		res;
 
 	lines = NULL;
-	size = 0;
-	res = get_lstmap(cub, fd, &lines, &size);
+	res = get_lstmap(cub, fd, &lines, line);
 	if (res)
 		return (res);
-	return (lst_to_map(cub, lines, size));
+	return (lst_to_map(cub, lines, cub->map.height));
 }
