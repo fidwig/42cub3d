@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/11 22:11:13 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:45:54 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -64,9 +64,9 @@ int				mlx2_destroy_display(void *xvar);
 
 # define FOV			90
 # define HB_STRENGTH	5
-# define LIGHT_STRENGTH 0.7
+# define LIGHT_STRENGTH 3
 # define LIGHT_RANGE	8
-// # define LIGHT_TINT	0x2222FF
+// # define LIGHT_TINT	0x00FF22
 // # define LIGHT_TINT	0xFD6D1C
 // # define LIGHT_TINT	0x5D0CED
 # define LIGHT_TINT	0xffbc90

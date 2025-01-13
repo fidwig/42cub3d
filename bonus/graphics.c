@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/11 21:54:34 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:45:39 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -82,6 +82,8 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 		texcoord.y = (int)(tex.height * ((j - (SH / 2 - h / 2)) % h) / h);
 		if (texcoord.y != texcoord.z)
 			col = dim_color(pixel_get(tex, texcoord.x, texcoord.y), light);
+		// if ((x + j) % 2)
+		// 	col = 
 		texcoord.z = texcoord.y;
 		pixel_put(&cub->image, x + cub->headbob.x, j + cub->headbob.y, col);
 	}

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:14:54 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/11 21:47:58 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:54:00 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -58,9 +58,13 @@ void	floorcasting(t_cub *cub, t_ray ray, int x)
 		fc.cfloor.y = fc.w * fc.sfloor.y + (1.0 - fc.w) * ray.origin.z;
 		texcoord.x = (int)(fc.cfloor.x * tex.width) % tex.width;
 		texcoord.y = (int)(fc.cfloor.y * tex.height) % tex.height;
+		// double light = 1.0;
+		double light = cub->y_dist_lookup[y][1];
+		if ((y + x) % 2)
+			light = get_light_intensity(cub, fc.cfloor, cub->y_dist_lookup[y][1]);
 		pixel_put(&cub->image, x + cub->headbob.x, y + cub->headbob.y,
 			dim_color(pixel_get(tex, texcoord.x, texcoord.y),
-				get_light_intensity(cub, fc.cfloor, cub->y_dist_lookup[y][1])));
+				light));
 	}
 }
 		// fc.cfloor.z = 1;
