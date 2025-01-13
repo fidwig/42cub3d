@@ -6,7 +6,7 @@
 #    By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2025/01/08 23:50:05 by bazaluga         ###   ########.fr        #
+#    Updated: 2025/01/13 12:54:00 by bazaluga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,7 @@ $(NAMETMP):	$(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
 
 $(NAME):	$(NAMETMP)
 
-$(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS)
+$(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS) Makefile
 		@rm -f $(NAMETMP)
 		$(CC) $(CFLAGS) $(MLX) $(LIBFT) $(BOBJS) -o $(NAME) $(LFLAGS)
 		@touch $(NAMEB)

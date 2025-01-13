@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:37:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 12:19:24 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:37:50 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ static int	check_map_line(t_cub *cub, char *line, int row)
 		{
 			if (cub->player.spd > 0 || row == 0 || i == 0 || !line[i + 1])
 				return (0);
-			//problem: inverted rotations
-			cub->player.rot = (M_PI / 2 * (line[i] == N))
-				+ (M_PI * (line[i] == W)) + ((3 * M_PI) / 2 * (line[i] == S));
-			cub->player.spd = 10;
+			cub->player.rot = (M_PI / 2 * (line[i] == S))
+				+ (M_PI * (line[i] == E)) + ((3 * M_PI) / 2 * (line[i] == N));
+			cub->player.spd = 3;
 			cub->player.pos.x = i + 0.5;
 			cub->player.pos.y = 0;
 			cub->player.pos.z = row + 0.5;

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/08 22:57:10 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:32:34 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ static void	cub_init(t_cub *cub)
 	cub->win = mlx_new_window(cub->mlx, SW, SH, "cub3d");
 	if (!cub->win)
 		stop_error(1, cub, "Window creation failed");
-	cub->player.spd = 3;
-	cub->player.pos = (t_dvec3){3.5, 0, 2.5};
-	cub->player.rot = 0;
 	cub->mouse_lock = MOUSE_LOCK;
 	init_y_dist_lookup_table(cub);
 	if (MOUSE_HIDE)
