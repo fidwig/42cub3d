@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 12:20:37 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:38:18 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,28 +90,27 @@ static void	reset_map(char **map)
 
 int	parse_scene(t_cub *cub, char *map_name)
 {
-	int		fd;
-	int		res;
-	char	*line;
+	t_pars_data	data;
+	int				res;
 
-	line = NULL;
+	data = (t_pars_data){0};
 	if (!check_name(map_name))
 		stop_error(1, cub, "Bad scene file extension");
-	fd = open(map_name, O_RDONLY);
-	if (fd == -1)
+	data.fd = open(map_name, O_RDONLY);
+	if (data.fd == -1)
 		stop_error(1, cub, "Can't open map file");
-	res = get_infos(cub, fd, &line);
+	res = get_infos(cub, &data);
 	if (res && res < 5)
 		stop_error(1, cub, err_txt(0, res));
 	else if (!res)
-		line = NULL;
+		data.line = NULL;
 	res = check_infos(cub);
 	if (res)
 		stop_error(1, cub, err_txt(1, res));
-	res = get_map(cub, fd, line);
+	res = get_map(cub, data.fd, data.line);
 	if (res)
 		stop_error(1, cub, err_txt(2, res));
-	close(fd);
+	close(data.fd);
 	if (!check_map(cub->map.raw, &cub->player))
 		stop_error(1, cub, "Incorrect map");
 	reset_map(cub->map.raw);

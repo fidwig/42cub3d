@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/09 14:56:25 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:38:10 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_info		t_info;
 typedef struct s_camera		t_camera;
 typedef struct s_cub		t_cub;
 typedef enum e_dir			t_dir;
+typedef struct s_pars_data	t_pars_data;
 
 # define MAPCHARS "10NSEWDO "
 
@@ -51,6 +52,13 @@ enum e_mapchars
 	DOOR_OPEN = 'O',
 	SPACE = ' ',
 	TMPEMPTY = '9'
+};
+
+struct s_pars_data
+{
+	int		fd;
+	char	*line;
+	char	*tline;
 };
 
 struct s_image
