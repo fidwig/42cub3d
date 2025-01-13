@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:37:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 15:37:50 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:18:34 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void	skip_empty_lines(int fd, char **line)
 
 static int	get_lstmap(t_cub *cub, int fd, t_list **lines, char *line)
 {
-	/* char	*line; */
 	int		i_end;
 
 	if (!line)

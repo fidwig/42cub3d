@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 13:38:18 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:15:00 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	reset_map(char **map)
 
 int	parse_scene(t_cub *cub, char *map_name)
 {
-	t_pars_data	data;
+	t_pars_data		data;
 	int				res;
 
 	data = (t_pars_data){0};

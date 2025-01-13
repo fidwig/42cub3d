@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 13:38:10 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:12:18 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_player		t_player;
 typedef struct s_map		t_map;
 typedef struct s_info		t_info;
 typedef struct s_camera		t_camera;
+typedef struct s_fcdat		t_fcdat;
+typedef struct s_sprite		t_sprite;
 typedef struct s_cub		t_cub;
 typedef enum e_dir			t_dir;
 typedef struct s_pars_data	t_pars_data;
@@ -148,6 +150,15 @@ struct s_hit
 	char		type;
 };
 
+struct s_fcdat
+{
+	t_dvec3	sfloor;
+	t_dvec3	cfloor;
+	t_hit	info;
+	double	w;
+
+};
+
 struct s_ray
 {
 	t_dvec3	dir;
@@ -186,6 +197,17 @@ struct s_camera
 	t_dvec3	plane;
 };
 
+// t_uicol	light_tint;
+// double	light_intensity;
+struct s_sprite
+{
+	t_dvec3	pos;
+	t_image	tex;
+	bool	light;
+	// t_uicol	tint;
+	double	dist;
+};
+
 struct s_cub
 {
 	void		*mlx;
@@ -195,12 +217,17 @@ struct s_cub
 	double		mouse_movement;
 	bool		mouse_lock;
 
+	double		light_lookup[1000];
 	double		y_dist_lookup[SH][2];
 	double		z_buffer[SW];
 
+	t_dvec3		headbob;
 	t_player	player;
 	t_map		map;
 	t_image		minimap;
+
+	t_sprite	*sprites;
+	int			sprite_count;
 
 	t_image		notex;
 	t_info		info;

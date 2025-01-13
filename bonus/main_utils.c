@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:56:27 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/08 15:02:07 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:15:26 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ bool	get_tex_imgs(void *mlx, t_map *map)
 		if (img->name)
 		{
 			img->img = mlx_xpm_file_to_image(mlx, img->name, &img->width,
-				&img->height);
+					&img->height);
 			if (!img->img)
 				return (false);
 			img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->len,
-				&img->endian);
+					&img->endian);
 		}
 		p += step;
 	}

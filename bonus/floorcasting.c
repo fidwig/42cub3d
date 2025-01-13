@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   floorcasting.c                                     :+:      :+:    :+:   */
@@ -6,20 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:14:54 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 20:02:54 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/11 21:47:58 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub_bonus.h"
-
-typedef struct s_fcdat
-{
-	t_dvec3	sfloor;
-	t_dvec3	cfloor;
-	t_hit	info;
-	double	w;
-
-}	t_fcdat;
 
 void	init_fcdat(t_fcdat *fc)
 {
@@ -60,16 +51,20 @@ void	floorcasting(t_cub *cub, t_ray ray, int x)
 	if (h < 0)
 		h = SH;
 	y = SH / 2 + h / 2 - 1;
-	while (y < SH)
+	while (++y < SH)
 	{
 		fc.w = cub->y_dist_lookup[y][0] / fc.info.dist;
 		fc.cfloor.x = fc.w * fc.sfloor.x + (1.0 - fc.w) * ray.origin.x;
 		fc.cfloor.y = fc.w * fc.sfloor.y + (1.0 - fc.w) * ray.origin.z;
 		texcoord.x = (int)(fc.cfloor.x * tex.width) % tex.width;
 		texcoord.y = (int)(fc.cfloor.y * tex.height) % tex.height;
-		pixel_put(&cub->image, x, y,
+		pixel_put(&cub->image, x + cub->headbob.x, y + cub->headbob.y,
 			dim_color(pixel_get(tex, texcoord.x, texcoord.y),
-				cub->y_dist_lookup[y][1]));
-		y++;
+				get_light_intensity(cub, fc.cfloor, cub->y_dist_lookup[y][1])));
 	}
 }
+		// fc.cfloor.z = 1;
+		// pixel_put(&cub->image, x + cub->headbob.x, (SH - y) + cub->headbob.y,
+		// 	dim_color(pixel_get(tex, texcoord.x, texcoord.y),
+		// 		get_light_intensity(cub, fc.cfloor)));
+		// fc.cfloor.z = 0;

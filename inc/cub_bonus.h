@@ -53,14 +53,22 @@
 # define BLACK		0x000000
 # define WHITE		0xFFFFFF
 # define DARKRED	0x802020
-# define MOUSE_LOCK 0
-# define MOUSE_HIDE 0
-# define FOV		100
+# define MOUSE_LOCK	0
+# define MOUSE_HIDE	0
 
 // COMPATIBILITY
 int				mlx2_destroy_display(void *xvar);
 int				mlx2_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
 int				mlx2_mouse_hide(void *mlx_ptr, void *win_ptr);
+
+# define FOV			90
+# define HB_STRENGTH	5
+# define LIGHT_STRENGTH 0.7
+# define LIGHT_RANGE	8
+// # define LIGHT_TINT	0x2222FF
+// # define LIGHT_TINT	0xFD6D1C
+// # define LIGHT_TINT	0x5D0CED
+# define LIGHT_TINT	0xffbc90
 
 // ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);
@@ -98,6 +106,12 @@ t_ray			cast_ray(t_dvec3 origin, t_dvec3 dir, t_map map);
 void			set_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
 void			add_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
 
+double			dist(t_dvec3 a, t_dvec3 b);
+double			compute_light(double d);
+// double			get_light_intensity(t_cub *cub, t_dvec3 tar);
+double			get_light_intensity(t_cub *cub, t_dvec3 tar, double light);
+
+void			init_fcdat(t_fcdat *fc);
 // ACTIONS
 void			act_ray(t_cub *cub);
 
