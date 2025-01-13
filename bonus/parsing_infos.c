@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 13:38:49 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:44:49 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,12 @@ int	get_infos(t_cub *cub, t_pars_data *d)
 
 	infos_count = 0;
 	d->line = get_next_line(d->fd);
-	/* d->tline = ft_strtrim(d->line, " \n"); */
-	while (*d->line && infos_count < 9)
+	while (d->line && infos_count < 9)
 	{
 		if (empty_line(d->line))
 		{
-			/* free(d->tline); */
 			free(d->line);
 			d->line = get_next_line(d->fd);
-			/* d->tline = ft_strtrim_free(d->line, " \n"); */
 			continue ;
 		}
 		res = infos_handle_line(cub, d->line);
@@ -115,7 +112,6 @@ int	get_infos(t_cub *cub, t_pars_data *d)
 		infos_count++;
 		free(d->line);
 		d->line = get_next_line(d->fd);
-		/* *line = ft_strtrim_free(get_next_line(fd), " \n"); */
 	}
 	return (free(d->line), 0);
 }
