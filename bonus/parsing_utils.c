@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 22:59:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/09 20:52:54 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:31:39 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,25 @@ int	check_infos(t_cub *cub)
 	t_map	*map;
 
 	map = &cub->map;
-	if (!map->tex_nor.name || !map->tex_sou.name || !map->tex_eas.name
-		|| !map->tex_wes.name)
+	if (!map->nor_tex.name || !map->sou_tex.name || !map->eas_tex.name
+		|| !map->wes_tex.name)
 		return (1);
-	if (map->ceil_set && map->tex_ceil.name)
+	if (map->ceil_set && map->ceil_tex.name)
 		return (2);
-	if (map->floor_set && map->tex_floor.name)
+	if (map->floor_set && map->floor_tex.name)
 		return (3);
-	map->ceil_set = (map->ceil_set || map->tex_ceil.name != NULL);
-	map->floor_set = (map->floor_set || map->tex_floor.name != NULL);
-	map->sky_set = (map->tex_sky.name != NULL);
+	map->ceil_set = (map->ceil_set || map->ceil_tex.name != NULL);
+	map->floor_set = (map->floor_set || map->floor_tex.name != NULL);
+	map->sky_set = (map->sky_tex.name != NULL);
 	if (!map->ceil_set && !map->sky_set)
 		return (4);
 	if (!map->floor_set)
 		return (5);
 	if (map->ceil_set && map->sky_set)
 		return (6);
-	if (map->tex_door.name && !map->tex_opendoor.name)
+	if (map->door_tex.name && !map->opendoor_tex.name)
 		return (7);
-	if (!map->tex_door.name && map->tex_opendoor.name)
+	if (!map->door_tex.name && map->opendoor_tex.name)
 		return (8);
 	return (0);
 }

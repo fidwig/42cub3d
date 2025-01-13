@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 16:12:18 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:27:00 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,17 +115,17 @@ struct s_map
 	t_uicol		sou_col;
 	t_uicol		eas_col;
 	t_uicol		wes_col;
-	t_uicol		col_ceil;
-	t_uicol		col_floor;
-	t_image		tex_nor;
-	t_image		tex_sou;
-	t_image		tex_eas;
-	t_image		tex_wes;
-	t_image		tex_ceil;
-	t_image		tex_floor;
-	t_image		tex_door;
-	t_image		tex_opendoor;
-	t_image		tex_sky;
+	t_uicol		ceil_col;
+	t_uicol		floor_col;
+	t_image		nor_tex;
+	t_image		sou_tex;
+	t_image		eas_tex;
+	t_image		wes_tex;
+	t_image		ceil_tex;
+	t_image		floor_tex;
+	t_image		door_tex;
+	t_image		opendoor_tex;
+	t_image		sky_tex;
 	bool		ceil_set;
 	bool		floor_set;
 	bool		sky_set;

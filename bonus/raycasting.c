@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:37:31 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/08 14:57:02 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:30:11 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	raycasting(t_cub *cub)
 		ray_dir = (t_dvec3){cos(cub->player.rot) + cam.plane.x * camera_x,
 			sin(cub->player.rot) + cam.plane.y * camera_x, 0};
 		ray = cast_ray(cub->player.pos, ray_dir, cub->map);
-		if (cub->map.tex_floor.name)
+		if (cub->map.floor_tex.name)
 			floorcasting(cub, ray, x);
 		draw_column_layers(cub, x, ray, cam.focal);
 	}

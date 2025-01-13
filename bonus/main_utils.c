@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:56:27 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 16:15:26 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:30:01 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ bool	get_tex_imgs(void *mlx, t_map *map)
 	void	*end;
 
 	step = sizeof(t_image);
-	p = &map->tex_nor;
-	end = &map->tex_sky;
+	p = &map->nor_tex;
+	end = &map->sky_tex;
 	while (p <= end)
 	{
 		img = ((t_image *)p);

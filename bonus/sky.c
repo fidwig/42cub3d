@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:06:47 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 16:02:54 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:30:05 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -23,7 +23,7 @@ void	render_sky(t_cub *cub)
 	int		visible_w;
 	double	distortion;
 
-	tex = cub->map.tex_sky;
+	tex = cub->map.sky_tex;
 	texcoord.z = (double)tex.width * ((cub->player.rot) / (2 * M_PI))
 		- dotp(a2dv(cub->player.rot + M_PI / 2), cub->player.upos) * 10.0;
 	visible_w = tex.width * 0.3;

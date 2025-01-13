@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 16:20:13 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:29:58 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static void	cub_init(t_cub *cub)
 static int	update(t_cub *cub)
 {
 	inputs_handler(cub);
-	if (cub->map.tex_sky.name)
+	if (cub->map.sky_tex.name)
 		render_sky(cub);
-	clear_image_bicolor(&cub->image, cub->map.col_ceil, cub->map.col_floor);
+	clear_image_bicolor(&cub->image, cub->map.ceil_col, cub->map.floor_col);
 	raycasting(cub);
 	draw_minimap(cub);
 	/* draw_sprites(cub); */

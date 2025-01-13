@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 15:44:49 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:30:07 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static bool	get_colour(t_cub *cub, char *line, char part)
 		ptr -= sizeof(unsigned char);
 	}
 	if (part == 'C')
-		cub->map.ceil_set = (cub->map.col_ceil = rgbtou(rgb)) || true;
+		cub->map.ceil_set = (cub->map.ceil_col = rgbtou(rgb)) || true;
 	else
-		cub->map.floor_set = (cub->map.col_floor = rgbtou(rgb)) || true;
+		cub->map.floor_set = (cub->map.floor_col = rgbtou(rgb)) || true;
 	return (true);
 }
 

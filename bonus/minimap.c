@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:43:48 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 17:51:59 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:31:16 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_wall(t_cub *cub, int x, int y)
 	[(int)cub->player.pos.x + x - 6];
 	if (c == '1')
 		draw_square(&cub->minimap, texcoord, 10,
-			(cub->map.col_floor & 0xefefef));
+			(cub->map.floor_col & 0xefefef));
 	else if (c == 'D')
 		draw_square(&cub->minimap, texcoord, 10, 0x00FF00);
 }
@@ -50,7 +50,7 @@ void	draw_minimap(t_cub *cub)
 	int		x;
 	int		y;
 
-	clear_image(&cub->minimap, (cub->map.col_floor | 0x101010));
+	clear_image(&cub->minimap, (cub->map.floor_col | 0x101010));
 	y = -1;
 	while (++y < 12)
 	{
@@ -67,8 +67,8 @@ void	draw_minimap(t_cub *cub)
 		}
 	}
 	draw_square(&cub->minimap, (t_vec3){48, 48, 0},
-		3, 0xffffff - (cub->map.col_floor));
+		3, 0xffffff - (cub->map.floor_col));
 	draw_square(&cub->minimap, (t_vec3){49 + cos(cub->player.rot) * 5.0,
 		49 + sin(cub->player.rot) * 5.0, 0}, 2,
-		0xffffff - (cub->map.col_floor));
+		0xffffff - (cub->map.floor_col));
 }
