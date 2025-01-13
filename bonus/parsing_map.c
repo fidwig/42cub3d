@@ -6,34 +6,41 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:37:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 16:18:34 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:36:22 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
 #include "libft.h"
 
-static int	check_map_line(t_cub *cub, char *line, int row)
+static int	save_sprite(t_cub *cub, t_pars_data *d, int row, int col)
+{
+	//lst_addback to d->lstsprites with row & i as position
+}
+
+static int	check_map_line(t_cub *cub, t_pars_data *d, int row)
 {
 	size_t	i;
 
 	i = 0;
-	while (line[i] && line[i] != '\n')
+	while (d->line[i] && d->line[i] != '\n')
 	{
-		if (!ft_strchr(MAPCHARS, line[i]))
+		if (ft_strchr(d->names, d->line[i]))
+			return (save_sprite(cub, d, row, i));
+		if (!ft_strchr(MAPCHARS, d->line[i]))
 			return (0);
-		if (line[i] == N || line[i] == S
-			|| line[i] == E || line[i] == W)
+		if (d->line[i] == N || d->line[i] == S
+			|| d->line[i] == E || d->line[i] == W)
 		{
-			if (cub->player.spd > 0 || row == 0 || i == 0 || !line[i + 1])
+			if (cub->player.spd > 0 || row == 0 || i == 0 || !d->line[i + 1])
 				return (0);
-			cub->player.rot = (M_PI / 2 * (line[i] == S))
-				+ (M_PI * (line[i] == E)) + ((3 * M_PI) / 2 * (line[i] == N));
+			cub->player.rot = (M_PI / 2 * (d->line[i] == S))
+				+ (M_PI * (d->line[i] == E)) + (1.5 * M_PI * (d->line[i] == N));
 			cub->player.spd = 3;
 			cub->player.pos.x = i + 0.5;
 			cub->player.pos.y = 0;
 			cub->player.pos.z = row + 0.5;
-			line[i] = EMPTY;
+			d->line[i] = EMPTY;
 		}
 		i++;
 	}
@@ -51,7 +58,7 @@ static void	skip_empty_lines(int fd, char **line)
 	}
 }
 
-static int	get_lstmap(t_cub *cub, int fd, t_list **lines, char *line)
+static int	get_lstmap(t_cub *cub, int fd, t_list **lines, t_pars_data *d)
 {
 	int		i_end;
 

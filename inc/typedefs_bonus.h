@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 16:27:00 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:31:22 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define SH	720
 
 # include <stdbool.h>
+# include "libft.h"
 
 typedef unsigned int		t_uicol;
 typedef struct s_hit		t_hit;
@@ -54,13 +55,6 @@ enum e_mapchars
 	DOOR_OPEN = 'O',
 	SPACE = ' ',
 	TMPEMPTY = '9'
-};
-
-struct s_pars_data
-{
-	int		fd;
-	char	*line;
-	char	*tline;
 };
 
 struct s_image
@@ -201,11 +195,21 @@ struct s_camera
 // double	light_intensity;
 struct s_sprite
 {
+	char	name;
 	t_dvec3	pos;
 	t_image	tex;
 	bool	light;
 	// t_uicol	tint;
 	double	dist;
+};
+
+struct s_pars_data
+{
+	int			fd;
+	char		*line;
+	t_sprite	sprites[26];
+	char		names[27];
+	t_list		*lstsprites;
 };
 
 struct s_cub
