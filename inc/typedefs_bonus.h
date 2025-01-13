@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/11 20:34:30 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/13 18:28:45 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -148,8 +148,9 @@ struct s_fcdat
 	t_dvec3	sfloor;
 	t_dvec3	cfloor;
 	t_hit	info;
-	double	w;
 
+	double	w;
+	double	light;
 };
 
 struct s_ray

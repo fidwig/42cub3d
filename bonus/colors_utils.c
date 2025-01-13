@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:57:33 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/11 20:35:30 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/13 21:42:45 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -53,21 +53,27 @@ t_uicol	dim_color(t_uicol col, double light)
 	rgb.b = clamp(((rgb.b * tint.b) / 255) * light, 0, 255);
 	return (rgbtou(rgb));
 }
-// rgb.r = clamp(rgb.r * light * 0.7 + tint.r * light * 0.3 - rtint.r * light * 0.1, 0, 255);
-// rgb.g = clamp(rgb.g * light * 0.7 + tint.g * light * 0.3 - rtint.g * light * 0.1, 0, 255);
-// rgb.b = clamp(rgb.b * light * 0.7 + tint.b * light * 0.3 - rtint.b * light * 0.1, 0, 255);
 
-t_uicol	apply_light(t_uicol col, t_uicol tint, double light)
+double	clamp(double n, double mini, double maxi)
 {
-	t_trgb	rgb;
-	t_trgb	rgb_tint;
-
-	if (light == 0.0)
-		return (0x0);
-	rgb = utorgb(col);
-	rgb_tint = utorgb(tint);
-	rgb.r = clamp(((rgb.r * rgb_tint.r) / 255) * light, 0, 255);
-	rgb.g = clamp(((rgb.g * rgb_tint.g) / 255) * light, 0, 255);
-	rgb.b = clamp(((rgb.b * rgb_tint.b) / 255) * light, 0, 255);
-	return (rgbtou(rgb));
+	if (n < mini)
+		n = mini;
+	if (n > maxi)
+		n = maxi;
+	return (n);
 }
+
+// t_uicol	apply_light(t_uicol col, t_uicol tint, double light)
+// {
+// 	t_trgb	rgb;
+// 	t_trgb	rgb_tint;
+
+// 	if (light == 0.0)
+// 		return (0x0);
+// 	rgb = utorgb(col);
+// 	rgb_tint = utorgb(tint);
+// 	rgb.r = clamp(((rgb.r * rgb_tint.r) / 255) * light, 0, 255);
+// 	rgb.g = clamp(((rgb.g * rgb_tint.g) / 255) * light, 0, 255);
+// 	rgb.b = clamp(((rgb.b * rgb_tint.b) / 255) * light, 0, 255);
+// 	return (rgbtou(rgb));
+// }

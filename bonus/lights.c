@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:18:17 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/11 21:38:36 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/13 21:49:29 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -18,11 +18,11 @@ double	compute_light(double d)
 	double	light;
 
 	// light = (LIGHT_RANGE - d) * LIGHT_STRENGTH;
-	light = LIGHT_STRENGTH / (0.3 + d);
+	light = LIGHT_STRENGTH / (0.2 + d);
 	return (light);
 }
 
-double	get_light_intensity(t_cub *cub, t_dvec3 tar, double light)
+double	get_light(t_cub *cub, t_dvec3 tar, double light)
 {
 	int		i;
 	double	tl;
@@ -44,8 +44,10 @@ double	get_light_intensity(t_cub *cub, t_dvec3 tar, double light)
 	}
 	return (light);
 }
+		// t_dvec3 dir = (t_dvec3){(tar.x - cub->sprites[i].pos.x) / d, (tar.y - cub->sprites[i].pos.y) / d, (tar.z - cub->sprites[i].pos.z) / d};
 
-// double	get_light_intensity(t_cub *cub, t_dvec3 tar)
+
+// double	get_light(t_cub *cub, t_dvec3 tar)
 // {
 // 	int		i;
 // 	double	tl;

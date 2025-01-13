@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 16:45:54 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/13 21:53:58 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -64,12 +64,13 @@ int				mlx2_destroy_display(void *xvar);
 
 # define FOV			90
 # define HB_STRENGTH	5
-# define LIGHT_STRENGTH 3
+# define LIGHT_STRENGTH 1
 # define LIGHT_RANGE	8
 // # define LIGHT_TINT	0x00FF22
+# define LIGHT_TINT	0xffcccc
 // # define LIGHT_TINT	0xFD6D1C
 // # define LIGHT_TINT	0x5D0CED
-# define LIGHT_TINT	0xffbc90
+// # define LIGHT_TINT	0xffbc90
 
 // ERRORZ
 void			clean_exit(int exit_code, t_cub *cub);
@@ -108,10 +109,10 @@ void			add_ray_info(t_ray ray, t_cast_data cast, t_hit *info);
 
 double			dist(t_dvec3 a, t_dvec3 b);
 double			compute_light(double d);
-// double			get_light_intensity(t_cub *cub, t_dvec3 tar);
-double			get_light_intensity(t_cub *cub, t_dvec3 tar, double light);
+// double			get_light(t_cub *cub, t_dvec3 tar);
+double			get_light(t_cub *cub, t_dvec3 tar, double light);
 
-void			init_fcdat(t_fcdat *fc);
+void			init_fcdat(t_cub *cub, t_fcdat *fc, int y);
 // ACTIONS
 void			act_ray(t_cub *cub);
 

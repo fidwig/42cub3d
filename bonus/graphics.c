@@ -6,20 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 16:45:39 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/13 21:13:54 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "cub_bonus.h"
-
-double	clamp(double n, double mini, double maxi)
-{
-	if (n < mini)
-		n = mini;
-	if (n > maxi)
-		n = maxi;
-	return (n);
-}
 
 t_image	get_wall_tex(t_cub *cub, t_dir facing)
 {
@@ -44,19 +35,14 @@ t_image	get_tex(t_cub *cub, char type, t_dir facing)
 	else
 		return (get_wall_tex(cub, facing));
 }
-	// return (cub->notex);
 
-t_dvec3	get_rw_pos(t_cub *cub, t_hit info, int h)
+double	get_fc_light(t_cub *cub, t_hit info, int h)
 {
 	t_fcdat	fc;
 
 	fc.info = info;
-	init_fcdat(&fc);
-	fc.w = cub->y_dist_lookup[(int)clamp((SH + h) / 2, 0, SH - 1)][0]
-		/ fc.info.dist;
-	fc.cfloor.x = (fc.w * fc.sfloor.x + (1.0 - fc.w) * cub->player.pos.x);
-	fc.cfloor.y = (fc.w * fc.sfloor.y + (1.0 - fc.w) * cub->player.pos.z);
-	return (fc.cfloor);
+	init_fcdat(cub, &fc, (SH + h) / 2);
+	return (fc.light);
 }
 
 void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
@@ -67,8 +53,7 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 	double	light;
 	t_uicol	col;
 
-	light = cub->y_dist_lookup[(int)clamp((SH + h) / 2, 0, SH - 1)][1];
-	light = get_light_intensity(cub, get_rw_pos(cub, info, h), light);
+	light = get_fc_light(cub, info, h);
 	tex = get_tex(cub, info.type, info.facing);
 	texcoord.x = (int)(info.x_wall * tex.width);
 	if (info.facing == EAST || info.facing == SOUTH)
@@ -82,8 +67,6 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 		texcoord.y = (int)(tex.height * ((j - (SH / 2 - h / 2)) % h) / h);
 		if (texcoord.y != texcoord.z)
 			col = dim_color(pixel_get(tex, texcoord.x, texcoord.y), light);
-		// if ((x + j) % 2)
-		// 	col = 
 		texcoord.z = texcoord.y;
 		pixel_put(&cub->image, x + cub->headbob.x, j + cub->headbob.y, col);
 	}
@@ -92,7 +75,7 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 	// pos = get_rw_pos(cub, info, h);
 			/*FC TEST*/
 			// pos.z = 1 - (double)texcoord.y / tex.height;
-			// light = get_light_intensity(cub, pos, light);
+			// light = get_light(cub, pos, light);
 			/*FC TEST*/
 
 void	draw_column_layers(t_cub *cub, int x, t_ray ray, double focal)
