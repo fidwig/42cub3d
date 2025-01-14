@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/14 17:26:15 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/14 18:40:40 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub_bonus.h"
 
@@ -45,6 +45,15 @@ double	get_fc_light(t_cub *cub, t_hit info, int h)
 	return (fc.light);
 }
 
+// t_dvec3	get_rw_pos(t_cub *cub, t_hit info, int h)
+// {
+// 	t_fcdat	fc;
+
+// 	fc.info = info;
+// 	init_fcdat(cub, &fc, (SH + h) / 2);
+// 	return (fc.sfloor);
+// }
+
 void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 {
 	int		j;
@@ -71,12 +80,14 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 		pixel_put(&cub->image, x + cub->headbob.x, j + cub->headbob.y, col);
 	}
 }
-	// t_dvec3 pos;			for more accurate light on wall (vertical fallof)
+	// 	/*FC TEST*/
+	// t_dvec3 pos;			//for more accurate light on wall (vertical fallof)
 	// pos = get_rw_pos(cub, info, h);
-			/*FC TEST*/
+	// 	/*FC TEST*/
+			// /*FC TEST*/
 			// pos.z = 1 - (double)texcoord.y / tex.height;
 			// light = get_light(cub, pos, light);
-			/*FC TEST*/
+			// /*FC TEST*/
 
 void	draw_column_layers(t_cub *cub, int x, t_ray ray, double focal)
 {
@@ -87,7 +98,8 @@ void	draw_column_layers(t_cub *cub, int x, t_ray ray, double focal)
 	i = ray.hits;
 	while (--i >= 0)
 	{
-		if (ray.info[i].type == 'O' && (ray.info[i].x_wall < 0.125 || ray.info[i].x_wall > 0.875))
+		if (ray.info[i].type == 'O' && (ray.info[i].x_wall < 0.125
+				|| ray.info[i].x_wall > 0.875))
 			cub->z_buffer[x] = ray.info[i].dist;
 		h = (int)(SH / (ray.info[i].dist * focal));
 		if (h < 0)

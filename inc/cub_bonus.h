@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub_bonus.h                                        :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/14 17:25:17 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/14 19:11:21 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef CUB_BONUS_H
 # define CUB_BONUS_H
@@ -63,8 +63,8 @@
 int				mlx2_destroy_display(void *xvar);
 
 # define FOV			90
-# define HB_STRENGTH	5
-# define LIGHT_STRENGTH 1.5
+# define HB_STRENGTH	8
+# define LIGHT_STRENGTH 1
 # define LIGHT_RANGE	8
 // # define LIGHT_TINT	0x00FF22
 // # define LIGHT_TINT	0xffcccc

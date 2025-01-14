@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   typedefs_bonus.h                                   :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 18:28:45 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/14 19:14:26 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef TYPEDEFS_BONUS_H
 # define TYPEDEFS_BONUS_H
@@ -21,28 +21,27 @@
 
 # include <stdbool.h>
 
-typedef unsigned int		t_uicol;
-typedef struct s_hit		t_hit;
-typedef struct s_ray		t_ray;
-typedef struct s_cast_data	t_cast_data;
-typedef struct s_ray		t_ray;
-typedef struct s_image		t_image;
-typedef struct s_trgb		t_trgb;
-typedef struct s_dvec3		t_dvec3;
-typedef struct s_vec3		t_vec3;
-typedef struct s_player		t_player;
-typedef struct s_map		t_map;
-typedef struct s_info		t_info;
-typedef struct s_camera		t_camera;
-typedef struct s_fcdat		t_fcdat;
-typedef struct s_sprite		t_sprite;
-typedef struct s_cub		t_cub;
-typedef enum e_dir			t_dir;
+typedef unsigned int			t_uicol;
+typedef struct s_hit			t_hit;
+typedef struct s_ray			t_ray;
+typedef struct s_cast_data		t_cast_data;
+typedef struct s_ray			t_ray;
+typedef struct s_image			t_image;
+typedef struct s_trgb			t_trgb;
+typedef struct s_dvec3			t_dvec3;
+typedef struct s_vec3			t_vec3;
+typedef struct s_player			t_player;
+typedef struct s_map			t_map;
+typedef struct s_info			t_info;
+typedef struct s_camera			t_camera;
+typedef struct s_fcdat			t_fcdat;
+typedef struct s_sprite			t_sprite;
+typedef struct s_sdrawing		t_sdrawing;
+typedef struct s_cub			t_cub;
+typedef enum e_dir				t_dir;
+typedef unsigned int			t_uicol;
 
 # define MAPCHARS "10NSEWDO "
-
-typedef unsigned int	t_uicol;
-
 
 enum e_mapchars
 {
@@ -198,9 +197,16 @@ struct s_sprite
 	t_dvec3	pos;
 	t_image	tex;
 	bool	light;
-	// t_uicol	tint;
 
-	double	dist;
+	t_vec3	scr;
+};
+
+struct s_sdrawing
+{
+	t_vec3	sp;
+	t_vec3	texcoord;
+	double	light;
+	int		size;
 };
 
 struct s_cub

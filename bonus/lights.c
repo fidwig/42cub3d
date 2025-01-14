@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   lights.c                                           :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:18:17 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/14 17:26:13 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/14 18:40:01 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub_bonus.h"
 
@@ -22,6 +22,7 @@ double	compute_light(double d)
 	return (light);
 }
 
+	// if (d < LIGHT_RANGE)[]
 double	get_light(t_cub *cub, t_dvec3 tar, double light)
 {
 	int		i;
@@ -31,14 +32,12 @@ double	get_light(t_cub *cub, t_dvec3 tar, double light)
 	i = -1;
 	(void) tar;
 	d = dist((t_dvec3){cub->player.pos.x, cub->player.pos.z, 0}, tar);
-	if (d < LIGHT_RANGE + 20)
-		light = compute_light(d);
+	light = compute_light(d);
 	while (++i < cub->sprite_count)
 	{
 		if (!cub->sprites[i].light)
 			continue ;
 		d = dist(cub->sprites[i].pos, tar);
-		cub->sprites[i].dist = d;
 		if (d >= LIGHT_RANGE)
 			continue ;
 		tl = compute_light(d);
@@ -47,8 +46,6 @@ double	get_light(t_cub *cub, t_dvec3 tar, double light)
 	}
 	return (light);
 }
-		// t_dvec3 dir = (t_dvec3){(tar.x - cub->sprites[i].pos.x) / d, (tar.y - cub->sprites[i].pos.y) / d, (tar.z - cub->sprites[i].pos.z) / d};
-
 
 // double	get_light(t_cub *cub, t_dvec3 tar)
 // {
