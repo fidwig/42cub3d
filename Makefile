@@ -6,7 +6,7 @@
 #    By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:52:38 by bazaluga          #+#    #+#              #
-#    Updated: 2025/01/13 16:09:01 by bazaluga         ###   ########.fr        #
+#    Updated: 2025/01/14 10:59:35 by bazaluga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,20 +15,20 @@ NAMETMP		:=	.mandatory_tmp
 NAMEB		:=	.bonus_tmp
 INCDIR		:=	inc
 SRCDIR		:=	src
+LIBFTDIR	:=	libft
 
 ifeq ($(shell uname), Linux)
 	MLXDIR	:=	mlx
-	LFLAGS	:=	-L/usr/lib -lXext -lX11 -lm -lz
+	LFLAGS	:=	-L$(MLXDIR) -lmlx -L$(LIBFTDIR) -lft -L/usr/lib -lXext -lX11 -lm -lz
 	SRCS	:=	mlx_compat_linux.c
 	BSRCS	:=	mlx_compat_linux.c
 else
 	MLXDIR	:=	mlx_macos
-	LFLAGS	:=	-framework OpenGL -framework AppKit -lm
+	LFLAGS	:=	-L$(MLXDIR) -lmlx -L$(LIBFTDIR) -lft -framework OpenGL -framework AppKit -lm
 	SRCS	:=	mlx_compat_macos.c
 	BSRCS	:=	mlx_compat_macos.c mlx_compat_macos2.c
 endif
 
-LIBFTDIR	:=	libft
 MLX			:=	$(MLXDIR)/libmlx.a
 LIBFT		:=	$(LIBFTDIR)/libft.a
 OBJDIR		:=	.obj
@@ -86,14 +86,14 @@ $(BOBJDIR)/%.o: $(BONUSDIR)/%.c
 
 $(NAMETMP):	$(LIBFT) $(MLX) $(OBJDIR) $(OBJS) Makefile
 		@rm -f $(NAMEB)
-		$(CC) $(CFLAGS) $(MLX) $(LIBFT) $(OBJS) -o $(NAME) $(LFLAGS)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LFLAGS)
 		@touch $(NAMETMP)
 
 $(NAME):	$(NAMETMP)
 
 $(NAMEB):	$(LIBFT) $(MLX) $(BOBJDIR) $(BOBJS) Makefile
 		@rm -f $(NAMETMP)
-		$(CC) $(CFLAGS) $(MLX) $(LIBFT) $(BOBJS) -o $(NAME) $(LFLAGS)
+		$(CC) $(CFLAGS) $(BOBJS) -o $(NAME) $(LFLAGS)
 		@touch $(NAMEB)
 
 clean:
