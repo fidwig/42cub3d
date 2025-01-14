@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 21:56:28 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/14 17:24:41 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -162,7 +162,7 @@ int	main(int argc, char **argv)
 	cub.map.sky_tex = tmp;
 	cub.sprite_count = 6;
 	cub.sprites = malloc(sizeof(t_sprite) * cub.sprite_count);
-	cub.sprites[0] = (t_sprite){(t_dvec3){4, 4, 0}, cub.map.torch_tex, 1, -1};
+	cub.sprites[0] = (t_sprite){(t_dvec3){4.5, 4, 0}, cub.map.torch_tex, 1, -1};
 	cub.sprites[1] = (t_sprite){(t_dvec3){4, 4.5, 0}, cub.map.torch_tex, 1, -1};
 	cub.sprites[2] = (t_sprite){(t_dvec3){4, 3.5, 0}, cub.map.torch_tex, 1, -1};
 	cub.sprites[3] = (t_sprite){(t_dvec3){4, 3, 0}, cub.map.torch_tex, 1, -1};

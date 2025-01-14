@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:43:37 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 16:05:33 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/14 17:15:43 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -18,34 +18,49 @@ double	dist(t_dvec3 a, t_dvec3 b)
 			* (a.y - b.y) + (a.z - b.z) * (a.z - b.z)));
 }
 
-t_sprite	*get_next_sprite(t_cub *cub)
+t_sprite	*get_next_sprite(t_cub *cub, t_sprite *last)
 {
-	static t_sprite		*next;
-	double				d;
-	int					i;
+	t_sprite	*next;
+	double		d;
+	double		dn;
+	double		dc;
+	int			i;
 
-	i = -1;
-	if (next)
-		d = next->dist;
-	else
-		d = 1e4;
+	d = 1e4;
+	if (last)
+		d = dist((t_dvec3){cub->player.pos.x, cub->player.pos.z, 0}, last->pos);
 	next = NULL;
+	dn = 0;
+	i = -1;
 	while (++i < cub->sprite_count)
 	{
-		if (cub->sprites[i].dist < d && (!next || cub->sprites[i].dist > next->dist))
+		dc = dist((t_dvec3){cub->player.pos.x, cub->player.pos.z, 0},
+				cub->sprites[i].pos);
+		if (dc < d && (dc > dn))
+		{
 			next = &cub->sprites[i];
+			dn = dc;
+		}
 	}
+	dprintf(2, "\n");
 	return (next);
 }
 
-void	draw_sprite(t_cub *cub, t_image tex, double d, t_vec3 screen_pos)
+	// if (size < 0 || size > SH * 2)
+	// 	size = SH * 2;
+void	draw_sprite(t_cub *cub, t_sprite sprite, double d, t_vec3 screen_pos)
 {
 	t_vec3	sp;
 	t_vec3	texcoord;
+	double	light;
 	int		size;
 
 	size = SH / d;
 	sp.x = screen_pos.x - size / 2 + 1;
+	light = 1.5;
+	if (!sprite.light)
+		light = get_light(cub, sprite.pos,
+				cub->y_dist_lookup[(int)clamp(screen_pos.x + size / 2, 0, 255)][1]);
 	if (sp.x < 0)
 		sp.x = -1;
 	while (++sp.x < screen_pos.x + size / 2 && sp.x < SW)
@@ -57,10 +72,11 @@ void	draw_sprite(t_cub *cub, t_image tex, double d, t_vec3 screen_pos)
 			sp.y = -1;
 		while (++sp.y < screen_pos.y + size / 2 && sp.y < SH)
 		{
-			texcoord.x = (int)(tex.width * ((sp.x - (screen_pos.x - size / 2)) / (double)size));
-			texcoord.y = (int)(tex.width * ((sp.y - (screen_pos.y - size / 2)) / (double)size));
-			texcoord.y += tex.width * ((int)(cub->info.last_frame / 125) % 4);
-			pixel_put(&cub->image, sp.x + cub->headbob.x, sp.y + cub->headbob.y, dim_color(pixel_get(tex, texcoord.x, texcoord.y), 1.5 + 0*LIGHT_STRENGTH/(0.9 + d)));
+			texcoord.x = (int)(sprite.tex.width * ((sp.x - (screen_pos.x - size / 2)) / (double)size));
+			texcoord.y = (int)(sprite.tex.width * ((sp.y - (screen_pos.y - size / 2)) / (double)size));
+			texcoord.y += sprite.tex.width * ((int)(cub->info.last_frame / 125) % 4);
+			pixel_put(&cub->image, sp.x + cub->headbob.x, sp.y + cub->headbob.y,
+				dim_color(pixel_get(sprite.tex, texcoord.x, texcoord.y), 1.5));
 		}
 	}
 }
@@ -71,7 +87,7 @@ void	draw_sprite(t_cub *cub, t_image tex, double d, t_vec3 screen_pos)
 	*/
 void	draw_sprites(t_cub *cub)
 {
-	// t_sprite *sprite;
+	t_sprite *sprite;
 	t_dvec3	transform;
 	t_dvec3	diff;
 	t_vec3	screen_pos;
@@ -82,21 +98,18 @@ void	draw_sprites(t_cub *cub)
 	cam.plane = (t_dvec3){cos(cub->player.rot - M_PI / 2.0) * cam.focal,
 		sin(cub->player.rot - M_PI / 2.0) * cam.focal, 0};
 	inv_det = 1.0 / (cam.plane.x * sin(cub->player.rot) - cam.plane.y * cos(cub->player.rot));
-	// sprite = get_next_sprite(cub);
-	// while (sprite != NULL)
-	int i = -1;
-	while (++i < cub->sprite_count)
+	sprite = get_next_sprite(cub, NULL);
+	while (sprite)
 	{
-		diff.x = (cub->sprites[i].pos.x - cub->player.pos.x);
-		diff.y = (cub->sprites[i].pos.y - cub->player.pos.z);
+		diff.x = (sprite->pos.x - cub->player.pos.x);
+		diff.y = (sprite->pos.y - cub->player.pos.z);
 		transform.x = inv_det * (sin(cub->player.rot) * diff.x - cos(cub->player.rot) * diff.y);
 		transform.y = inv_det * (-cam.plane.y * diff.x + cam.plane.x * diff.y);
-		if (transform.y < 0.05)
-			continue ;
 		screen_pos.x = (int)((SW / 2) * (1 - transform.x / transform.y));
 		screen_pos.y = SH / 2;
-		draw_sprite(cub, cub->sprites[i].tex, transform.y, screen_pos);
-		// sprite = get_next_sprite(cub);
+		if (!(transform.y < 0.05 || screen_pos.x < 0 || screen_pos.x > SW))
+			draw_sprite(cub, *sprite, transform.y, screen_pos);
+		sprite = get_next_sprite(cub, sprite);
 	}
 }
 // double	dngl = wrap_angle(atan2(diff.y, diff.x) - cub->player.rot);

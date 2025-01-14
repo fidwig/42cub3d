@@ -6,18 +6,18 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:18:17 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 21:49:29 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/14 17:26:13 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "cub_bonus.h"
 
-// light = 8 * pow(1 - d / LIGHT_RANGE, 3);
+	// light = (LIGHT_RANGE - d) * LIGHT_STRENGTH;
+	// light = (LIGHT_RANGE / 2) * pow(1 - d / LIGHT_RANGE, 3);
 double	compute_light(double d)
 {
 	double	light;
 
-	// light = (LIGHT_RANGE - d) * LIGHT_STRENGTH;
 	light = LIGHT_STRENGTH / (0.2 + d);
 	return (light);
 }
@@ -30,6 +30,9 @@ double	get_light(t_cub *cub, t_dvec3 tar, double light)
 
 	i = -1;
 	(void) tar;
+	d = dist((t_dvec3){cub->player.pos.x, cub->player.pos.z, 0}, tar);
+	if (d < LIGHT_RANGE + 20)
+		light = compute_light(d);
 	while (++i < cub->sprite_count)
 	{
 		if (!cub->sprites[i].light)
