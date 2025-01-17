@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 16:15:00 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:30:37 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	parse_scene(t_cub *cub, char *map_name)
 	int				res;
 
 	data = (t_pars_data){0};
+	cub->pars_data = &data;
 	if (!check_name(map_name))
 		stop_error(1, cub, "Bad scene file extension");
 	data.fd = open(map_name, O_RDONLY);
@@ -102,17 +103,17 @@ int	parse_scene(t_cub *cub, char *map_name)
 	res = get_infos(cub, &data);
 	if (res && res < 5)
 		stop_error(1, cub, err_txt(0, res));
-	else if (!res)
-		data.line = NULL;
+	/* else if (!res) */
+	/* 	data.line = NULL; */
 	res = check_infos(cub);
 	if (res)
 		stop_error(1, cub, err_txt(1, res));
-	res = get_map(cub, data.fd, data.line);
+	res = get_map(cub, &data);
 	if (res)
 		stop_error(1, cub, err_txt(2, res));
 	close(data.fd);
 	if (!check_map(cub->map.raw, &cub->player))
 		stop_error(1, cub, "Incorrect map");
 	reset_map(cub->map.raw);
-	return (1);
+	return (cub->pars_data = NULL, 1);
 }

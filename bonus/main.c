@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 16:29:58 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:03:33 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	cub_init(t_cub *cub)
 	cub->mlx = mlx_init();
 	if (!get_tex_imgs(cub->mlx, &cub->map))
 		stop_error(1, cub, "Getting textures failed");
+	if (!get_tex_sprites(cub))
+		stop_error(1, cub, "Getting sprites textures failed");
 	cub->image.img = mlx_new_image(cub->mlx, SW, SH);
 	cub->image.addr = mlx_get_data_addr(cub->image.img,
 			&cub->image.bpp, &cub->image.len, &cub->image.endian);

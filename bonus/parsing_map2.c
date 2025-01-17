@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 23:20:54 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/08 23:54:34 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:27:48 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	lst_to_map(t_cub *cub, t_list *lines, int size)
 		node = lines;
 		lines = lines->next;
 		if (!add_line_to_lines(node, &cub->map.raw[i], len_line))
-			return (4);
+			return (5);
 		free2(node);
 		i++;
 	}

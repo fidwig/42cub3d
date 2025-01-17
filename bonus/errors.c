@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 16:29:12 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:29:43 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,29 @@ static void	clean_imgs_tex(t_cub *cub)
 		mlx_destroy_image(cub->mlx, cub->map.ceil_tex.img);
 	if (cub->map.floor_tex.img)
 		mlx_destroy_image(cub->mlx, cub->map.floor_tex.img);
+	if (cub->map.sky_tex.img)
+		mlx_destroy_image(cub->mlx, cub->map.sky_tex.img);
 	if (cub->minimap.img)
 		mlx_destroy_image(cub->mlx, cub->minimap.img);
 }
 
 void	clean_exit(int exit_code, t_cub *cub)
 {
+	int	i;
+
 	clean_imgs_tex(cub);
+	if (cub->pars_data && cub->pars_data->lstsprites)
+		ft_lstclear(&cub->pars_data->lstsprites, &free);
+	if (cub->sprites)
+	{
+		i = 0;
+		while (i < cub->sprite_count)
+		{
+			if (cub->sprites[i].tex.img)
+				mlx_destroy_image(cub->mlx, cub->sprites[i].tex.img);
+			i++;
+		}
+	}
 	if (cub->win)
 		mlx_destroy_window(cub->mlx, cub->win);
 	if (cub->mlx)
@@ -55,23 +71,18 @@ int	clean_exit_hook(t_cub *cub)
 
 const char	*err_txt(int phase, int err_n)
 {
-	static const char	*infos[] = {"",
-		"Unexpected line while getting textures & colours",
-		"Duplicate texture or colour",
-		"Unable to open texture file",
-		"Problem getting floor/ceil colours"};
-	static const char	*checkinfos[] = {"",
-		"Missing wall texture",
-		"Duplicate ceil: found colour + texture",
-		"Duplicate floor: found colour + texture",
-		"Missing ceil or sky texture/colour",
-		"Missing floor texture/colour",
-		"Use of sky & ceil textures at the same time forbidden",
-		"Door texture set but no open door",
-		"Open door texture set but no door"};
-	static const char	*getmap[] = {"", "get_map: No initial player position \
-set", "get_map: mem allocation error", "get_map: bad map format: forbidden \
-newlines", "get_map: problem creating raw map"};
+	static const char	*infos[] = {"", "Unexpected line while getting textures \
+& colours", "Duplicate texture or colour", "Unable to open texture file",
+"Problem getting floor/ceil colours"};
+	static const char	*checkinfos[] = {"", "Missing wall texture", "Duplicate \
+ceil: found colour + texture", "Duplicate floor: found colour + texture",
+"Missing ceil or sky texture/colour", "Missing floor texture/colour", "Use of \
+sky & ceil textures at the same time forbidden",
+"Door texture set but no open door", "Open door texture set but no door"};
+	static const char	*getmap[] = {"", "get_lstmap: No initial player \
+position set", "get_lstmap: mem allocation error", "get_lstmap: bad map format: forbidden newlines", "lst_to_map: mem allocation error for map", "lst_to_map: \
+mem allocation error for a line", "lst_to_sprites: mem allocation error for \
+sprites array"};
 
 	if (phase == 0 && (unsigned long)err_n < sizeof(infos))
 		return (infos[err_n]);

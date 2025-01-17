@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/13 18:31:22 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:43:23 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,7 @@ struct s_pars_data
 	char		*line;
 	t_sprite	sprites[26];
 	char		names[27];
+	int			n_sprites;
 	t_list		*lstsprites;
 };
 
@@ -232,6 +233,8 @@ struct s_cub
 
 	t_sprite	*sprites;
 	int			sprite_count;
+
+	t_pars_data	*pars_data;
 
 	t_image		notex;
 	t_info		info;
