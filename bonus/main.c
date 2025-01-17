@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/14 12:03:33 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:09:09 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ static int	update(t_cub *cub)
 	clear_image_bicolor(&cub->image, cub->map.ceil_col, cub->map.floor_col);
 	raycasting(cub);
 	draw_minimap(cub);
-	/* draw_sprites(cub); */
+	if (cub->sprite_count > 0)
+		draw_sprites(cub);
 	draw_image(&cub->image, &cub->minimap, 10, 10);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->image.img, 0, 0);
 	update_info(&cub->info);

@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/17 11:30:37 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:07:55 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,11 @@ static int	dfs(char **map, int x, int y)
 	return (1);
 }
 
-static int	check_map(char **map, t_player *p)
+static int	check_map(char **map)
 {
 	int	x;
 	int	y;
 
-	if (!dfs(map, p->pos.x, p->pos.y))
-		return (0);
 	y = 0;
 	while (map[y])
 	{
@@ -103,8 +101,6 @@ int	parse_scene(t_cub *cub, char *map_name)
 	res = get_infos(cub, &data);
 	if (res && res < 5)
 		stop_error(1, cub, err_txt(0, res));
-	/* else if (!res) */
-	/* 	data.line = NULL; */
 	res = check_infos(cub);
 	if (res)
 		stop_error(1, cub, err_txt(1, res));
@@ -112,8 +108,15 @@ int	parse_scene(t_cub *cub, char *map_name)
 	if (res)
 		stop_error(1, cub, err_txt(2, res));
 	close(data.fd);
-	if (!check_map(cub->map.raw, &cub->player))
+	if (!check_map(cub->map.raw))
+	{
+		for (int i = 0; i < cub->map.height; i++)
+			ft_dprintf(2, "%s\n", cub->map.raw[i]);
 		stop_error(1, cub, "Incorrect map");
+	}
 	reset_map(cub->map.raw);
+	/* for (int i = 0; i < cub->sprite_count; i++) */
+	/* 	printf("sprite %c: (%.2f, %.2f), light = %d\n", cub->sprites[i].name, */
+	/* 		   cub->sprites[i].pos.x, cub->sprites[i].pos.y, cub->sprites[i].light); */
 	return (cub->pars_data = NULL, 1);
 }

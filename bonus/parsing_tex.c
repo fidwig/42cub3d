@@ -6,12 +6,27 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:46:27 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/17 11:32:02 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:07:03 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
 #include <fcntl.h>
+
+static int	config_sprite(t_pars_data *d, t_sprite *s_ptr)
+{
+	size_t	i;
+
+	i = ft_strlen(d->line) - 1;
+	while (i > 0 && d->line[i] && (d->line[i] == '\n' || d->line[i] == ' '))
+		i--;
+	s_ptr->light = (d->line[i] == '1');
+	if (d->line[i] == '1' || d->line[i] == '0')
+		d->line[i] = '\0';
+	else if (d->line[i] != 'm')
+		return (0);
+	return (1);
+}
 
 static char	**get_sprite_name_ptr(t_pars_data *d)
 {
@@ -33,14 +48,17 @@ static char	**get_sprite_name_ptr(t_pars_data *d)
 				return (NULL);
 			d->sprites[i].name = d->line[2];
 			d->names[i] = d->line[2];
+			if (!config_sprite(d, &d->sprites[i]))
+				return (NULL);
 			return (&d->sprites[i].tex.name);
 		}
 	}
 	return (NULL);
 }
 
-static char	**get_name_ptr(t_cub *cub, t_pars_data *d)
+static char	**get_name_ptr(t_cub *cub, t_pars_data *d, size_t *i)
 {
+	*i = 2;
 	if (!ft_strncmp(d->line, "NO ", 3))
 		return (&cub->map.nor_tex.name);
 	if (!ft_strncmp(d->line, "SO ", 3))
@@ -59,6 +77,7 @@ static char	**get_name_ptr(t_cub *cub, t_pars_data *d)
 		return (&cub->map.opendoor_tex.name);
 	if (!ft_strncmp(d->line, "SK ", 3))
 		return (&cub->map.sky_tex.name);
+	*i = 3;
 	return (get_sprite_name_ptr(d));
 }
 
@@ -70,10 +89,9 @@ int	get_texture(t_cub *cub, t_pars_data *d)
 
 	if (empty_line(d->line))
 		return (1);
-	i = 2;
+	name = get_name_ptr(cub, d, &i);
 	while (d->line[i] && d->line[i] == ' ')
 		i++;
-	name = get_name_ptr(cub, d);
 	if (!name)
 		return (1);
 	if (*name)

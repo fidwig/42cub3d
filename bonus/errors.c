@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/17 11:29:43 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:53:25 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ ceil: found colour + texture", "Duplicate floor: found colour + texture",
 sky & ceil textures at the same time forbidden",
 "Door texture set but no open door", "Open door texture set but no door"};
 	static const char	*getmap[] = {"", "get_lstmap: No initial player \
-position set", "get_lstmap: mem allocation error", "get_lstmap: bad map format: forbidden newlines", "lst_to_map: mem allocation error for map", "lst_to_map: \
+position set", "get_lstmap: mem allocation error", "get_lstmap: bad map format: forbidden character", "lst_to_map: mem allocation error for map", "lst_to_map: \
 mem allocation error for a line", "lst_to_sprites: mem allocation error for \
 sprites array"};
 

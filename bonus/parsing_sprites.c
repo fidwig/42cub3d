@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:40:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/17 11:33:38 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:05:54 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	save_sprite(t_pars_data *d, int row, int col)
 	n_sprite = ft_strchr(d->names, d->line[col]) - d->names;
 	new->name = d->names[n_sprite];
 	new->tex = d->sprites[n_sprite].tex;
-	new->pos = (t_dvec3){col + 0.5, 0, row + 0.5};
+	new->pos = (t_dvec3){col + 0.5, row + 0.5, 0};
+	new->light = d->sprites[n_sprite].light;
 	d->line[col] = '0';
 	d->n_sprites++;
 	return (1);
@@ -49,5 +50,6 @@ int	lst_to_sprites(t_cub *cub, t_pars_data *d)
 		d->lstsprites = node_next;
 		i++;
 	}
+	cub->sprite_count = i;
 	return (0);
 }
