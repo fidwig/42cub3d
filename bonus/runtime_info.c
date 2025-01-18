@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:45:24 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 19:24:21 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/18 18:53:35 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	init_info(t_info *info)
 {
 	*info = (t_info){0};
 	info->start_time = get_now(MSEC);
-	info->last_frame = info->start_time;
 	return (0);
 }
 

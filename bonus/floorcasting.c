@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:14:54 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 17:36:08 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/18 19:03:15 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_fcdat(t_cub *cub, t_fcdat *fc, int y)
 		fc->sfloor.x = fc->info.pos.x + fc->info.x_wall;
 		fc->sfloor.y = fc->info.pos.y + 1.0;
 	}
+	fc->sfloor.z = 0.0;
 	if (y >= SH)
 		y = SH - 1;
 	fc->light = get_light(cub, fc->sfloor);
@@ -52,23 +53,19 @@ void	floorcasting(t_cub *cub, t_ray ray, int x)
 	h = clamp(SH / (fc.info.dist * 1.0), 0, SH);
 	y = SH / 2 + h / 2 - 1;
 	init_fcdat(cub, &fc, y);
-	static double lghts[32][32];
 	while (++y < SH)
 	{
 		fc.w = cub->y_dist_lookup[y][0] / fc.info.dist;
 		fc.cfloor.x = fc.w * fc.sfloor.x + (1.0 - fc.w) * ray.origin.x;
 		fc.cfloor.y = fc.w * fc.sfloor.y + (1.0 - fc.w) * ray.origin.z;
+		fc.cfloor.z = 0.0;
 		texcoord.x = (int)(fc.cfloor.x * tex.width) % tex.width;
 		texcoord.y = (int)(fc.cfloor.y * tex.height) % tex.height;
-		// if(texcoord.y != 0)
-		// 	lghts[texcoord.x][texcoord.y] = lghts[texcoord.x][texcoord.y - 1];
-		// if (!((texcoord.y + (texcoord.x % 2) * 2) % 4) || texcoord.y == 0)
-			lghts[texcoord.x][texcoord.y] = get_light(cub, fc.cfloor);
-		// if (!((y + (x % 2) * 2) % 4))
-		// 	fc.light = get_light(cub, fc.cfloor);
+		if (!((y + (x % 2) * 2) % 4))
+			fc.light = get_light(cub, fc.cfloor);
 		pixel_put(&cub->image, x + cub->headbob.x, y + cub->headbob.y,
 			dim_color(pixel_get(tex, texcoord.x, texcoord.y),
-				lghts[texcoord.x][texcoord.y]));
+				fc.light));
 	}
 }
 	// if (!(((int)(fc.cfloor.y * 32) + ((int)(fc.cfloor.x * 32))) % 2))
