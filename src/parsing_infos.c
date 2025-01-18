@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/08 14:10:20 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:50:57 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static bool	get_texture(t_cub *cub, char *line)
 	if (*name)
 		return (false);
 	*name = gc_strtrim(&line[i], " \n");
-	if (ft_strcmp(&(*name)[ft_strlen(*name) - 4], ".xpm"))
+	if (!*name || ft_strcmp(&(*name)[ft_strlen(*name) - 4], ".xpm"))
 		return (free2(*name), *name = NULL, false);
 	fd_tex = open(*name, O_RDONLY);
 	if (fd_tex == -1)

@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:01:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/18 19:35:06 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:50:17 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	*malloc2(size_t size)
 
 void	free2(void *addr)
 {
-	trash_remove(get_trash(), addr);
+	if (addr)
+		trash_remove(get_trash(), addr);
 }
 
 void	trash_clear(void)
