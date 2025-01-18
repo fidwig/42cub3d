@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 11:20:43 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:04:34 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	init_y_dist_lookup_table(t_cub *cub)
 static void	cub_init(t_cub *cub)
 {
 	cub->mlx = mlx_init();
+	if (!cub->mlx)
+		stop_error(1, cub, "MLX init failed");
 	if (!get_tex_imgs(cub->mlx, &cub->map))
 		stop_error(1, cub, "Getting textures failed");
 	if (!get_tex_sprites(cub))
