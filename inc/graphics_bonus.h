@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:31:32 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/14 19:12:56 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/16 18:36:39 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void			floorcasting(t_cub *cub, t_ray ray, int x);
 void			render_sky(t_cub *cub);
 void			draw_square(t_image *img, t_vec3 pos, int s, t_uicol color);
 void			draw_sprites(t_cub *cub);
+void			get_sprite_color(t_image tex, t_sdrawing *dr);
 
 #endif
