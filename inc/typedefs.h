@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/08 14:18:57 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:46:28 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ struct s_cub
 	t_info		info;
 };
 
-# ifndef __linux__
+# ifdef __APPLE__
 
 enum e_key
 {

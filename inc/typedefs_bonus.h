@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/18 09:52:30 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:46:49 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ enum e_mapchars
 	DOOR = 'D',
 	DOOR_OPEN = 'O',
 	SPACE = ' ',
-	TMPEMPTY = '9'
+	TMP = '2'
 };
 
 struct s_image
@@ -249,7 +249,7 @@ struct s_cub
 	t_info		info;
 };
 
-# ifndef __linux__
+# ifdef __APPLE__
 
 enum e_key
 {

@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/18 12:09:20 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:43:47 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	dfs(char **map, int x, int y)
 {
 	if (y < 0 || !map[y] || x < 0 || !map[y][x])
 		return (0);
-	if (map[y][x] == WALL || map[y][x] == TMPEMPTY)
+	if (map[y][x] == WALL || (map[y][x] >= TMP && map[y][x] <= TMP + 2))
 		return (1);
-	map[y][x] = TMPEMPTY;
+	map[y][x] = TMP + (map[y][x] == DOOR) + (2 * (map[y][x] == DOOR_OPEN));
 	if (!dfs(map, x - 1, y))
 		return (0);
 	if (!dfs(map, x + 1, y))
@@ -78,8 +78,12 @@ static void	reset_map(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == TMPEMPTY)
+			if (map[i][j] == TMP)
 				map[i][j] = EMPTY;
+			else if (map[i][j] == TMP + 1)
+				map[i][j] = DOOR;
+			else if (map[i][j] == TMP + 2)
+				map[i][j] = DOOR_OPEN;
 			j++;
 		}
 		i++;

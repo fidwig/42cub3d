@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 10:16:39 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:54:27 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,21 @@ void	draw_column(t_cub *cub, int x, int h, t_ray ray)
 	t_image	tex;
 	t_vec3	texcoord;
 
+	col = 0x0;
 	if (h < 0)
 		h = SH;
 	tex = get_tex(cub, ray.info.facing);
 	texcoord.x = (int)(ray.info.x_wall * tex.width);
 	if (ray.info.facing == EAST || ray.info.facing == SOUTH)
 		texcoord.x = tex.width - texcoord.x - 1;
-	texcoord.y = -1;
+	texcoord.z = -1;
 	j = SH / 2 - h / 2;
 	if (j < 0)
 		j = -1;
 	while (++j < (SH / 2 + h / 2) && j <= SH)
 	{
-		if (j < 0)
-			continue ;
 		texcoord.y = (int)(tex.height * ((j - (SH / 2 - h / 2)) % h) / h);
-		/* if (texcoord.y != texcoord.z) */
+		if (texcoord.y != texcoord.z)
 			col = pixel_get(tex, texcoord.x, texcoord.y);
 		texcoord.z = texcoord.y;
 		pixel_put(&cub->image, x, j, col);

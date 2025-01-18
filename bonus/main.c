@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 12:07:11 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:18:52 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static int	update(t_cub *cub)
 	inputs_handler(cub);
 	if (cub->map.sky_tex.name)
 		render_sky(cub);
-	clear_image_bicolor(&cub->image, cub->map.ceil_col, cub->map.floor_col);
+	else
+		clear_image_bicolor(&cub->image, cub->map.ceil_col, cub->map.floor_col);
 	raycasting(cub);
 	draw_minimap(cub);
 	if (cub->sprite_count > 0)
