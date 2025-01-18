@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:46:27 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/18 11:53:11 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:09:35 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	**get_sprite_name_ptr(t_pars_data *d)
 	if (!ft_strncmp(d->line, "S_", 2) && d->line[2])
 	{
 		if (d->line[2] >= 'a' && d->line[2] <= 'z' && (d->line[3] == ' '
-			|| d->line[3] == '\n'))
+				|| d->line[3] == '\n'))
 		{
 			i = 0;
 			while (d->names[i])

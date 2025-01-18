@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/17 13:07:55 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:09:20 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,7 @@ int	parse_scene(t_cub *cub, char *map_name)
 		stop_error(1, cub, err_txt(2, res));
 	close(data.fd);
 	if (!check_map(cub->map.raw))
-	{
-		for (int i = 0; i < cub->map.height; i++)
-			ft_dprintf(2, "%s\n", cub->map.raw[i]);
 		stop_error(1, cub, "Incorrect map");
-	}
 	reset_map(cub->map.raw);
-	/* for (int i = 0; i < cub->sprite_count; i++) */
-	/* 	printf("sprite %c: (%.2f, %.2f), light = %d\n", cub->sprites[i].name, */
-	/* 		   cub->sprites[i].pos.x, cub->sprites[i].pos.y, cub->sprites[i].light); */
 	return (cub->pars_data = NULL, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/14 11:47:18 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:06:24 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static bool	get_colour(t_cub *cub, char *line, char part)
 		ptr -= sizeof(unsigned char);
 	}
 	if (part == 'C')
-		cub->map.ceil_set = (cub->map.ceil_col = rgbtou(rgb)) || true;
+		cub->map.ceil_set = ((cub->map.ceil_col = rgbtou(rgb)) || true);
 	else
-		cub->map.floor_set = (cub->map.floor_col = rgbtou(rgb)) || true;
+		cub->map.floor_set = ((cub->map.floor_col = rgbtou(rgb)) || true);
 	return (true);
 }
 
@@ -108,7 +108,7 @@ int	get_infos(t_cub *cub, t_pars_data *d)
 		}
 		res = infos_handle_line(cub, d);
 		if (res && res < 5)
-			return (close(d->fd), free(d->line), d->line = NULL,  res);
+			return (close(d->fd), free(d->line), d->line = NULL, res);
 		else if (res && res == 5)
 			return (res);
 		infos_count++;

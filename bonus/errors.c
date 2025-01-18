@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/17 11:53:25 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:08:47 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,15 @@ const char	*err_txt(int phase, int err_n)
 {
 	static const char	*infos[] = {"", "Unexpected line while getting textures \
 & colours", "Duplicate texture or colour", "Unable to open texture file",
-"Problem getting floor/ceil colours"};
+		"Problem getting floor/ceil colours"};
 	static const char	*checkinfos[] = {"", "Missing wall texture", "Duplicate \
 ceil: found colour + texture", "Duplicate floor: found colour + texture",
-"Missing ceil or sky texture/colour", "Missing floor texture/colour", "Use of \
-sky & ceil textures at the same time forbidden",
-"Door texture set but no open door", "Open door texture set but no door"};
+		"Missing ceil or sky texture/colour", "Missing floor texture/colour",
+		"Use of sky & ceil textures at the same time forbidden", "Door texture \
+set but no open door", "Open door texture set but no door"};
 	static const char	*getmap[] = {"", "get_lstmap: No initial player \
-position set", "get_lstmap: mem allocation error", "get_lstmap: bad map format: forbidden character", "lst_to_map: mem allocation error for map", "lst_to_map: \
+position set", "get_lstmap: mem allocation error", "get_lstmap: bad map format: \
+forbidden character", "lst_to_map: mem allocation error for map", "lst_to_map: \
 mem allocation error for a line", "lst_to_sprites: mem allocation error for \
 sprites array"};
 

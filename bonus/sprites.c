@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:43:37 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/14 19:10:59 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/18 12:11:36 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_sprite	*get_next_sprite(t_cub *cub, t_sprite *last)
 			dn = dc;
 		}
 	}
-	dprintf(2, "\n");
 	return (next);
 }
 

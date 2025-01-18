@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 12:04:34 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:07:11 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	cub_init(t_cub *cub)
 	init_y_dist_lookup_table(cub);
 	if (MOUSE_HIDE)
 		mlx2_mouse_hide(cub->mlx, cub->win);
-	/* mlx_mouse_show(cub->mlx, cub->win); */
 	init_info(&cub->info);
 }
 

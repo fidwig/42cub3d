@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:40:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/18 11:19:20 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:06:48 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	lst_to_sprites(t_cub *cub, t_pars_data *d)
 	while (d->lstsprites && i < d->n_sprites)
 	{
 		node_next = d->lstsprites->next;
-		cub->sprites[i] = *((t_sprite*)(d->lstsprites->content));
+		cub->sprites[i] = *((t_sprite *)(d->lstsprites->content));
 		free(d->lstsprites->content);
 		free(d->lstsprites);
 		d->lstsprites = node_next;
