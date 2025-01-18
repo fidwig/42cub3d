@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 01:37:31 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 16:30:11 by bazaluga         ###   ########.fr       */
+/*   Created: 2024/11/13 01:28:12 by jsommet           #+#    #+#             */
+/*   Updated: 2025/01/14 18:39:51 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	dda_step(t_cast_data *cast, t_map map)
 		}
 	}
 }
+
+		// if (cast->flag)
+		// 	cast->ray.dir.y *= -1;
+		// else
+		// 	cast->ray.dir.x *= -1;
 
 void	dda(t_cast_data	*cast, t_map map)
 {

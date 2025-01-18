@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sky.c                                              :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:06:47 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 16:30:05 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/14 18:41:05 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub_bonus.h"
 
@@ -38,8 +38,8 @@ void	render_sky(t_cub *cub)
 			if (texcoord.x > tex.width)
 				texcoord.x -= tex.width;
 			texcoord.y = (1 - scr.y / (distortion * SKY_HEIGHT)) * tex.height;
-			pixel_put(&cub->image, scr.x + cub->headbob.x, SKY_HEIGHT - scr.y + cub->headbob.y,
-				pixel_get(tex, texcoord.x, texcoord.y));
+			pixel_put(&cub->image, scr.x + cub->headbob.x, SKY_HEIGHT - scr.y
+				+ cub->headbob.y, pixel_get(tex, texcoord.x, texcoord.y));
 		}
 	}
 }

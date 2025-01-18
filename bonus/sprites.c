@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:43:37 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/11 21:40:25 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/14 19:10:59 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub_bonus.h"
 
@@ -18,49 +18,73 @@ double	dist(t_dvec3 a, t_dvec3 b)
 			* (a.y - b.y) + (a.z - b.z) * (a.z - b.z)));
 }
 
-t_sprite	*get_next_sprite(t_cub *cub)
+t_sprite	*get_next_sprite(t_cub *cub, t_sprite *last)
 {
-	static t_sprite		*next;
-	double				d;
-	int					i;
+	t_sprite	*next;
+	double		d;
+	double		dn;
+	double		dc;
+	int			i;
 
-	i = -1;
-	if (next)
-		d = next->dist;
-	else
-		d = 1e4;
+	d = 1e4;
+	if (last)
+		d = dist((t_dvec3){cub->player.pos.x, cub->player.pos.z, 0}, last->pos);
 	next = NULL;
+	dn = 0;
+	i = -1;
 	while (++i < cub->sprite_count)
 	{
-		if (cub->sprites[i].dist < d && (!next || cub->sprites[i].dist > next->dist))
+		dc = dist((t_dvec3){cub->player.pos.x, cub->player.pos.z, 0},
+				cub->sprites[i].pos);
+		if (dc < d && (dc > dn))
+		{
 			next = &cub->sprites[i];
+			dn = dc;
+		}
 	}
+	dprintf(2, "\n");
 	return (next);
 }
 
-void	draw_sprite(t_cub *cub, t_image tex, double d, t_vec3 screen_pos)
-{
-	t_vec3	sp;
-	t_vec3	texcoord;
-	int		size;
+	// if (size < 0 || size > SH * 2)
+	// 	size = SH * 2;
 
-	size = SH / d;
-	sp.x = screen_pos.x - size / 2 + 1;
-	if (sp.x < 0)
-		sp.x = -1;
-	while (++sp.x < screen_pos.x + size / 2 && sp.x < SW)
+void	init_drawing_vars(t_cub *cub, t_sprite s, double d, t_sdrawing *dr)
+{
+	dr->size = SH / d;
+	dr->sp.x = s.scr.x - dr->size / 2 + 1;
+	dr->light = 1.5;
+	if (!s.light)
+		dr->light = get_light(cub, s.pos,
+				cub->y_dist_lookup[(int)clamp(s.scr.x
+					+ dr->size / 2, 0, 255)][1]);
+	if (dr->sp.x < 0)
+		dr->sp.x = -1;
+}
+
+void	draw_sprite(t_cub *cub, t_sprite sprite, double d, t_vec3 scr)
+{
+	t_sdrawing	dr;
+
+	init_drawing_vars(cub, sprite, d, &dr);
+	while (++dr.sp.x < scr.x + dr.size / 2 && dr.sp.x < SW)
 	{
-		if (cub->z_buffer[sp.x] < d)
+		if (cub->z_buffer[dr.sp.x] < d)
 			continue ;
-		sp.y = screen_pos.y - (size / 2 + 1);
-		if (sp.y < 0)
-			sp.y = -1;
-		while (++sp.y < screen_pos.y + size / 2 && sp.y < SH)
+		dr.sp.y = scr.y - (dr.size / 2 + 1);
+		if (dr.sp.y < 0)
+			dr.sp.y = -1;
+		while (++dr.sp.y < scr.y + dr.size / 2 && dr.sp.y < SH)
 		{
-			texcoord.x = (int)(tex.width * ((sp.x - (screen_pos.x - size / 2)) / (double)size));
-			texcoord.y = (int)(tex.width * ((sp.y - (screen_pos.y - size / 2)) / (double)size));
-			texcoord.y += tex.width * ((int)(cub->info.last_frame / 125) % 4);
-			pixel_put(&cub->image, sp.x + cub->headbob.x, sp.y + cub->headbob.y, dim_color(pixel_get(tex, texcoord.x, texcoord.y), 1.5 + 0*LIGHT_STRENGTH/(0.9 + d)));
+			dr.texcoord.x = (int)(sprite.tex.width * ((dr.sp.x
+							- (scr.x - dr.size / 2)) / (double)dr.size));
+			dr.texcoord.y = (int)(sprite.tex.width * ((dr.sp.y
+							- (scr.y - dr.size / 2)) / (double)dr.size));
+			dr.texcoord.y += sprite.tex.width
+				* ((int)(cub->info.last_frame / 125) % 4);
+			pixel_put(&cub->image, dr.sp.x + cub->headbob.x,
+				dr.sp.y + cub->headbob.y, dim_color(pixel_get(sprite.tex,
+						dr.texcoord.x, dr.texcoord.y), 1.5));
 		}
 	}
 }
@@ -71,38 +95,29 @@ void	draw_sprite(t_cub *cub, t_image tex, double d, t_vec3 screen_pos)
 	*/
 void	draw_sprites(t_cub *cub)
 {
-	// t_sprite *sprite;
-	t_dvec3	transform;
-	t_dvec3	diff;
-	t_vec3	screen_pos;
-	t_camera cam;
-	double	inv_det;
+	t_sprite	*s;
+	t_dvec3		diff;
+	t_dvec3		transform;
+	t_camera	cam;
+	double		inv;
 
 	cam.focal = 1.0;
 	cam.plane = (t_dvec3){cos(cub->player.rot - M_PI / 2.0) * cam.focal,
 		sin(cub->player.rot - M_PI / 2.0) * cam.focal, 0};
-	inv_det = 1.0 / (cam.plane.x * sin(cub->player.rot) - cam.plane.y * cos(cub->player.rot));
-	// sprite = get_next_sprite(cub);
-	// while (sprite != NULL)
-	int i = -1;
-	while (++i < cub->sprite_count)
+	inv = 1.0 / (cam.plane.x * sin(cub->player.rot)
+			- cam.plane.y * cos(cub->player.rot));
+	s = get_next_sprite(cub, NULL);
+	while (s)
 	{
-		diff.x = (cub->sprites[i].pos.x - cub->player.pos.x);
-		diff.y = (cub->sprites[i].pos.y - cub->player.pos.z);
-		transform.x = inv_det * (sin(cub->player.rot) * diff.x - cos(cub->player.rot) * diff.y);
-		transform.y = inv_det * (-cam.plane.y * diff.x + cam.plane.x * diff.y);
-		if (transform.y < 0.05)
-			continue ;
-		screen_pos.x = (int)((SW / 2) * (1 - transform.x / transform.y));
-		screen_pos.y = SH / 2;
-		draw_sprite(cub, cub->sprites[i].tex, transform.y, screen_pos);
-		// sprite = get_next_sprite(cub);
+		diff.x = (s->pos.x - cub->player.pos.x);
+		diff.y = (s->pos.y - cub->player.pos.z);
+		transform.x = inv * (sin(cub->player.rot) * diff.x
+				- cos(cub->player.rot) * diff.y);
+		transform.y = inv * (-cam.plane.y * diff.x + cam.plane.x * diff.y);
+		s->scr.x = (int)((SW / 2) * (1 - transform.x / transform.y));
+		s->scr.y = SH / 2;
+		if (!(transform.y < 0.05 || s->scr.x < 0 || s->scr.x > SW))
+			draw_sprite(cub, *s, transform.y, s->scr);
+		s = get_next_sprite(cub, s);
 	}
 }
-// double	dngl = wrap_angle(atan2(diff.y, diff.x) - cub->player.rot);
-// if (dngl > M_PI)
-// 	dngl -= 2 * M_PI;
-
-// double	x_cam = (dngl + deg2rad(FOV / 2)) / deg2rad(FOV);
-// if (x_cam < -0.2 || x_cam > 1.2)
-// 	return ;rd.y));

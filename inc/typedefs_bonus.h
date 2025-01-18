@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/17 10:43:23 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 09:52:30 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_sprite		t_sprite;
 typedef struct s_cub		t_cub;
 typedef enum e_dir			t_dir;
 typedef struct s_pars_data	t_pars_data;
+typedef struct s_sdrawing	t_sdrawing;
 
 # define MAPCHARS "10NSEWDO "
 
@@ -149,8 +150,9 @@ struct s_fcdat
 	t_dvec3	sfloor;
 	t_dvec3	cfloor;
 	t_hit	info;
-	double	w;
 
+	double	w;
+	double	light;
 };
 
 struct s_ray
@@ -199,8 +201,7 @@ struct s_sprite
 	t_dvec3	pos;
 	t_image	tex;
 	bool	light;
-	// t_uicol	tint;
-	double	dist;
+	t_vec3	scr;
 };
 
 struct s_pars_data
@@ -211,6 +212,14 @@ struct s_pars_data
 	char		names[27];
 	int			n_sprites;
 	t_list		*lstsprites;
+};
+
+struct s_sdrawing
+{
+	t_vec3	sp;
+	t_vec3	texcoord;
+	double	light;
+	int		size;
 };
 
 struct s_cub

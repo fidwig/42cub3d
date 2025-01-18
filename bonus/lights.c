@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   lights.c                                           :+:      :+:    :+:   */
@@ -6,23 +6,24 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:18:17 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/11 21:38:36 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/14 18:40:01 by jsommet          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub_bonus.h"
 
-// light = 8 * pow(1 - d / LIGHT_RANGE, 3);
+	// light = (LIGHT_RANGE - d) * LIGHT_STRENGTH;
+	// light = (LIGHT_RANGE / 2) * pow(1 - d / LIGHT_RANGE, 3);
 double	compute_light(double d)
 {
 	double	light;
 
-	// light = (LIGHT_RANGE - d) * LIGHT_STRENGTH;
-	light = LIGHT_STRENGTH / (0.3 + d);
+	light = LIGHT_STRENGTH / (0.2 + d);
 	return (light);
 }
 
-double	get_light_intensity(t_cub *cub, t_dvec3 tar, double light)
+	// if (d < LIGHT_RANGE)[]
+double	get_light(t_cub *cub, t_dvec3 tar, double light)
 {
 	int		i;
 	double	tl;
@@ -30,12 +31,13 @@ double	get_light_intensity(t_cub *cub, t_dvec3 tar, double light)
 
 	i = -1;
 	(void) tar;
+	d = dist((t_dvec3){cub->player.pos.x, cub->player.pos.z, 0}, tar);
+	light = compute_light(d);
 	while (++i < cub->sprite_count)
 	{
 		if (!cub->sprites[i].light)
 			continue ;
 		d = dist(cub->sprites[i].pos, tar);
-		cub->sprites[i].dist = d;
 		if (d >= LIGHT_RANGE)
 			continue ;
 		tl = compute_light(d);
@@ -45,7 +47,7 @@ double	get_light_intensity(t_cub *cub, t_dvec3 tar, double light)
 	return (light);
 }
 
-// double	get_light_intensity(t_cub *cub, t_dvec3 tar)
+// double	get_light(t_cub *cub, t_dvec3 tar)
 // {
 // 	int		i;
 // 	double	tl;

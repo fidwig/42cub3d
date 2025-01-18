@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/17 13:09:09 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 09:34:47 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	init_y_dist_lookup_table(t_cub *cub)
 	{
 		dist = SH / (2.0 * y - SH);
 		cub->y_dist_lookup[y][0] = dist;
-		cub->y_dist_lookup[y][1] = pow((1.0 - (dist / 18)), 2);
+		cub->y_dist_lookup[y][1] = LIGHT_STRENGTH / (0.2 + dist);
 	}
 }
 
@@ -50,6 +50,7 @@ static void	cub_init(t_cub *cub)
 	init_y_dist_lookup_table(cub);
 	if (MOUSE_HIDE)
 		mlx2_mouse_hide(cub->mlx, cub->win);
+	/* mlx_mouse_show(cub->mlx, cub->win); */
 	init_info(&cub->info);
 }
 
