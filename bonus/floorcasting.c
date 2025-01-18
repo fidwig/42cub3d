@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:14:54 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 09:51:31 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:45:35 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_fcdat(t_cub *cub, t_fcdat *fc, int y)
 {
+	fc->sfloor.z = 0.0;
 	if (fc->info.facing == EAST)
 	{
 		fc->sfloor.x = fc->info.pos.x;

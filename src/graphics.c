@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 19:05:44 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/18 10:16:39 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	draw_column(t_cub *cub, int x, int h, t_ray ray)
 		if (j < 0)
 			continue ;
 		texcoord.y = (int)(tex.height * ((j - (SH / 2 - h / 2)) % h) / h);
-		if (texcoord.y != texcoord.z)
+		/* if (texcoord.y != texcoord.z) */
 			col = pixel_get(tex, texcoord.x, texcoord.y);
 		texcoord.z = texcoord.y;
 		pixel_put(&cub->image, x, j, col);
