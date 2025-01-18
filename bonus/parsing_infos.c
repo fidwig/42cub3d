@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/18 12:06:24 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:22:27 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	get_infos(t_cub *cub, t_pars_data *d)
 
 	infos_count = 0;
 	d->line = get_next_line(d->fd);
-	while (d->line && infos_count < 9)
+	while (d->line && infos_count < 34)
 	{
 		if (empty_line(d->line))
 		{
