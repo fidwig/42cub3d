@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/20 17:50:11 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:55:09 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	cub_init(t_cub *cub)
 	cub->player.spd = 3;
 	cub->player.pos = (t_dvec3){3.5, 0, 2.5};
 	cub->player.yaw = 0;
+	cub->player.pitch = 0;
 	cub->mouse_lock = MOUSE_LOCK;
 	init_y_dist_lookup_table(cub);
 	if (MOUSE_HIDE)

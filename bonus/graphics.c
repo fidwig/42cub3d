@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/20 17:45:56 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 18:17:38 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 		texcoord.x = tex.width - texcoord.x - 1;
 	col = 0x0;
 	texcoord.z = -1;
-	j = SH / 2 - h / 2 + 1 /*- mouse y*/;
+	j = SH / 2 - h / 2;
 	if (j < 0)
 		j = -1;
-	while (++j < (SH / 2 + h / 2 /*- mouse y*/) && j <= SH)
+	while (++j < (SH / 2 + h / 2) && j <= SH)
 	{
-		texcoord.y = (int)(tex.height * ((j - (SH / 2 - h / 2 /*- mouse y*/)) % h) / h);
+		texcoord.y = (int)(tex.height * ((j - (SH / 2 - h / 2)) % h) / h);
 		if (texcoord.y != texcoord.z)
 			col = dim_color(pixel_get(tex, texcoord.x, texcoord.y), light);
 		texcoord.z = texcoord.y;

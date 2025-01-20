@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:28:12 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/20 17:48:24 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 18:07:05 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	mouse_event_hook(int x, int y, t_cub *cub)
 	if (cub->mouse_lock)
 	{
 		cub->mouse_movement.x = x - (SW / 2);
-		cub->mouse_movement.y = y - (SW / 2);
+		cub->mouse_movement.y = y - (SH / 2);
 	}
 	else
 	{

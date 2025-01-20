@@ -6,18 +6,20 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/20 17:50:17 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 18:17:49 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
 
-void	rotate(t_cub *cub, float r)
+void	rotate(t_cub *cub, float y, float p)
 {
-	if (!r)
+	if (!y && !p)
 		return ;
 	cub->player.yaw = wrap_angle(cub->player.yaw
-			+ ((double)r * (M_PI / 10.0) * cub->info.delta / 100.0));
+			+ ((double)y * (M_PI / 10.0) * cub->info.delta / 100.0));
+	cub->player.pitch = wrap_angle(cub->player.pitch
+			+ ((double)p * (M_PI / 10.0) * cub->info.delta / 100.0));
 }
 
 double	sign(double n)
@@ -63,13 +65,15 @@ void	inputs_handler(t_cub *cub)
 {
 	move(cub, cub->inputs[XK_d] - cub->inputs[XK_a],
 		cub->inputs[XK_w] - cub->inputs[XK_s]);
-	rotate(cub, cub->inputs[RARR] - cub->inputs[LARR]);
+	rotate(cub, cub->inputs[RARR] - cub->inputs[LARR], 0);
 	if (cub->inputs[XK_space])
 		act_ray(cub);
-	if (cub->mouse_movement.x)
+	if (/*cub->mouse_lock && */cub->mouse_movement.x || cub->mouse_movement.y)
 	{
-		rotate(cub, (float) cub->mouse_movement.x * 0.05);
+		rotate(cub, (float) cub->mouse_movement.x * 0.05,
+			cub->mouse_movement.y * 0.05);
 		cub->mouse_movement.x = 0;
+		cub->mouse_movement.y = 0;
 		if (cub->mouse_lock)
 			mlx_mouse_move(cub->mlx, cub->win, SW / 2, SH / 2);
 	}
