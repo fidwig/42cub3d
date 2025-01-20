@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:43:37 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 12:11:36 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:40:26 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ t_sprite	*get_next_sprite(t_cub *cub, t_sprite *last)
 void	init_drawing_vars(t_cub *cub, t_sprite s, double d, t_sdrawing *dr)
 {
 	dr->size = SH / d;
+	dr->col = 0x0;
+	dr->ltc = (t_vec3){-1, -1, -1};
 	dr->sp.x = s.scr.x - dr->size / 2 + 1;
 	dr->light = 1.5;
 	if (!s.light)
-		dr->light = get_light(cub, s.pos,
-				cub->y_dist_lookup[(int)clamp(s.scr.x
-					+ dr->size / 2, 0, 255)][1]);
+		dr->light = get_light(cub, s.pos);
 	if (dr->sp.x < 0)
 		dr->sp.x = -1;
 }
@@ -81,9 +81,9 @@ void	draw_sprite(t_cub *cub, t_sprite sprite, double d, t_vec3 scr)
 							- (scr.y - dr.size / 2)) / (double)dr.size));
 			dr.texcoord.y += sprite.tex.width
 				* ((int)(cub->info.last_frame / 125) % 4);
+			get_sprite_color(sprite.tex, &dr);
 			pixel_put(&cub->image, dr.sp.x + cub->headbob.x,
-				dr.sp.y + cub->headbob.y, dim_color(pixel_get(sprite.tex,
-						dr.texcoord.x, dr.texcoord.y), 1.5));
+				dr.sp.y + cub->headbob.y, dr.col);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:14:54 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 19:04:24 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:02:20 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_fcdat(t_cub *cub, t_fcdat *fc, int y)
 	fc->sfloor.z = 0.0;
 	if (y >= SH)
 		y = SH - 1;
-	fc->light = get_light(cub, fc->sfloor, cub->y_dist_lookup[y][1]);
+	fc->light = get_light(cub, fc->sfloor);
 }
 
 void	floorcasting(t_cub *cub, t_ray ray, int x)
@@ -61,8 +61,8 @@ void	floorcasting(t_cub *cub, t_ray ray, int x)
 		fc.cfloor.z = 0.0;
 		texcoord.x = (int)(fc.cfloor.x * tex.width) % tex.width;
 		texcoord.y = (int)(fc.cfloor.y * tex.height) % tex.height;
-		if ((x + y) % 2)
-			fc.light = get_light(cub, fc.cfloor, cub->y_dist_lookup[y][1]);
+		if (!((y + (x % 2) * 2) % 4))
+			fc.light = get_light(cub, fc.cfloor);
 		pixel_put(&cub->image, x + cub->headbob.x, y + cub->headbob.y,
 			dim_color(pixel_get(tex, texcoord.x, texcoord.y),
 				fc.light));

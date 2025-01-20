@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 09:51:53 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:06:13 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	draw_layer(t_cub *cub, int x, int h, t_hit	info)
 	texcoord.x = (int)(info.x_wall * tex.width);
 	if (info.facing == EAST || info.facing == SOUTH)
 		texcoord.x = tex.width - texcoord.x - 1;
+	col = 0x0;
 	texcoord.z = -1;
 	j = SH / 2 - h / 2 + 1;
 	if (j < 0)

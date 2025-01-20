@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/18 19:46:49 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:04:34 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,8 @@ struct s_sdrawing
 	t_vec3	texcoord;
 	double	light;
 	int		size;
+	t_uicol	col;
+	t_vec3	ltc;
 };
 
 struct s_cub

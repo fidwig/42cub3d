@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:28:12 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/14 18:39:51 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:59:31 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,3 @@ void	raycasting(t_cub *cub)
 		draw_column_layers(cub, x, ray, cam.focal);
 	}
 }
-/*________TEMP________*/
