@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:43:48 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 17:51:59 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:50:11 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	draw_minimap(t_cub *cub)
 	}
 	draw_square(&cub->minimap, (t_vec3){48, 48, 0},
 		3, 0xffffff - (cub->map.col_floor));
-	draw_square(&cub->minimap, (t_vec3){49 + cos(cub->player.rot) * 5.0,
-		49 + sin(cub->player.rot) * 5.0, 0}, 2,
+	draw_square(&cub->minimap, (t_vec3){49 + cos(cub->player.yaw) * 5.0,
+		49 + sin(cub->player.yaw) * 5.0, 0}, 2,
 		0xffffff - (cub->map.col_floor));
 }

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/16 18:30:58 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:50:32 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ struct s_player
 {
 	t_dvec3	pos;
 	t_dvec3	upos;
-	double	rot;
+	double	yaw;
+	double	pitch;
 	double	spd;
 };
 
@@ -217,7 +218,7 @@ struct s_cub
 	void		*win;
 	t_image		image;
 	bool		inputs[258];
-	double		mouse_movement;
+	t_dvec3		mouse_movement;
 	bool		mouse_lock;
 
 	double		light_lookup[1000];

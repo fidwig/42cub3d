@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:28:12 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/16 18:50:23 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:50:11 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,23 @@ void	raycasting(t_cub *cub)
 	t_camera	cam;
 
 	cam.focal = 1.0;
-	cam.plane = (t_dvec3){cos(cub->player.rot - M_PI / 2.0) * cam.focal,
-		sin(cub->player.rot - M_PI / 2.0) * cam.focal, 0};
+	cam.plane = (t_dvec3){cos(cub->player.yaw - M_PI / 2.0) * cam.focal,
+		sin(cub->player.yaw - M_PI / 2.0) * cam.focal, 0};
 	x = -1;
-	unsigned long floor = 0;
-	unsigned long a;
+	// unsigned long floor = 0;
+	// unsigned long a;
 	while (++x < SW)
 	{
 		camera_x = 2.0 * (1 - x / ((double)SW)) - cam.focal;
-		ray_dir = (t_dvec3){cos(cub->player.rot) + cam.plane.x * camera_x,
-			sin(cub->player.rot) + cam.plane.y * camera_x, 0};
+		ray_dir = (t_dvec3){cos(cub->player.yaw) + cam.plane.x * camera_x,
+			sin(cub->player.yaw) + cam.plane.y * camera_x, 0};
 		ray = cast_ray(cub->player.pos, ray_dir, cub->map);
-		a = get_now(MSEC);
+		// a = get_now(MSEC);
 		floorcasting(cub, ray, x);
-		floor += get_now(MSEC) - a;
+		// floor += get_now(MSEC) - a;
 		draw_column_layers(cub, x, ray, cam.focal);
 	}
-	dprintf(2, "   floor render time:\t%lums\n", floor);
+	// dprintf(2, "   floor render time:\t%lums\n", floor);
 }
 	// unsigned long cast = 0;
 	// unsigned long walls = 0;

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:17:45 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 18:56:54 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:50:11 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	cub_init(t_cub *cub)
 	cub->win = mlx_new_window(cub->mlx, SW, SH, "cub3d");
 	cub->player.spd = 3;
 	cub->player.pos = (t_dvec3){3.5, 0, 2.5};
-	cub->player.rot = 0;
+	cub->player.yaw = 0;
 	cub->mouse_lock = MOUSE_LOCK;
 	init_y_dist_lookup_table(cub);
 	if (MOUSE_HIDE)
@@ -53,7 +53,7 @@ void	cub_init(t_cub *cub)
 
 int	update(t_cub *cub)
 {
-	// clear_image(&cub->image, BLACK);
+	clear_image(&cub->image, BLACK);
 	// if (cub->map.sky_tex_name)
 	render_sky(cub);
 	// else if (!cub->map.ceil_tex_name)
@@ -164,9 +164,9 @@ int	main(int argc, char **argv)
 	cub.sprites[3] = (t_sprite){(t_dvec3){4, 3, 0}, cub.map.torch_tex, 1, (t_vec3){0}};
 	cub.sprites[4] = (t_sprite){(t_dvec3){8, 8, 0}, cub.map.torch_tex, 1, (t_vec3){0}};
 	cub.sprites[5] = (t_sprite){(t_dvec3){15, 15, 0}, cub.map.torch_tex, 1, (t_vec3){0}};
-	unsigned long a = get_now(MSEC);
-	while (get_now(MSEC) < a + 1000)
-		;
+	// unsigned long a = get_now(MSEC);
+	// while (get_now(MSEC) < a + 1000)
+	// 	;
 	mlx_loop(cub.mlx);
 	return (0);
 }

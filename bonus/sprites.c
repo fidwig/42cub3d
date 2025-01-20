@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:43:37 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/16 18:40:26 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:50:11 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,17 @@ void	draw_sprites(t_cub *cub)
 	double		inv;
 
 	cam.focal = 1.0;
-	cam.plane = (t_dvec3){cos(cub->player.rot - M_PI / 2.0) * cam.focal,
-		sin(cub->player.rot - M_PI / 2.0) * cam.focal, 0};
-	inv = 1.0 / (cam.plane.x * sin(cub->player.rot)
-			- cam.plane.y * cos(cub->player.rot));
+	cam.plane = (t_dvec3){cos(cub->player.yaw - M_PI / 2.0) * cam.focal,
+		sin(cub->player.yaw - M_PI / 2.0) * cam.focal, 0};
+	inv = 1.0 / (cam.plane.x * sin(cub->player.yaw)
+			- cam.plane.y * cos(cub->player.yaw));
 	s = get_next_sprite(cub, NULL);
 	while (s)
 	{
 		diff.x = (s->pos.x - cub->player.pos.x);
 		diff.y = (s->pos.y - cub->player.pos.z);
-		transform.x = inv * (sin(cub->player.rot) * diff.x
-				- cos(cub->player.rot) * diff.y);
+		transform.x = inv * (sin(cub->player.yaw) * diff.x
+				- cos(cub->player.yaw) * diff.y);
 		transform.y = inv * (-cam.plane.y * diff.x + cam.plane.x * diff.y);
 		s->scr.x = (int)((SW / 2) * (1 - transform.x / transform.y));
 		s->scr.y = SH / 2;

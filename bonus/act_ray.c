@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:37:31 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/14 18:40:20 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:50:11 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	act_ray(t_cub *cub)
 
 	if (cub->info.last_frame - last < 250)
 		return ;
-	x = (int)(cub->player.pos.x + cos(cub->player.rot));
-	y = (int)(cub->player.pos.z + sin(cub->player.rot));
+	x = (int)(cub->player.pos.x + cos(cub->player.yaw));
+	y = (int)(cub->player.pos.z + sin(cub->player.yaw));
 	if (x == (int)cub->player.pos.x && y == (int)cub->player.pos.z)
 		return ;
 	cell = &cub->map.raw[y][x];

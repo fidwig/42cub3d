@@ -6,14 +6,14 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:06:47 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/16 15:17:12 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:50:11 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
 
 //texcoord.z is the texcoord offset because of the stupid norm
-//  - dotp(cub->player.upos, a2dv(cub->player.rot + M_PI / 2)) * 5.0
+//  - dotp(cub->player.upos, a2dv(cub->player.yaw + M_PI / 2)) * 5.0
 
 void	render_sky(t_cub *cub)
 {
@@ -24,8 +24,8 @@ void	render_sky(t_cub *cub)
 	double	distortion;
 
 	tex = cub->map.sky_tex;
-	texcoord.z = (double)tex.width * ((cub->player.rot) / (2 * M_PI))
-		- dotp(a2dv(cub->player.rot + M_PI / 2), cub->player.upos) * 10.0;
+	texcoord.z = (double)tex.width * ((cub->player.yaw) / (2 * M_PI))
+		- dotp(a2dv(cub->player.yaw + M_PI / 2), cub->player.upos) * 10.0;
 	visible_w = tex.width * 0.3;
 	scr.y = SKY_HEIGHT + 1;
 	while (--scr.y >= 0)
