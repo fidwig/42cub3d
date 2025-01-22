@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/17 19:01:53 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/22 15:51:49 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int				mlx2_mouse_hide(void *mlx_ptr, void *win_ptr);
 
 # define FOV			90
 # define HB_STRENGTH	8
-# define LIGHT_STRENGTH 1
+# define LIGHT_STRENGTH 2
 # define LIGHT_RANGE	8
 // # define LIGHT_TINT	0x22FF44
 // # define LIGHT_TINT	0xccffff
 // # define LIGHT_TINT	0xFD6D1C
-# define LIGHT_TINT	0x4444ED
-// # define LIGHT_TINT	0xffac70
+// # define LIGHT_TINT	0x4444ED
+# define LIGHT_TINT	0xffac70
 // # define LIGHT_TINT	0x1234ff
 
 // ERRORZ

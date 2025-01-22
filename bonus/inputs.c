@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/13 15:52:27 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:20:59 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	move(t_cub *cub, int x, int y)
 		/ (cub->map.height / 2);
 	if (x == 0 && y == 0)
 		return (cub->headbob = (t_dvec3){0}, (void)0);
-	cub->headbob.y = fabs(sin(cub->info.frame_count / 10.0)) * -HB_STRENGTH;
-	cub->headbob.x = cos(cub->info.frame_count / 10.0) * (HB_STRENGTH / 2);
+	cub->headbob.y = fabs(sin(cub->info.last_frame / 150.0)) * -HB_STRENGTH;
+	cub->headbob.x = cos(cub->info.last_frame / 150.0) * (HB_STRENGTH / 2);
 	mangle = wrap_angle(cub->player.rot + atan2(x, y));
 	move.x = cos(mangle) * cub->player.spd * (cub->info.delta / 1000.0);
 	move.z = sin(mangle) * cub->player.spd * (cub->info.delta / 1000.0);
