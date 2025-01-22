@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:46:27 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/18 12:09:35 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/23 00:33:27 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,26 @@ static int	config_sprite(t_pars_data *d, t_sprite *s_ptr)
 	return (1);
 }
 
-static char	**get_sprite_name_ptr(t_pars_data *d)
+static char	**get_sprite_name_ptr(t_pars_data *d, char *line)
 {
 	int			i;
 
-	if (!ft_strncmp(d->line, "S_", 2) && d->line[2])
+	if (!ft_strncmp(line, "S_", 2) && line[2])
 	{
-		if (d->line[2] >= 'a' && d->line[2] <= 'z' && (d->line[3] == ' '
-				|| d->line[3] == '\n'))
+		if (line[2] >= 'a' && line[2] <= 'z' && (line[3] == ' '
+				|| line[3] == '\n'))
 		{
 			i = 0;
 			while (d->names[i])
 			{
-				if (d->names[i] == d->line[2])
+				if (d->names[i] == line[2])
 					return (NULL);
 				i++;
 			}
 			if (i == 26)
 				return (NULL);
-			d->sprites[i].name = d->line[2];
-			d->names[i] = d->line[2];
+			d->sprites[i].name = line[2];
+			d->names[i] = line[2];
 			if (!config_sprite(d, &d->sprites[i]))
 				return (NULL);
 			return (&d->sprites[i].tex.name);
@@ -58,37 +58,38 @@ static char	**get_sprite_name_ptr(t_pars_data *d)
 
 static char	**get_name_ptr(t_cub *cub, t_pars_data *d, size_t *i)
 {
-	*i = 2;
-	if (!ft_strncmp(d->line, "NO ", 3))
+	*i = *i + 2;
+	if (!ft_strncmp(&d->line[*i - 2], "NO ", 3))
 		return (&cub->map.nor_tex.name);
-	if (!ft_strncmp(d->line, "SO ", 3))
+	if (!ft_strncmp(&d->line[*i - 2], "SO ", 3))
 		return (&cub->map.sou_tex.name);
-	if (!ft_strncmp(d->line, "WE ", 3))
+	if (!ft_strncmp(&d->line[*i - 2], "WE ", 3))
 		return (&cub->map.wes_tex.name);
-	if (!ft_strncmp(d->line, "EA ", 3))
+	if (!ft_strncmp(&d->line[*i - 2], "EA ", 3))
 		return (&cub->map.eas_tex.name);
-	if (!ft_strncmp(d->line, "C ", 2))
+	if (!ft_strncmp(&d->line[*i - 2], "C ", 2))
 		return (&cub->map.ceil_tex.name);
-	if (!ft_strncmp(d->line, "F ", 2))
+	if (!ft_strncmp(&d->line[*i - 2], "F ", 2))
 		return (&cub->map.floor_tex.name);
-	if (!ft_strncmp(d->line, "DO ", 3))
+	if (!ft_strncmp(&d->line[*i - 2], "DO ", 3))
 		return (&cub->map.door_tex.name);
-	if (!ft_strncmp(d->line, "OD ", 3))
+	if (!ft_strncmp(&d->line[*i - 2], "OD ", 3))
 		return (&cub->map.opendoor_tex.name);
-	if (!ft_strncmp(d->line, "SK ", 3))
+	if (!ft_strncmp(&d->line[*i - 2], "SK ", 3))
 		return (&cub->map.sky_tex.name);
-	*i = 3;
-	return (get_sprite_name_ptr(d));
+	*i += 1;
+	return (get_sprite_name_ptr(d, &d->line[*i - 3]));
 }
 
-int	get_texture(t_cub *cub, t_pars_data *d)
+int	get_texture(t_cub *cub, t_pars_data *d, char *line)
 {
 	size_t	i;
 	char	**name;
 	int		fd_tex;
 
-	if (empty_line(d->line))
+	if (empty_line(line))
 		return (1);
+	i = line - d->line;
 	name = get_name_ptr(cub, d, &i);
 	while (d->line[i] && d->line[i] == ' ')
 		i++;

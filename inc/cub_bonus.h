@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:23:02 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/22 15:51:49 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/23 00:25:38 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int				lst_to_map(t_cub *cub, t_list *lines, int size);
 int				get_map(t_cub *cub, t_pars_data *d);
 int				parse_scene(t_cub *cub, char *map_name);
 int				check_infos(t_cub *cub);
-int				get_texture(t_cub *cub, t_pars_data *d);
+int				get_texture(t_cub *cub, t_pars_data *d, char *line);
 int				save_sprite(t_pars_data *d, int row, int col);
 int				lst_to_sprites(t_cub *cub, t_pars_data *d);
 

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:57:33 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/14 18:40:21 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/23 00:47:39 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_trgb	invert_rgb(t_trgb col)
 	col.g = 255 - col.g;
 	col.b = 255 - col.b;
 	return (col);
-}	
+}
 
 t_uicol	dim_color(t_uicol col, double light)
 {
