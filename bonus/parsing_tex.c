@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:46:27 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/23 00:33:27 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:18:45 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ static char	**get_name_ptr(t_cub *cub, t_pars_data *d, size_t *i)
 		return (&cub->map.wes_tex.name);
 	if (!ft_strncmp(&d->line[*i - 2], "EA ", 3))
 		return (&cub->map.eas_tex.name);
-	if (!ft_strncmp(&d->line[*i - 2], "C ", 2))
-		return (&cub->map.ceil_tex.name);
 	if (!ft_strncmp(&d->line[*i - 2], "F ", 2))
 		return (&cub->map.floor_tex.name);
 	if (!ft_strncmp(&d->line[*i - 2], "DO ", 3))

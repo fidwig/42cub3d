@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/23 10:24:20 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:18:15 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ struct s_map
 	t_image		sou_tex;
 	t_image		eas_tex;
 	t_image		wes_tex;
-	t_image		ceil_tex;
 	t_image		floor_tex;
 	t_image		door_tex;
 	t_image		opendoor_tex;
