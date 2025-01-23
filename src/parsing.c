@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:36:54 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/23 00:46:25 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/23 10:14:35 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ static int	check_box(char **map, int x, int y)
 {
 	if (x <= 0 || y <= 0 || !map[y + 1] || !map[y][x + 1])
 		return (0);
+	if (map[y][x - 1] == ' ' || map[y][x + 1] == ' ' || map[y - 1][x] == ' '
+		|| map[y + 1][x] == ' ')
+		return (0);
 	return (1);
 }
 
@@ -41,11 +44,8 @@ static int	check_map(char **map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] != WALL && map[y][x] != SPACE)
-			{
-				if (!check_box(map, x, y))
-					return (0);
-			}
+			if (map[y][x] != WALL && map[y][x] != ' ' && !check_box(map, x, y))
+				return (0);
 			x++;
 		}
 		y++;
