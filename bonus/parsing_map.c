@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:37:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/17 11:34:17 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/23 10:30:38 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	check_map_line(t_cub *cub, t_pars_data *d, int row)
 				|| d->line[i + 1] == '\n')
 				return (0);
 			cub->player.rot = (M_PI / 2 * (d->line[i] == S))
-				+ (M_PI * (d->line[i] == E)) + (1.5 * M_PI * (d->line[i] == N));
+				+ (M_PI * (d->line[i] == W)) + (1.5 * M_PI * (d->line[i] == N));
 			cub->player.spd = 3;
 			cub->player.pos = (t_dvec3){i + 0.5, 0, row + 0.5};
 			d->line[i] = EMPTY;

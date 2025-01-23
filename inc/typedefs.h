@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:33:05 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/18 19:46:28 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/23 10:24:41 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ enum e_mapchars
 	E = 'E',
 	W = 'W',
 	SPACE = ' ',
-	TMPEMPTY = '9'
 };
 
 struct s_image

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 09:24:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/20 18:04:34 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/23 10:24:20 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ enum e_mapchars
 	DOOR = 'D',
 	DOOR_OPEN = 'O',
 	SPACE = ' ',
-	TMP = '2'
 };
 
 struct s_image
