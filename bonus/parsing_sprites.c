@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:40:14 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/18 12:06:48 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/23 09:40:56 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	lst_to_sprites(t_cub *cub, t_pars_data *d)
 
 	if (d->n_sprites < 1)
 		return (0);
-	cub->sprites = (t_sprite *)ft_calloc(d->n_sprites, sizeof(t_sprite));
+	cub->sprites = (t_sprite *)gc_calloc(d->n_sprites, sizeof(t_sprite));
 	if (!cub->sprites)
 		return (6);
 	i = 0;
