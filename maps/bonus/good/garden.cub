@@ -1,0 +1,25 @@
+NO ./resources/xpm/walltex.xpm
+SO ./resources/xpm/walltex.xpm
+EA ./resources/xpm/walltex.xpm
+WE ./resources/xpm/walltex.xpm
+
+DO ./resources/xpm/doortex.xpm
+OD ./resources/xpm/doortex_open.xpm
+
+SK ./resources/xpm/purplelotrsky.xpm
+F ./resources/xpm/grass.xpm
+
+S_f ./resources/xpm/fire_set.xpm 1
+S_c ./resources/xpm/chesttex.xpm 0
+S_w ./resources/xpm/fire_set.xpm 0
+S_r ./resources/xpm/pot.xpm 0
+S_d ./resources/xpm/mirror.xpm 0
+S_u ./resources/xpm/walltex.xpm 0
+S_p ./resources/xpm/skytex.xpm 1
+
+111111111111111111111111111111
+1000p000000000000fSf00000000c1
+100u00000c0000000fff0000000p01
+1D00000000p000000000000000d001111
+1www00000000000c00000p00000wfc001
+111111111111111111111111111111111

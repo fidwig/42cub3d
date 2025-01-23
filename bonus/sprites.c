@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:43:37 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/16 18:40:26 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/22 20:39:37 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	draw_sprite(t_cub *cub, t_sprite sprite, double d, t_vec3 scr)
 							- (scr.x - dr.size / 2)) / (double)dr.size));
 			dr.texcoord.y = (int)(sprite.tex.width * ((dr.sp.y
 							- (scr.y - dr.size / 2)) / (double)dr.size));
-			dr.texcoord.y += sprite.tex.width
-				* ((int)(cub->info.last_frame / 125) % 4);
+			dr.texcoord.y = (dr.texcoord.y + sprite.tex.width
+					* (int)(cub->info.last_frame / 125)) % sprite.tex.height;
 			get_sprite_color(sprite.tex, &dr);
 			pixel_put(&cub->image, dr.sp.x + cub->headbob.x,
 				dr.sp.y + cub->headbob.y, dr.col);
@@ -115,7 +115,7 @@ void	draw_sprites(t_cub *cub)
 		transform.y = inv * (-cam.plane.y * diff.x + cam.plane.x * diff.y);
 		s->scr.x = (int)((SW / 2) * (1 - transform.x / transform.y));
 		s->scr.y = SH / 2;
-		if (!(transform.y < 0.05 || s->scr.x < 0 || s->scr.x > SW))
+		if (!(transform.y < 0.05 || s->scr.x < -200 || s->scr.x > SW + 200))
 			draw_sprite(cub, *s, transform.y, s->scr);
 		s = get_next_sprite(cub, s);
 	}

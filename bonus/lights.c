@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:18:17 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/16 16:26:29 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/22 20:48:46 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ double	compute_light(double d)
 {
 	double	light;
 
-	light = LIGHT_STRENGTH / (0.2 + d);
+	light = LIGHT_STRENGTH / (0.3 + d);
 	return (light);
 }
 
