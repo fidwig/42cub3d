@@ -9,7 +9,7 @@ OD ./resources/xpm/doortex_open.xpm
 SK ./resources/xpm/purplelotrsky.xpm
 F ./resources/xpm/grass.xpm
 
-S_f ./resources/xpm/window-fire_set.xpm 1
+S_f ./resources/xpm/fire_set.xpm 1
 S_c ./resources/xpm/chesttex.xpm 0
 S_w ./resources/xpm/fire_set.xpm 0
 S_r ./resources/xpm/pot.xpm 0
