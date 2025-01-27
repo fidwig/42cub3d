@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:43:37 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/22 20:39:37 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/27 17:56:03 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	draw_sprite(t_cub *cub, t_sprite sprite, double d, t_vec3 scr)
 			dr.texcoord.y = (int)(sprite.tex.width * ((dr.sp.y
 							- (scr.y - dr.size / 2)) / (double)dr.size));
 			dr.texcoord.y = (dr.texcoord.y + sprite.tex.width
-					* (int)(cub->info.last_frame / 125)) % sprite.tex.height;
+					* (int)(cub->info.last_frame / 128)) % sprite.tex.height;
 			get_sprite_color(sprite.tex, &dr);
 			pixel_put(&cub->image, dr.sp.x + cub->headbob.x,
 				dr.sp.y + cub->headbob.y, dr.col);
