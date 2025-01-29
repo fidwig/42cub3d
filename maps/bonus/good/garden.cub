@@ -1,13 +1,13 @@
-NO ./resources/xpm/oldwalltex.xpm
-SO ./resources/xpm/oldwalltex.xpm
-EA ./resources/xpm/oldwalltex.xpm
-WE ./resources/xpm/oldwalltex.xpm
+NO ./resources/xpm/fence.xpm
+SO ./resources/xpm/fence.xpm
+EA ./resources/xpm/fence.xpm
+WE ./resources/xpm/fence.xpm
 
 DO ./resources/xpm/doortex.xpm
 OD ./resources/xpm/doortex_open.xpm
 
-SK ./resources/xpm/purplelotrsky.xpm
-F ./resources/xpm/grass.xpm
+SK ./resources/xpm/ap_sky.xpm
+F ./resources/xpm/grass_floor.xpm
 
 S_f ./resources/xpm/fire_set.xpm 1
 S_c ./resources/xpm/chesttex.xpm 0
@@ -24,8 +24,17 @@ S_i ./resources/xpm/torch_set_inter.xpm 0
 1D00000000p000000000000000d001111
 1www00000000000c00000p00000wfc001
 111111111111101111111111111111111
-111111111111101111111111111111111
-111111111111101111111111111111111
+            101
+            101
+            101
+            101
+            101
+            101
+            101
+            101
+            101
+            101
+            101
 111111111111101111111111111111111
 100i00000000000000000000000i00001
 100000i00000000000000i00000000001
