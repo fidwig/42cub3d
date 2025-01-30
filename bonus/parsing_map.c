@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:37:09 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/23 10:30:38 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:18:00 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	get_lstmap(t_cub *cub, int fd, t_list **lines, t_pars_data *d)
 	}
 	skip_empty_lines(fd, &d->line);
 	if (d->line)
-		return (close(fd), free(d->line), 3);
+		return (close(fd), free(d->line), d->line = NULL, 3);
 	return (cub->player.spd == 0);
 }
 

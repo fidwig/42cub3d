@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:33:18 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/23 11:19:16 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:14:28 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	clean_exit(int exit_code, t_cub *cub)
 	clean_imgs_tex(cub);
 	if (cub->pars_data && cub->pars_data->lstsprites)
 		ft_lstclear(&cub->pars_data->lstsprites, &free);
+	if (cub->pars_data && cub->pars_data->line)
+		free(cub->pars_data->line);
 	if (cub->sprites)
 	{
 		i = 0;
