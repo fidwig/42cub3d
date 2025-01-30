@@ -6,14 +6,12 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:18:17 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/16 16:26:29 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:56:08 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
 
-	// light = (LIGHT_RANGE - d) * LIGHT_STRENGTH;
-	// light = (LIGHT_RANGE / 2) * pow(1 - d / LIGHT_RANGE, 3);
 double	compute_light(double d)
 {
 	double	light;
@@ -22,7 +20,6 @@ double	compute_light(double d)
 	return (light);
 }
 
-	// if (d < LIGHT_RANGE)[]
 double	get_light(t_cub *cub, t_dvec3 tar)
 {
 	int		i;

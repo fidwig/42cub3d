@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:30:54 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/22 17:20:59 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:56:00 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@ void	move(t_cub *cub, int x, int y)
 		[(int)cub->player.pos.x]))
 		cub->player.pos.z = npos.z;
 }
-// move.x = x * cos(cub->player.rot + (M_PI / 2.0)) + y * cos(cub->player.rot);
-// move.z = x * sin(cub->player.rot + (M_PI / 2.0)) + y * sin(cub->player.rot);
-// move.x *= cub->player.spd * (cub->info.delta / 100.0);
-// move.z *= cub->player.spd * (cub->info.delta / 100.0);dis
 
 void	inputs_handler(t_cub *cub)
 {

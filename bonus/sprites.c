@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:43:37 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/16 18:40:26 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:57:51 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ t_sprite	*get_next_sprite(t_cub *cub, t_sprite *last)
 	}
 	return (next);
 }
-
-	// if (size < 0 || size > SH * 2)
-	// 	size = SH * 2;
 
 void	init_drawing_vars(t_cub *cub, t_sprite s, double d, t_sdrawing *dr)
 {
@@ -88,10 +85,6 @@ void	draw_sprite(t_cub *cub, t_sprite sprite, double d, t_vec3 scr)
 	}
 }
 
-	/*
-	for each sprite
-	draw sprite if sprite dist < cub->z_buffer[x]
-	*/
 void	draw_sprites(t_cub *cub)
 {
 	t_sprite	*s;

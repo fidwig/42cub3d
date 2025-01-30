@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 01:28:12 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/20 17:59:31 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:57:14 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ void	dda_step(t_cast_data *cast, t_map map)
 		}
 	}
 }
-
-		// if (cast->flag)
-		// 	cast->ray.dir.y *= -1;
-		// else
-		// 	cast->ray.dir.x *= -1;
 
 void	dda(t_cast_data	*cast, t_map map)
 {

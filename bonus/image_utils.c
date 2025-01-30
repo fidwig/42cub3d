@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:56:18 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/12 20:01:06 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:55:55 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ void	pixel_put(t_image *image, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-	// if (x < 0 || x > image.width || y < 0 || y > image.height)
-	// 	return (0x0);
 unsigned int	pixel_get(t_image image, int x, int y)
 {
 	char	*dst;

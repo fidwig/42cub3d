@@ -6,14 +6,11 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:06:47 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/16 15:17:12 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:57:32 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
-
-//texcoord.z is the texcoord offset because of the stupid norm
-//  - dotp(cub->player.upos, a2dv(cub->player.rot + M_PI / 2)) * 5.0
 
 void	render_sky(t_cub *cub)
 {
