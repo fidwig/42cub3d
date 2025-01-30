@@ -1,0 +1,36 @@
+NO ./resources/xpm/metal_grid.xpm
+SO ./resources/xpm/metal_grid.xpm
+EA ./resources/xpm/metal_grid.xpm
+WE ./resources/xpm/metal_grid.xpm
+
+DO ./resources/xpm/doortex.xpm
+OD ./resources/xpm/doortex_open.xpm
+
+SK ./resources/xpm/darksky.xpm
+F ./resources/xpm/strip/carpet.xpm
+
+S_f ./resources/xpm/strip/poledancer.xpm 1
+
+111111111111111111111111111111
+100000000000000000S00000000001
+100000000000000000000000000001
+1D00000000000000000f00000000001111
+100000000000000000000000000000001
+111111111111101111111111111111111
+            101
+            101
+            101
+            101
+            101
+            101
+            101
+            101
+            101
+            101
+            101
+111111111111101111111111111111111
+100000000000000000000000000000001
+100000000000000000000000000000001
+100000000000000000000000000000001
+111111111111111111111111111111111
+
