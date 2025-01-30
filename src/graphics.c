@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2024/12/13 19:05:44 by jsommet          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:47:17 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	draw_column(t_cub *cub, int x, int h, t_ray ray)
 	texcoord.x = (int)(ray.info.x_wall * tex.width);
 	if (ray.info.facing == EAST || ray.info.facing == SOUTH)
 		texcoord.x = tex.width - texcoord.x - 1;
-	texcoord.y = -1;
+	texcoord.z = -1;
 	j = SH / 2 - h / 2;
 	if (j < 0)
 		j = -1;

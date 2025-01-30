@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:28:43 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/18 13:22:27 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/23 00:25:28 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	infos_handle_line(t_cub *cub, t_pars_data *d)
 	line = d->line;
 	while (*line && *line == ' ')
 		line++;
-	got_tex = get_texture(cub, d);
+	got_tex = get_texture(cub, d, line);
 	if (!got_tex)
 		return (0);
 	if (got_tex > 1 && got_tex <= 3)

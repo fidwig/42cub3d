@@ -6,7 +6,7 @@
 /*   By: bazaluga <bazaluga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:36:48 by bazaluga          #+#    #+#             */
-/*   Updated: 2025/01/18 19:43:47 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/01/23 10:09:02 by bazaluga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,12 @@ static bool	check_name(char *map_name)
 	return (true);
 }
 
-static int	dfs(char **map, int x, int y)
+static int	check_box(char **map, int x, int y)
 {
-	if (y < 0 || !map[y] || x < 0 || !map[y][x])
+	if (x <= 0 || y <= 0 || !map[y + 1] || !map[y][x + 1])
 		return (0);
-	if (map[y][x] == WALL || (map[y][x] >= TMP && map[y][x] <= TMP + 2))
-		return (1);
-	map[y][x] = TMP + (map[y][x] == DOOR) + (2 * (map[y][x] == DOOR_OPEN));
-	if (!dfs(map, x - 1, y))
-		return (0);
-	if (!dfs(map, x + 1, y))
-		return (0);
-	if (!dfs(map, x, y - 1))
-		return (0);
-	if (!dfs(map, x, y + 1))
+	if (map[y][x - 1] == ' ' || map[y][x + 1] == ' ' || map[y - 1][x] == ' '
+		|| map[y + 1][x] == ' ')
 		return (0);
 	return (1);
 }
@@ -52,42 +44,13 @@ static int	check_map(char **map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == EMPTY)
-			{
-				if (!dfs(map, x, y))
-					return (0);
-				y = -1;
-				break ;
-			}
-			else
-				x++;
+			if (map[y][x] != WALL && map[y][x] != ' ' && !check_box(map, x, y))
+				return (0);
+			x++;
 		}
 		y++;
 	}
 	return (1);
-}
-
-static void	reset_map(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == TMP)
-				map[i][j] = EMPTY;
-			else if (map[i][j] == TMP + 1)
-				map[i][j] = DOOR;
-			else if (map[i][j] == TMP + 2)
-				map[i][j] = DOOR_OPEN;
-			j++;
-		}
-		i++;
-	}
 }
 
 int	parse_scene(t_cub *cub, char *map_name)
@@ -114,6 +77,5 @@ int	parse_scene(t_cub *cub, char *map_name)
 	close(data.fd);
 	if (!check_map(cub->map.raw))
 		stop_error(1, cub, "Incorrect map");
-	reset_map(cub->map.raw);
 	return (cub->pars_data = NULL, 1);
 }

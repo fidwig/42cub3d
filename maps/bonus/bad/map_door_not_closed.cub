@@ -1,0 +1,19 @@
+NO ./resources/xpm/walltex.xpm
+SO ./resources/xpm/walltex.xpm
+EA ./resources/xpm/walltex.xpm
+WE ./resources/xpm/walltex.xpm
+
+DO ./resources/xpm/door_tex.xpm
+OD ./resources/xpm/doortex_open.xpm
+
+SK ./resources/xpm/skytex.xpm
+F ./resources/xpm/floortex.xpm
+
+S_a ./resources/xpm/fire_set.xpm 1
+S_c ./resources/xpm/fire_set.xpm 0
+
+
+111111111111111111111111111111
+10000E0000000000aaccc00000000D
+111100111111111111111111111111
+111111111111111111111111111111
