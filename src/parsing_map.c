@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:59:18 by bazaluga          #+#    #+#             */
-/*   Updated: 2024/11/30 19:31:51 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:38:18 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	check_map_line(t_cub *cub, char *line, int row)
 		{
 			if (cub->player.spd > 0 || row == 0 || i == 0 || !line[i + 1])
 				return (false);
-			cub->player.rot = (M_PI / 2 * (line[i] == N))
-				+ (M_PI * (line[i] == W)) + ((3 * M_PI) / 2 * (line[i] == S));
+			cub->player.rot = (M_PI / 2 * (line[i] == S))
+				+ (M_PI * (line[i] == W)) + ((3 * M_PI) / 2 * (line[i] == N));
 			cub->player.spd = 10;
 			cub->player.pos.x = i + 0.5;
 			cub->player.pos.y = 0;

@@ -6,7 +6,7 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:32:29 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/30 13:47:17 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:38:03 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_image	get_tex(t_cub *cub, t_dir facing)
 {
 	if (facing == NORTH)
 		return (cub->map.tex_nor);
-	else if (facing == EAST)
+	else if (facing == WEST)
 		return (cub->map.tex_eas);
 	else if (facing == SOUTH)
 		return (cub->map.tex_sou);
