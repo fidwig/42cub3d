@@ -6,11 +6,16 @@
 /*   By: jsommet <jsommet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:06:47 by jsommet           #+#    #+#             */
-/*   Updated: 2025/01/30 13:57:32 by bazaluga         ###   ########.fr       */
+/*   Updated: 2025/02/01 18:39:12 by jsommet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_bonus.h"
+
+double	mano(double v)
+{
+	return (v * v);
+}
 
 void	render_sky(t_cub *cub)
 {
@@ -30,7 +35,7 @@ void	render_sky(t_cub *cub)
 		scr.x = -1;
 		while (++scr.x < SW)
 		{
-			distortion = (pow(((double) scr.x / SW) - 0.5, 2)) * +2.0 + 1.0;
+			distortion = (mano(((double) scr.x / SW) - 0.5)) * 2.0 + 1.0;
 			texcoord.x = ((double)scr.x / SW) * visible_w + texcoord.z;
 			if (texcoord.x > tex.width)
 				texcoord.x -= tex.width;

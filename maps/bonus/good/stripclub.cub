@@ -1,6 +1,6 @@
 NO ./resources/xpm/metal_grid.xpm
-SO ./resources/xpm/metal_grid.xpm
-EA ./resources/xpm/metal_grid.xpm
+SO ./resources/xpm/grass.xpm
+EA ./resources/xpm/grass.xpm
 WE ./resources/xpm/metal_grid.xpm
 
 DO ./resources/xpm/doortex.xpm
