@@ -12,7 +12,6 @@ F ./resources/xpm/floortex.xpm
 S_f ./resources/xpm/fire_set.xpm 1
 S_c ./resources/xpm/chesttex.xpm 0
 S_w ./resources/xpm/fire_set.xpm 0
-S_u ./resources/xpm/purplelotrsky.xpm 1
 S_i ./resources/xpm/torch_set_inter.xpm 1
 
 
@@ -20,5 +19,5 @@ S_i ./resources/xpm/torch_set_inter.xpm 1
 100i0ii0000000000fSf00000000c1
 100ii0i00c0000000fff0000000001
 1D111111111111111O111111111111
-1www00u00000000c00000000000wfc1
+1www00000000000c00000000000wfc1
 111111111111111111111111111111
